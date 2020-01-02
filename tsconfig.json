@@ -1,11 +1,41 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist",
+    "baseUrl": "src",
+    "paths": {
+      "@env": [
+        "environments/environment"
+      ],
+      "@shared/*": [
+        "app/shared/*"
+      ],
+      "@services/*": [
+        "app/core/services/*"
+      ],
+      "@query/*": [
+        "app/graphQL/query/*"
+      ],
+      "@mutation/*": [
+        "app/graphQL/mutation/*"
+      ],
+      "@interface/*": [
+        "app/interface/*"
+      ],
+      "@feature/*": [
+        "app/feature/*"
+      ],
+      "@constant/*": [
+        "app/constant/*"
+      ],
+      "@toolComponent/*": [
+        "app/core/component/*"
+      ],
+    },
+    "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -15,12 +45,12 @@
       "node_modules/@types"
     ],
     "lib": [
-      "es2018",
-      "dom"
+      "es2017",
+      "dom",
+      "esnext.asynciterable"
     ]
   },
   "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "enableIvy": false
   }
 }

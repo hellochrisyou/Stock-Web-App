@@ -1,0 +1,59 @@
+<!-- Typography -->
+<form [formGroup]="tourneyFormGroup">
+    <mat-vertical-stepper [linear]="isLinear" #stepper>
+        <mat-step formGroupName="tourneyFormGroup" [stepControl]="tourneyFormGroup">
+            <ng-template matStepLabel>Tournament information</ng-template>
+            <mat-form-field>
+                <mat-label>Tournament Name</mat-label>
+                <input matInput formControlName="firstNameFormCtrl" [value]="name" required>
+                <mat-error>This field is required</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Game Type</mat-label>
+                <mat-slide-toggle [value]="gameType">Slide me!</mat-slide-toggle>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Fee</mat-label>
+                <input matInput formControlName="firstNameFormCtrl" [value]="fee" required>
+                <mat-error>This field is required</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Value binding</mat-label>
+                <!--  TODO Angular sets the inputs for both directives on the input element here.
+                      e.g. [value] is set for MatInput and MatDatepicker.
+                      MatInput#value expects a string whereas MatDatepicker#value expects a Date.
+                      This breaks strict template type checking. What should we do here?
+                -->
+                <input matInput [matDatepicker]="datePicker4" [value]="date" [min]="minDate">
+                <mat-datepicker #datePicker [touchUi]="touch" [startAt]="startAt" [startView]="yearView ? 'year' : 'month'"></mat-datepicker>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+        <mat-step formGroupName="rulesFG" [stepControl]="tourneyFormGroup">
+            <ng-template matStepLabel>Rules</ng-template>
+            <!-- Table with button that will prompt popup -->
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+        <mat-step formGroupName="courseFG" [stepControl]="tourneyFormGroup">
+            <ng-template matStepLabel>Course</ng-template>
+            <!-- Table with button that will prompt popup -->
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+        <mat-step formGroupName="playersFG" [stepControl]="tourneyFormGroup">
+            <ng-template matStepLabel>Players</ng-template>
+            <!-- Table for Courses with radio button-->
+            <div>
+                <button mat-button>Done</button>
+                <button type="button" mat-button (click)="linearVerticalStepper.reset()">Reset</button>
+            </div>
+        </mat-step>
+    </mat-vertical-stepper>
+</form>
