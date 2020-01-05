@@ -8,7 +8,9 @@ import {
 import { finalize, tap } from 'rxjs/operators';
 // import { MessageService } from '../message.service'; USE A DIALOG POP UP
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class LoggingInterceptor implements HttpInterceptor {
     constructor() { }
     intercept(req: HttpRequest<any>, next: HttpHandler) {

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Stock, Profile } from '@shared/interface/interface';
+import { Stock, Ipo } from '@shared/interface/models';
 
 @Component({
   selector: 'base-table',
@@ -12,16 +12,16 @@ import { Stock, Profile } from '@shared/interface/interface';
 export class TableComponent implements OnInit {
 
 
-  private _dataSource: MatTableDataSource<Stock | Profile>;
+  private _dataSource: MatTableDataSource<Stock | Ipo>;
   private _columnIds: string[] = [];
   private _dataArray: any[];
   private _columnObjects: any[];
 
   @Input()
-  public get dataSource(): MatTableDataSource<Stock | Profile> {
+  public get dataSource(): MatTableDataSource<Stock | Ipo> {
     return this._dataSource;
   }
-  public set dataSource(ds: MatTableDataSource<Stock | Profile>) {
+  public set dataSource(ds: MatTableDataSource<Stock | Ipo>) {
     ds.sort = this.sort;
     ds.paginator = this.paginator;
     this._dataSource = ds;

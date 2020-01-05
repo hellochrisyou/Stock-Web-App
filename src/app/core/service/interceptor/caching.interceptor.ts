@@ -21,7 +21,9 @@ import { RequestCache } from '@shared/abstract/request-cache.abstract.class';
  * pass request through to next()
  */
 // #docregion v1
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class CachingInterceptor implements HttpInterceptor {
     constructor(private cache: RequestCache) { }
 

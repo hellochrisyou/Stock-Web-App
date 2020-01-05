@@ -4,7 +4,7 @@
     </mat-form-field>
     <div class="mat-elevation-z7" fxLayout="column" fxLayoutAlign="center stretch">
         <table mat-table [dataSource]="dataSource" matSort matSortDirection="asc">
-            <ng-container *ngFor="let col of columnObjects;index as i; trackBy: trackByFn" [matColumnDef]="col.columnId">
+            <ng-container *ngFor="let col of columnObjects;index as i" [matColumnDef]="col.columnId">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{col.propertyName}}</th>
                 <td mat-cell *matCellDef="let dataArray">{{dataArray[col.propertyName]}}</td>
             </ng-container>

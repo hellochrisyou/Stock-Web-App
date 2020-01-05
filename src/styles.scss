@@ -2,3 +2,27 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+div mat-tab-group mat-tab-header div.mat-tab-label-content {
+    color: black !important;
+}
+
+.mat-select-panel {
+    background: #fff;
+  }
+  
+  .mat-select-panel:not([class*=mat-elevation-z]) {
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+  }
+
+mat-label {
+    color:black;
+}   
+
+div.mat-select-panel {
+    max-height:100%;    
+}
+
+section {
+    margin: 0 auto;
+} 

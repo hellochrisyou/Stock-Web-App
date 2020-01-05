@@ -3,6 +3,8 @@ import { ColumnObject } from '@shared/interface/interface';
 export const STOCK_COL_OBJ: ColumnObject[] = [
     { columnId: 'symbol', propertyName: 'symbol' },
     { columnId: 'name', propertyName: 'name' },
+    { columnId: 'primaryExchange', propertyName: 'primaryExchange' },
+    { columnId: 'open', propertyName: 'open' },
     { columnId: 'low', propertyName: 'low' },
     { columnId: 'high', propertyName: 'high' },
     { columnId: 'latestPrice', propertyName: 'latestPrice' },
@@ -13,16 +15,25 @@ export const STOCK_COL_OBJ: ColumnObject[] = [
     { columnId: 'ytdChnge', propertyName: 'ytdChnge' }
 ];
 
-export const PROF_COL_OBJ: ColumnObject[] = [
+export const IPO_COL_OBJ: ColumnObject[] = [
     { columnId: 'symbol', propertyName: 'symbol' },
     { columnId: 'coName', propertyName: 'coName' },
-    { columnId: 'exchange', propertyName: 'exchange' },
-    { columnId: 'industry', propertyName: 'industry' },
-    { columnId: 'website', propertyName: 'website' },
-    { columnId: 'description', propertyName: 'description' },
+    { columnId: 'market', propertyName: 'market' },
+    { columnId: 'city', propertyName: 'city' },
+    { columnId: 'state', propertyName: 'state' },
     { columnId: 'ceo', propertyName: 'ceo' },
-    { columnId: 'sector', propertyName: 'sector' },
-    { columnId: 'employees', propertyName: 'employees' },
-    { columnId: 'city', propertyName: 'city' }
+    { columnId: 'url', propertyName: 'url' },
+    { columnId: 'sharesOffered', propertyName: 'sharesOffered' },
+    { columnId: 'priceLow', propertyName: 'priceLow' },
+    { columnId: 'priceHigh', propertyName: 'priceHigh' },
+    { columnId: 'revenue', propertyName: 'revenue' },
+    { columnId: 'netIncome', propertyName: 'netIncome' },
+    { columnId: 'totalAssets', propertyName: 'totalAssets' },
+    { columnId: 'stockholderEquity', propertyName: 'stockholderEquity' },
+    { columnId: 'companyDescription', propertyName: 'companyDescription' },
+    { columnId: 'businessDescription', propertyName: 'businessDescription' },
+    { columnId: 'useOfProceeds', propertyName: 'useOfProceeds' },
+    { columnId: 'competition', propertyName: 'competition' },
+    { columnId: 'amount', propertyName: 'amount' },
+    { columnId: 'percentOffered', propertyName: 'percentOffered' }
 ];
-
