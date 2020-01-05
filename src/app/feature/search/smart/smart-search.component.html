@@ -1,2 +1,6 @@
-<search-bar (emitValue)="onSubmit($event)"></search-bar>
-<base-table [dataSource]="tmpMat" [columnIds]="colObj" [columnObjects]="colObj" [dataArray]="dataArr"></base-table>
+<section>
+    <search-bar (emitValue)="onSubmit($event)"></search-bar>
+    <base-table [dataSource]="tmpMat" [columnIds]="colObj" [columnObjects]="colObj" [dataArray]="dataArr"
+        [isSearch]="isSearch" [isStock]="isStock">
+    </base-table>
+</section>

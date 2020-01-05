@@ -50,15 +50,15 @@
   <!-- Navgate -->
   <br />
   <div class="card-container">
-    <a class="card mat-elevation-z1" routerLink="/search-stock" routerLinkActive="routeLink">
+    <a class="card mat-elevation-z1" routerLink="/search-stock" routerLinkActive="active">
       <mat-icon>search</mat-icon>
       <span>Search</span>
     </a>
-    <a class="card mat-elevation-z1" routerLink="/my-list" routerLinkActive="routeLink">
+    <a class="card mat-elevation-z1" routerLink="/my-list" routerLinkActive="active">
       <mat-icon>asssignment</mat-icon>
       <span>My list</span>
     </a>
   </div>
-  <main>
-    <router-outlet></router-outlet>
+  <main [@routerTransition]="getState(o)? o.activatedRoute : ''">
+    <router-outlet #o="outlet"></router-outlet>
   </main>

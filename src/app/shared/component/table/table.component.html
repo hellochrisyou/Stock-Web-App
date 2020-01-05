@@ -1,12 +1,17 @@
 <section>
     <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" />
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by Symbol" />
     </mat-form-field>
     <div class="mat-elevation-z7" fxLayout="column" fxLayoutAlign="center stretch">
         <table mat-table [dataSource]="dataSource" matSort matSortDirection="asc">
             <ng-container *ngFor="let col of columnObjects;index as i" [matColumnDef]="col.columnId">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{col.propertyName}}</th>
-                <td mat-cell *matCellDef="let dataArray">{{dataArray[col.propertyName]}}</td>
+                <td mat-cell *matCellDef="let dataArray">{{dataArray[col.propertyName]}}
+                    <button *ngIf="col.columnId==='Select'" mat-button class="customize-button" (click)="select(i)">
+                        <mat-icon *ngIf="isSearch" class="icon-green">add</mat-icon>
+                        <mat-icon *ngIf="!isSearch" class="icon-red">clear</mat-icon>
+                    </button>
+                </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="columnIds; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: columnIds"></tr>

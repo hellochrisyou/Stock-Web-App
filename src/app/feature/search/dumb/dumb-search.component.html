@@ -1,19 +1,22 @@
-<form [formGroup]="searchForm" (ngSubmit)="submitForm()">
-    <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <mat-select [formControl]="searchOptCtrl" required>
-            <mat-option>-- None --</mat-option>
-            <mat-optgroup *ngFor="let group of searchGroup" [label]="group.name" [disabled]="group.disabled">
-                <mat-option *ngFor="let option of group.option" [value]="option.value">
-                    {{option.viewValue}}
-                </mat-option>
-            </mat-optgroup>
-        </mat-select>
-        <mat-error *ngIf="searchOptCtrl.errors.required">
-            This field is required
-        </mat-error>
-    </mat-form-field>
-    <div class="button-wrapper">
-        <button mat-flat-button color="primary">Submit</button>
-    </div>
-</form>
+<section fxLayout="column" fxLayoutAlign="center space-between">
+    <form [formGroup]="searchForm" (ngSubmit)="submitForm()" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
+        <div>
+            <mat-form-field>
+                <mat-label>Search Filter</mat-label>
+                <mat-select [formControl]="searchOptCtrl">
+                    <mat-optgroup *ngFor="let group of searchGroup" [label]="group.name" [disabled]="group.disabled">
+                        <mat-option *ngFor="let select of group.option" [value]="select.value">
+                            {{select.viewValue}}
+                        </mat-option>
+                    </mat-optgroup>
+                </mat-select>
+                <mat-error *ngIf="searchOptCtrl.required">
+                    This field is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="button-wrapper">
+            <button mat-flat-button color="primary">Submit</button>
+        </div>
+    </form>
+</section>

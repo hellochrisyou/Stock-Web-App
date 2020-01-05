@@ -3,6 +3,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Stock, Ipo } from '@shared/interface/models';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { FirebaseService } from 'app/core/service/crud/firebase.service';
 
 @Component({
   selector: 'base-table',
@@ -11,20 +13,40 @@ import { Stock, Ipo } from '@shared/interface/models';
 })
 export class TableComponent implements OnInit {
 
-
+  private _isStock: boolean;
+  private _isSearch: boolean;
   private _dataSource: MatTableDataSource<Stock | Ipo>;
   private _columnIds: string[] = [];
   private _dataArray: any[];
   private _columnObjects: any[];
+  router: any;
+
+  @Input()
+  public get isStock(): boolean {
+    return this._isStock;
+  }
+  public set isStock(value: boolean) {
+    this._isStock = value;
+  }
+
+  @Input()
+  public get isSearch(): boolean {
+    return this._isSearch;
+  }
+  public set isSearch(value: boolean) {
+    this._isSearch = value;
+  }
 
   @Input()
   public get dataSource(): MatTableDataSource<Stock | Ipo> {
     return this._dataSource;
   }
   public set dataSource(ds: MatTableDataSource<Stock | Ipo>) {
-    ds.sort = this.sort;
-    ds.paginator = this.paginator;
-    this._dataSource = ds;
+    if (ds) {
+      ds.sort = this.sort;
+      ds.paginator = this.paginator;
+      this._dataSource = ds;
+    }
   }
 
   @Input()
@@ -32,7 +54,9 @@ export class TableComponent implements OnInit {
     return this._columnIds;
   }
   public set columnIds(colObjArr: any[]) {
-    this._columnIds = colObjArr.map(c => c.columnId);
+    if (colObjArr) {
+      this._columnIds = colObjArr.map(c => c.columnId);
+    }
   }
 
   @Input()
@@ -54,13 +78,15 @@ export class TableComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor() { }
+  constructor(
+    private firebaseService: FirebaseService
+  ) { }
 
   ngOnInit() {
-    console.log(this.dataArray);
+
   }
 
-  applyFilter(filterValue: string): void {
+  public applyFilter(filterValue: string): void {
     this._dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this._dataSource.paginator) {
@@ -68,4 +94,40 @@ export class TableComponent implements OnInit {
     }
   }
 
+  public select(value: number): void {
+    console.log('valuevalue', value);
+    if (this.isSearch) {
+      // Add
+      if (this.isStock) {
+        // Add Stock
+        this.firebaseService.addStock(this.dataArray[value])
+          .then(
+            res => {
+              this.resetFields();
+              // use snack bar
+            }
+          )
+      } else {
+        // Add Ipo
+        this.firebaseService.addIpo(this.dataArray[value])
+          .then(
+            res => {
+              this.resetFields();
+              // use snack bar
+            }
+          )
+      }
+    } else {
+      // Delete
+      if (this.isStock) {
+        // Delete Stock
+
+      } else {
+        // Delete Ipo
+      }
+    }
+  }
+  resetFields() {
+    throw new Error("Method not implemented.");
+  }
 }

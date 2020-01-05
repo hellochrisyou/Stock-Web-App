@@ -8,7 +8,7 @@ export interface RequestCacheEntry {
 
 export interface ColumnObject {
     columnId: string,
-    propertyName: string | number | Date
+    propertyName: string
 }
 
 export interface SearchGroup {

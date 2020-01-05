@@ -17,17 +17,20 @@ export class SearchStockResolveService {
     this.stockArr = [];
     data.forEach(x => {
       this.curStock = {};
-      this.curStock.symbol = data.symbol;
-      this.curStock.name = data.name;
-      this.curStock.open = data.open;
-      this.curStock.low = data.low;
-      this.curStock.high = data.high;
-      this.curStock.latestPrice = data.latestPrice;
-      this.curStock.chnge = data.change;
-      this.curStock.chngePrcnt = data.changePercent;
-      this.curStock.week52Low = data.week52Low;
-      this.curStock.week52High = data.week52High;
-      this.curStock.ytdChnge = data.ytdChange;
+      this.curStock.Symbol = x.symbol;
+      this.curStock.Exchange = x.primaryExchange;
+      this.curStock.Name = x.companyName;
+      this.curStock.Open = x.open;
+      this.curStock.Low = x.low;
+      this.curStock.High = x.high;
+      this.curStock.LatestPrice = x.latestPrice;
+      this.curStock.Change = x.change;
+      this.curStock.ChangePercent = x.changePercent;
+      this.curStock.Week52Low = x.week52Low;
+      this.curStock.Week52High = x.week52High;
+      this.curStock.YtdChange = Math.round(x.ytdChange * 100000) / 100000
+
+        ;
       this.stockArr.push(this.curStock);
     })
     return this.stockArr;

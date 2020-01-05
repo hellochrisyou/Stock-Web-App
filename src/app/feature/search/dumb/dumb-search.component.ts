@@ -1,9 +1,8 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SearchGroup } from '@shared/interface/interface';
 import { SEARCHGROUP } from '@shared/const/search-option.const';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { HttpService } from 'app/core/service/http.service';
-import { EventEmitter } from 'protractor';
+import { HttpService } from 'app/core/service/api/http.service';
 import { CREATE_SEARCH_HEADER } from '../search.config';
 
 @Component({

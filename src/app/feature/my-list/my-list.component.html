@@ -1,1 +1,8 @@
-<p>my-list works!</p>
+<section fxLayout="column" fxLayoutAlign="space-around center">
+    <base-table *ngIf="stockMatTable" [dataSource]="stockMatTable" [columnIds]="stockCol" [columnObjects]="stockCol"
+        [dataArray]="stockArr">
+    </base-table>
+    <base-table *ngIf="ipoMatTable" [dataSource]="ipoMatTable" [columnIds]="ipoCol" [columnObjects]="ipoCol"
+        [dataArray]="ipoArr">
+    </base-table>
+</section>

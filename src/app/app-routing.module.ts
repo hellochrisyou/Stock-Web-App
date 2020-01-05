@@ -9,10 +9,12 @@ const routes: Routes = [
   {
     path: 'search-stock',
     component: SmartSearchComponent
+    , data: { state: 'search-stock' }
   },
   {
     path: 'my-list',
     component: MyListComponent
+    , data: { state: 'my-list' }
   },
   {
     path: '',

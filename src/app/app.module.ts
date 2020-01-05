@@ -10,6 +10,9 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { MyListComponent } from '@feature/my-list/my-list.component';
 import { SearchModule } from '@feature/search/search.module';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,8 @@ import { SearchModule } from '@feature/search/search.module';
     CoreModule,
     SharedModule,
     SearchModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     AppRoutingModule
   ],
   providers: [],
