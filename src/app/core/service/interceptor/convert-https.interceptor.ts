@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 })
 export class EnsureHttpsInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        // #docregion excerpt
         // clone request and replace 'http://' with 'https://' at the same time
         const secureReq = req.clone({
             url: req.url.replace('http://', 'https://')

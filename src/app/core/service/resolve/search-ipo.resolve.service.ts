@@ -8,14 +8,18 @@ export class SearchIpoResolveService {
 
   private _ipoArr: Ipo[];
 
-  curIpo: Ipo = {};
+  curIpo: Ipo = {
+    Select: 'Select'
+  };
 
   constructor() { }
 
   resolveIpoArray(data: any): Ipo[] {
     this.ipoArr = [];
     data.forEach(x => {
-      this.curIpo = {};
+      this.curIpo = {
+        Select: 'Select'
+      };
 
       this.curIpo.Symbol = x.symbol,
         this.curIpo.Name = x.companyName,

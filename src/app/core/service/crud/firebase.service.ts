@@ -14,7 +14,7 @@ export class FirebaseService {
   }
 
   public getIpos() {
-    return this.db.collection('stock').valueChanges()
+    return this.db.collection('IPO').valueChanges()
   }
 
   public addStock(value: Stock): Promise<DocumentReference> {

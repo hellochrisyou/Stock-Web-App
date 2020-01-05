@@ -8,7 +8,9 @@ import { StockDto } from '@shared/interface/dto.interface';
 export class SearchStockResolveService {
 
   stockArr: Stock[];
-  private _curStock: Stock = {};
+  private _curStock: Stock = {
+    Select: 'Select'
+  };
 
 
   constructor() { }
@@ -16,7 +18,9 @@ export class SearchStockResolveService {
   resolveStockArray(data: any): Stock[] {
     this.stockArr = [];
     data.forEach(x => {
-      this.curStock = {};
+      this.curStock = {
+        Select: 'Select'
+      };
       this.curStock.Symbol = x.symbol;
       this.curStock.Exchange = x.primaryExchange;
       this.curStock.Name = x.companyName;

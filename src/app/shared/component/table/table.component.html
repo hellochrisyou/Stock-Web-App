@@ -1,6 +1,6 @@
 <section>
     <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by Symbol" />
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" />
     </mat-form-field>
     <div class="mat-elevation-z7" fxLayout="column" fxLayoutAlign="center stretch">
         <table mat-table [dataSource]="dataSource" matSort matSortDirection="asc">

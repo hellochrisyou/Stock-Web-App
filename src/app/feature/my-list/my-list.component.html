@@ -1,7 +1,13 @@
 <section fxLayout="column" fxLayoutAlign="space-around center">
+    <div class="mat-typography">
+        <h1 class="mat-display-1">Stocks</h1>
+    </div>
     <base-table *ngIf="stockMatTable" [dataSource]="stockMatTable" [columnIds]="stockCol" [columnObjects]="stockCol"
         [dataArray]="stockArr">
     </base-table>
+    <div class="mat-typography">
+        <h1 class="mat-display-1">IPO</h1>
+    </div>
     <base-table *ngIf="ipoMatTable" [dataSource]="ipoMatTable" [columnIds]="ipoCol" [columnObjects]="ipoCol"
         [dataArray]="ipoArr">
     </base-table>

@@ -1,7 +1,6 @@
 import { Input, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormArray, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { FORM_TOUCHED } from '@shared/utils/utils';
 import { RequiredErrorStateMatcher } from '@shared/validator/validators/custom-error-state-matcher/required-error-state-matcher';
 export class CreateBaseForm implements OnInit, OnDestroy {
 
@@ -65,9 +64,6 @@ export class CreateBaseForm implements OnInit, OnDestroy {
         return this.activeFormGroup;
     }
 
-    public execFormValidation(): void {
-        FORM_TOUCHED(this.abstractControl);
-    }
 
     public checkNestedFieldNameError(fg: AbstractControl, errorType: string): boolean {
         const isError = fg && fg.invalid && (fg.dirty || fg.touched);

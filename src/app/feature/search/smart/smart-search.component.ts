@@ -6,6 +6,8 @@ import { HttpService } from 'app/core/service/api/http.service';
 import { SearchStockResolveService } from 'app/core/service/resolve/search-stock.resolve.service';
 import { SearchIpoResolveService } from 'app/core/service/resolve/search-ipo.resolve.service';
 import { STOCK_COL_OBJ, IPO_COL_OBJ } from '@shared/const/column.const';
+import { SearchCacheIpoService } from 'app/core/service/cache/search-cache-ipo.service';
+import { SearchCacheStockService } from 'app/core/service/cache/search-cache-stock.service';
 
 @Component({
   selector: 'search-stock',
@@ -24,7 +26,9 @@ export class SmartSearchComponent implements OnInit {
   constructor(
     private httpService: HttpService,
     private searchStockResolveService: SearchStockResolveService,
-    private searchIpoResolveService: SearchIpoResolveService
+    private searchIpoResolveService: SearchIpoResolveService,
+    private searchCacheStockService: SearchCacheStockService,
+    private searchCacheIpoService: SearchCacheIpoService
   ) { }
 
   ngOnInit() {
@@ -33,19 +37,43 @@ export class SmartSearchComponent implements OnInit {
 
   onSubmit(value: string) {
     if (value.includes('collection')) {
-      this.httpService.get(value).subscribe(data => {
-        this.tmpMat = new MatTableDataSource(this.searchStockResolveService.resolveStockArray(data));
-        this.colObj = STOCK_COL_OBJ;
-        this.isStock = true;
-        this.dataArr = this.searchStockResolveService.stockArr;
-      });
+      let newValue = value.slice(31)
+      this.colObj = STOCK_COL_OBJ;
+      this.isStock = true;
+      if (this.searchCacheStockService.isExist(newValue)) {
+        this.dataArr = this.searchCacheStockService.stocks;
+        this.tmpMat = new MatTableDataSource(this.searchCacheStockService.stocks);
+      } else {
+        this.httpService.get(value).subscribe(data => {
+          this.tmpMat = new MatTableDataSource(this.searchStockResolveService.resolveStockArray(data));
+          this.dataArr = this.searchStockResolveService.stockArr;
+          if (!this.searchCacheStockService.isExist(newValue)) {
+            this.dataArr.forEach(x => {
+              x.Select = newValue;
+              this.searchCacheStockService.addStock(x);
+            })
+          }
+
+        })
+      };
     } else {
-      this.httpService.get(value).subscribe(data => {
-        this.tmpMat = new MatTableDataSource(this.searchIpoResolveService.resolveIpoArray(data));
-        this.colObj = IPO_COL_OBJ;
-        this.isStock = false;
-        this.dataArr = this.searchIpoResolveService.ipoArr;
-      });
+      this.colObj = IPO_COL_OBJ;
+      this.isStock = false;
+      if (this.searchCacheIpoService.isExist(value)) {
+        this.dataArr = this.searchCacheIpoService.ipos;
+        this.tmpMat = new MatTableDataSource(this.searchCacheIpoService.ipos);
+      } else {
+        this.httpService.get(value).subscribe(data => {
+          this.tmpMat = new MatTableDataSource(this.searchIpoResolveService.resolveIpoArray(data));
+          this.dataArr = this.searchIpoResolveService.ipoArr;
+          if (!this.searchCacheIpoService.isExist(value)) {
+            this.dataArr.forEach(x => {
+              x.Select = value;
+              this.searchCacheIpoService.addIpo(x);
+            });
+          }
+        });
+      }
     }
   }
 }

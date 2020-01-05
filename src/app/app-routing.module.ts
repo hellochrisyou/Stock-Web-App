@@ -7,20 +7,14 @@ import { SmartSearchComponent } from '@feature/search/smart/smart-search.compone
 
 const routes: Routes = [
   {
-    path: 'search-stock',
-    component: SmartSearchComponent
-    , data: { state: 'search-stock' }
-  },
-  {
-    path: 'my-list',
-    component: MyListComponent
-    , data: { state: 'my-list' }
+    path: 'feature',
+    loadChildren: () => import('./feature/feature.module').then(mod => mod.FeatureModule),
+    // canLoad: [AuthGuard]
   },
   {
     path: '',
-    redirectTo: '/search-stock',
+    redirectTo: '/feature',
     pathMatch: 'full'
-
   },
   { path: '**', component: ErrorComponent }
 ];

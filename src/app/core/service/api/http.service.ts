@@ -10,6 +10,8 @@ import { KeyValuePair } from '@shared/interface/dto.interface';
 })
 export class HttpService {
 
+  private _fullUrl = '';
+
   private _api_url = GLOBAL_URL.SECTOR_TYPES;
   private _token = '&token=Tsk_1ad1e73bfed34883a302621bf10db807';
 
@@ -26,10 +28,17 @@ export class HttpService {
     this._token = value;
   }
 
+  public get fullUrl() {
+    return this._fullUrl;
+  }
+  public set fullUrl(value) {
+    this._fullUrl = value;
+  }
+
   constructor(private http: HttpClient) { }
 
   public get(value: string) {
-
+    this.fullUrl = this.api_url + value + this.token;
     return this.http.get<KeyValuePair>(this.api_url + value + this.token).pipe(
       // retry sending the request for 3 extra time
       retry(3),
