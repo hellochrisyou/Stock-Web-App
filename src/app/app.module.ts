@@ -7,8 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
-import { MyListComponent } from '@feature/my-list/my-list.component';
-import { SearchModule } from '@feature/search/search.module';
+import { MyListComponent } from '@feature/main/my-list/my-list.component';
+import { SearchModule } from '@feature/main/search/search.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
@@ -16,6 +16,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoginComponent } from './feature/login/login.component';
 import { ProfileComponent } from './feature/profile/profile.component';
+import { HomeModule } from '@feature/home/home.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ProfileComponent } from './feature/profile/profile.component';
     CoreModule,
     SharedModule,
     SearchModule,
+    HomeModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),

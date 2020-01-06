@@ -1,11 +1,11 @@
 import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
 
 export const SIGNUP_SET_VALIDATOR = (fg: FormGroup) => {
-    fg.get('signUpemailCtrl').setValidators([
+    fg.get('signupEmailCtrl').setValidators([
         Validators.minLength(10),
         Validators.required,
     ]);
-    fg.get('signUppasstrl').setValidators([
+    fg.get('signupPasstrl').setValidators([
         Validators.minLength(8),
         Validators.required,
     ]);
@@ -31,11 +31,11 @@ export const CREATE_LOGIN_FG = (formBuilder: FormBuilder): FormGroup => {
     LOGIN_SET_VALIDATOR(loginFg);
     return loginFg;
 };
-export const CREATE_SIGNUP_FG = (formBuilder: FormBuilder): FormGroup => {
+export const CREATE_SIGNUP_FG = (formBuilder: FormBuilder): FormGroup | FormArray => {
 
     const signupFg: FormGroup = formBuilder.group({
-        signUpEmailCtrl: [''],
-        singUpPassCtrl: ['']
+        signupEmailCtrl: [''],
+        singupPassCtrl: ['']
     });
     SIGNUP_SET_VALIDATOR(signupFg);
     return signupFg;

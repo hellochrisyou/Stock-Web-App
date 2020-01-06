@@ -1,0 +1,64 @@
+<p>presentation works!</p>
+<main>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form [formGroup]="signUpFg">
+                <h1>Create Account</h1>
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="signUpEmailCtrl" required />
+                    <mat-error>This field is required</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="signUpPassCtrl" required />
+                    <mat-error>This field is required</mat-error>
+                </mat-form-field>
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form [formGroup]="loginFg">
+                <h1>Sign In</h1>
+                <div class="social-container">
+                    <a (click)="loginFB()" class="social">
+                        <i class="fa fa-facebook-f"></i>
+                    </a>
+                    <a (click)="loginGoogle()" class="social">
+                        <i class="fa fa-google"></i>
+                    </a>
+                    <a (click)="loginGithub()" class="social">
+                        <i class="fa fa-github"></i>
+                    </a>
+                </div>
+                <span>or use your account</span>
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="loginEmailCtrl" required>
+                    <mat-error>This field is required</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="loginPassCtrl" required>
+                    <mat-error>This field is required</mat-error>
+                </mat-form-field>
+                <button>Log In</button>
+
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome back!</h1>
+                    <p>Please login with your email or social media account</p>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Hi!</h1>
+                    <p>Enter your registration details</p>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

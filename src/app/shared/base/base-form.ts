@@ -8,6 +8,7 @@ export class CreateBaseForm implements OnInit, OnDestroy {
     get abstractControl(): AbstractControl {
         return this._abstractControl;
     }
+
     set abstractControl(ac: AbstractControl) {
         this._abstractControl = ac;
         this.formGroup = this._abstractControl instanceof FormGroup ?
@@ -45,7 +46,7 @@ export class CreateBaseForm implements OnInit, OnDestroy {
     protected _abstractControl: AbstractControl;
 
     constructor(protected formBuilder: FormBuilder,
-        // protected changeDetectorRef: ChangeDetectorRef,
+        protected changeDetectorRef: ChangeDetectorRef,
         //   protected dialogService: DialogService,
         //   protected createFormsService: CreateFormsService
     ) {
@@ -64,7 +65,6 @@ export class CreateBaseForm implements OnInit, OnDestroy {
         return this.activeFormGroup;
     }
 
-
     public checkNestedFieldNameError(fg: AbstractControl, errorType: string): boolean {
         const isError = fg && fg.invalid && (fg.dirty || fg.touched);
         if (isError && errorType) {
@@ -72,8 +72,6 @@ export class CreateBaseForm implements OnInit, OnDestroy {
         }
         return isError;
     }
-
-    protected handleStepActiveEvent(): void { }
 
     // protected subscribeFormsService(): void {
     //     this.createFormsService.formItemEvents

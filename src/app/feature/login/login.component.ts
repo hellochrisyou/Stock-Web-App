@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'app/core/service/auth/auth.service';
 import { Router } from '@angular/router';
 import { CreateBaseForm } from '@shared/base/base-form';
-import { FormGroup, AbstractControl, FormBuilder } from '@angular/forms';
+import { FormGroup, AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ShowOnDirtyErrorStateMatcher } from '@angular/material';
 
 declare var $: any;
 
@@ -11,101 +12,137 @@ declare var $: any;
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent extends CreateBaseForm implements OnInit {
+export class LoginComponent {
 
 
-  public formGroup: FormGroup;
+  // condition = true;
+  // loggedIn = false;
 
-  get email(): AbstractControl {
-    return this.formGroup.get('email');
-  }
+  // fornGroup: FormGroup;
 
-  get password(): AbstractControl {
-    return this.formGroup.get('password');
-  }
+  // matcher = new ShowOnDirtyErrorStateMatcher();
 
-  constructor(public auth: AuthService,
-    private router: Router, private fb: FormBuilder) {
-    super(fb);
-  }
+  // btnClick(): void {
+  //   this.condition = !this.condition;
+  // }
 
-  ngOnInit() {
-    //FOCUS THE email FIELD ON PAGE LOAD
-    //Comment this out if you want to edit as its really frustrating
-    $(document).ready(function () {
-      //$('#email').focus();
-    });
 
-    //CATCH THE SUBMIT
-    $('#login').on('submit', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
 
-      //CHECK THAT FIELDS ARE FILLED
-      if ($("#email").val() != '' && $("#password").val() != '') {
 
-        //SUBMIT BUTTON ANIMATION HANDLING
-        $('#submit').addClass('checking');
-        $('#submit input').attr('disabled', 'true');
 
-        // LOGIN HERE
+  // constructor(public auth: AuthService,
+  //   private fb: FormBuilder,
+  //   private router: Router,
+  // ) {
+  //   super(fb);
+  // }
 
-      } else {
+  // ngOnInit() {
+  //   super.ngOnInit();
 
-        //SHAKE THE email AND PW FIELDS IF THEY ARE EMPTY ON SUBMIT
-        if ($("#email").val() != '') {
+  //   const signUpButton = document.getElementById('signUp');
+  //   const signInButton = document.getElementById('signIn');
+  //   const container = document.getElementById('container');
 
-          $("#password").addClass('shake');
-          $("#password").focus();
-          setTimeout(function () {
-            $("#password").removeClass('shake');
-          }, 440);
 
-        } else {
+  //   signUpButton.addEventListener('click', () => {
+  //     container.classList.add("right-panel-active");
+  //   });
 
-          $("#email").addClass('shake');
-          $("#email").focus();
-          setTimeout(function () {
-            $("#email").removeClass('shake');
-          }, 440);
 
-        }
-      }
-    })
+  //   signInButton.addEventListener('click', () => {
+  //     container.classList.remove("right-panel-active");
+  //   });
 
-    //HANDLE ANIMATION AND CLEARING OF INCORRECT PW
-    function clearPassword() {
-      $("#password").addClass('shake');
-      setTimeout(function () {
-        $("#password").val('');
-        $("#password").focus();
-        $("#password").removeClass('shake');
-        $('#submit input').removeAttr('disabled');
-      }, 440);
-    }
+  //   this.activeFormGroup = CREATE_LOGIN_HEADER(this.formBuilder);
+  //   // //FOCUS THE email FIELD ON PAGE LOAD
+  //   // //Comment this out if you want to edit as its really frustrating
+  //   // $(document).ready(function () {
+  //   //   //$('#email').focus();
+  //   // });
 
-  }
+  //   // //CATCH THE SUBMIT
+  //   // $('#login').on('submit', function (e) {
+  //   //   e.preventDefault();
+  //   //   e.stopPropagation();
 
-  signUp() {
-  }
+  //   //   //CHECK THAT FIELDS ARE FILLED
+  //   //   if ($("#email").val() != '' && $("#password").val() != '') {
 
-  signIn() {
-  }
+  //   //     //SUBMIT BUTTON ANIMATION HANDLING
+  //   //     $('#submit').addClass('checking');
+  //   //     $('#submit input').attr('disabled', 'true');
 
-  signOut() {
-    this.auth.SignOut();
-  }
+  //   //     // LOGIN HERE
 
-  signInWithGithub(): void {
+  //   //   } else {
 
-  }
+  //   //     //SHAKE THE email AND PW FIELDS IF THEY ARE EMPTY ON SUBMIT
+  //   //     if ($("#email").val() != '') {
 
-  signInWithGoogle(): void {
+  //   //       $("#password").addClass('shake');
+  //   //       $("#password").focus();
+  //   //       setTimeout(function () {
+  //   //         $("#password").removeClass('shake');
+  //   //       }, 440);
 
-  }
+  //   //     } else {
 
-  private afterSignIn(): void {
-    // Do after login stuff here, such router redirects, toast messages, etc.
-    this.router.navigate(['/']);
-  }
+  //   //       $("#email").addClass('shake');
+  //   //       $("#email").focus();
+  //   //       setTimeout(function () {
+  //   //         $("#email").removeClass('shake');
+  //   //       }, 440);
+
+  //   //     }
+  //   //   }
+  //   // })
+
+  //   // //HANDLE ANIMATION AND CLEARING OF INCORRECT PW
+  //   // function clearPassword() {
+  //   //   $("#password").addClass('shake');
+  //   //   setTimeout(function () {
+  //   //     $("#password").val('');
+  //   //     $("#password").focus();
+  //   //     $("#password").removeClass('shake');
+  //   //     $('#submit input').removeAttr('disabled');
+  //   //   }, 440);
+  //   // }
+
+  // }
+
+
+  // public ngOnDestroy(): void {
+  //   super.ngOnDestroy();
+  // }
+
+
+  // signUpEmail() {
+  //   this.auth.SignUpEmail(this.formGroup.get('loginEmailCtrl').value, this.formGroup.get('loginPassCtrl').value);
+  // }
+
+  // loginEmail() {
+  //   this.auth.SignInEmail(this.formGroup2.get('loginEmailCtrl').value, this.formGroup2.get('loginPassCtrl').value);
+  // }
+
+  // logOut() {
+  //   this.auth.SignOut();
+  // }
+
+  // loginGithub(): void {
+  //   this.auth.SigninGithub();
+  // }
+
+  // loginGoogle(): void {
+  //   this.auth.SigninGoogle();
+  // }
+
+  // loginFB(): void {
+  //   this.auth.SigninFB();
+  // }
+
+  // private afterSignIn(): void {
+  //   // Do after login stuff here, such router redirects, toast messages, etc.
+  //   this.router.navigate(['/']);
+  // }
 }

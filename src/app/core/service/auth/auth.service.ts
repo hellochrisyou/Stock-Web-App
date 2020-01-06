@@ -38,10 +38,30 @@ export class AuthService {
   }
 
   // Firebase Google Sign-in
-  SigninWithGoogle() {
+  SigninGoogle() {
     return this.OAuthProvider(new auth.GoogleAuthProvider())
       .then(res => {
-        console.log('Successfully logged in!')
+        console.log('Google Successfully logged in!')
+      }).catch(error => {
+        console.log(error)
+      });
+  }
+
+  // Firebase Google Sign-in
+  SigninGithub() {
+    return this.OAuthProvider(new auth.GithubAuthProvider())
+      .then(res => {
+        console.log('Github Successfully logged in!')
+      }).catch(error => {
+        console.log(error)
+      });
+  }
+
+  // Firebase Google Sign-in
+  SigninFB() {
+    return this.OAuthProvider(new auth.FacebookAuthProvider())
+      .then(res => {
+        console.log('Facebook Successfully logged in!')
       }).catch(error => {
         console.log(error)
       });
@@ -55,7 +75,7 @@ export class AuthService {
   }
 
   /* Sign up */
-  SignUp(email: string, password: string) {
+  SignupEmail(email: string, password: string) {
     this.angularFireAuth
       .auth
       .createUserWithEmailAndPassword(email, password)
@@ -68,7 +88,7 @@ export class AuthService {
   }
 
   /* Sign in */
-  SignIn(email: string, password: string) {
+  SigninEmail(email: string, password: string) {
     this.angularFireAuth
       .auth
       .signInWithEmailAndPassword(email, password)

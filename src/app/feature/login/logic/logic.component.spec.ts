@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DumbSearchComponent } from './dumb-search.component';
+import { LogicComponent } from './logic.component';
 
-describe('DumbComponent', () => {
-  let component: DumbSearchComponent;
-  let fixture: ComponentFixture<DumbSearchComponent>;
+describe('LogicComponent', () => {
+  let component: LogicComponent;
+  let fixture: ComponentFixture<LogicComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DumbSearchComponent]
+      declarations: [ LogicComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DumbSearchComponent);
+    fixture = TestBed.createComponent(LogicComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

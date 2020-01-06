@@ -3,7 +3,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Stock, Ipo } from '@shared/interface/models';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { FirebaseService } from 'app/core/service/crud/firebase.service';
 
 @Component({

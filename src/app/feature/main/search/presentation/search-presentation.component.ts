@@ -2,15 +2,14 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SearchGroup } from '@shared/interface/interface';
 import { SEARCHGROUP } from '@shared/const/search-option.const';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { HttpService } from 'app/core/service/api/http.service';
 import { CREATE_SEARCH_HEADER } from '../search.config';
 
 @Component({
   selector: 'search-bar',
-  templateUrl: './dumb-search.component.html',
-  styleUrls: ['./dumb-search.component.scss']
+  templateUrl: './search-presentation.component.html',
+  styleUrls: ['./search-presentation.component.scss']
 })
-export class DumbSearchComponent implements OnInit {
+export class SearchPresentationComponent implements OnInit {
 
   searchGroup: SearchGroup[] = SEARCHGROUP;
   value: string;
