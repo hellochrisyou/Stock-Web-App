@@ -1,2 +1,15 @@
-<signup-presentation [abstractControl]="activeFormEntry()" (signupVal)="emitSignupSubmit($event)"></signup-presentation>
->
+<div class="presentation">
+    <form [formGroup]="formGroup">
+        <h1>Create Account</h1>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input placeholder="Email" matInput formControlName="signupEmailCtrl" />
+            This field is required
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input placeholder="Password" matInput formControlName="signupPassCtrl" />
+        </mat-form-field>
+        <button type="submit" (click)="signup()">Sign Up</button>
+    </form>
+    <div class="form-container">

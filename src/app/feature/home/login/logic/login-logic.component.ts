@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'app/core/service/auth/auth.service';
 import { CreateBaseForm } from '@shared/base/base-form';
-import { FormBuilder } from '@angular/forms';
-import { CREATE_SIGNUP_FG } from '@feature/login/login.config';
-import { FORM_TOUCHED } from '@feature/home/home.utils';
+import { FormBuilder, AbstractControl, Validators } from '@angular/forms';
 import { CREATE_LOGIN_FG } from '@feature/home/home.config';
+import { EmitService } from 'app/core/service/emit/emit.service';
+import { FORM_TOUCHED } from '@feature/home/home.utils';
+import { RequiredErrorStateMatcher } from '@shared/error-state-matcher';
 
 @Component({
   selector: 'login-logic',
@@ -13,31 +14,71 @@ import { CREATE_LOGIN_FG } from '@feature/home/home.config';
 })
 export class LoginLogicComponent extends CreateBaseForm implements OnInit, OnDestroy {
 
-  @Output() loginValPres = new EventEmitter<string[]>();
-
-  constructor(
-    private auth: AuthService,
-    protected formBuilder: FormBuilder,
-    protected changeDetectorRef: ChangeDetectorRef,
-  ) {
-    super(formBuilder, changeDetectorRef);
-    this.formName = 'loginForm';
+  public loginEmailErrors() {
+    return this.formGroup.get('loginEmailCtrl').errors;
   }
 
+  public loginPassErrors() {
+    return this.formGroup.get('loginPassCtrl').errors;
+  }
+
+  constructor(
+    protected auth: AuthService,
+    protected fb: FormBuilder,
+    protected changeDetectorRef: ChangeDetectorRef,
+    protected emitService: EmitService
+  ) {
+    super(fb, changeDetectorRef);
+    this.formName = 'loginForm';
+    // this.emitService.logingOutput.subscribe(x => {
+    //   this.auth.SigninEmail(this.formGroup.get('loginEmailCtrl').value, this.formGroup.get('loginPassCtrl').value);
+    // });
+  }
+
+  public login(): boolean {
+    if (!this.formGroup.valid) {
+      alert('Please fill all the required fields!')
+      return false;
+    } else {
+      console.log(this.formGroup.value)
+    }
+    this.auth.SigninEmail(this.formGroup.get('loginEmailCtrl').value, this.formGroup.get('loginPassCtrl').value);
+  }
   public ngOnInit(): void {
     super.ngOnInit();
-    this.activeFormGroup = CREATE_LOGIN_FG(this.formBuilder);
+    this.formGroup = this.fb.group({
+      loginEmailCtrl: ['', [
+        Validators.required,
+      ]],
+      loginPassCtrl: ['', [
+        Validators.required,
+      ]]
+    });
+    this.changeDetectorRef.markForCheck();
   }
 
   public ngOnDestroy(): void {
     super.ngOnDestroy();
   }
 
-  public emitLoginSubmit(data: string[]): void {
-    if (!this.activeFormGroup.valid) {
-      FORM_TOUCHED(this.activeFormGroup);
-      return;
+  public loginGithub(): boolean {
+    if (!this.formGroup.valid) {
+      alert('Please fill all the required fields')
+      return false;
+    } else {
+      console.log(this.formGroup.value)
     }
-    this.loginValPres.emit(data);
+    this.auth.SigninGithub();
   }
+
+  public loginGoogle(): boolean {
+    if (!this.formGroup.valid) {
+      alert('Please fill all the required fields')
+      return false;
+    } else {
+      console.log(this.formGroup.value)
+    }
+    this.auth.SigninGoogle();
+  }
+
 }

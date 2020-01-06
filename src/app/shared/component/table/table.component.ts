@@ -107,7 +107,7 @@ export class TableComponent implements OnInit {
             }
           )
       } else {
-        // Add Ipo
+        // Add Ipo 
         this.firebaseService.addIpo(this.dataArray[value])
           .then(
             res => {

@@ -1,1 +1,24 @@
-<login-presentation [abstractControl]="activeFormEntry()" (loginVal)="emitLoginSubmit($event)"></login-presentation>>
+<div class="presentation">
+    <form [formGroup]="formGroup">
+        <h1>Sign In</h1>
+        <div><span>with your social media</span></div>
+        <div class="social-container">
+            <a (click)="loginGoogle()" class="social">
+                <i class="fa fa-google"></i>
+            </a>
+            <a (click)="loginGithub()" class="social">
+                <i class="fa fa-github"></i>
+            </a>
+        </div>
+        <span>or use your account</span>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input placeholder="Email" matInput formControlName="loginEmailCtrl">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input placeholder="Password" matInput formControlName="loginPassCtrl">
+        </mat-form-field>
+        <button type="submit" (click)="login()">Log In</button>
+    </form>
+</div>

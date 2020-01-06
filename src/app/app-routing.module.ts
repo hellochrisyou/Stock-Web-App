@@ -5,13 +5,13 @@ import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
   {
-    path: 'feature',
-    loadChildren: () => import('./feature/feature.module').then(mod => mod.FeatureModule),
+    path: 'home',
+    loadChildren: () => import('./feature/home/home.module').then(mod => mod.HomeModule),
     // canLoad: [AuthGuard]
   },
   {
     path: '',
-    redirectTo: '/feature',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   { path: '**', component: ErrorComponent }

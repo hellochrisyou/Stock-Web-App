@@ -4,20 +4,18 @@ import { HomeComponent } from './home.component';
 import { SharedModule } from '@shared/shared.module';
 import { LoginLogicComponent } from './login/logic/login-logic.component';
 import { SignupLogicComponent } from './signup/logic/signup-logic.component';
-import { SignupPresentationComponent } from './signup/presentation/signup-presentation.component';
-import { LoginPresentationComponent } from './login/presentation/login-presentation.component';
+import { HomeRoutingModule } from './home-routing.module';
 
 
 
 @NgModule({
-  declarations: [HomeComponent, LoginLogicComponent, LoginPresentationComponent, SignupLogicComponent, SignupPresentationComponent],
+  declarations: [HomeComponent, LoginLogicComponent, SignupLogicComponent],
   imports: [
-    CommonModule,
-    SharedModule
+    SharedModule,
+    HomeRoutingModule
   ],
   exports: [
-    SharedModule,
-    HomeComponent, LoginLogicComponent, LoginPresentationComponent, SignupLogicComponent, SignupPresentationComponent
+    HomeComponent, LoginLogicComponent, SignupLogicComponent
   ]
 })
 export class HomeModule { }

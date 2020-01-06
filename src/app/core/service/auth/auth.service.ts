@@ -57,16 +57,6 @@ export class AuthService {
       });
   }
 
-  // Firebase Google Sign-in
-  SigninFB() {
-    return this.OAuthProvider(new auth.FacebookAuthProvider())
-      .then(res => {
-        console.log('Facebook Successfully logged in!')
-      }).catch(error => {
-        console.log(error)
-      });
-  }
-
   // Firebase Logout 
   SignOut() {
     return this.afAuth.auth.signOut().then(() => {

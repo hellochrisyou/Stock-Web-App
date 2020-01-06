@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'app/core/service/auth/auth.service';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { EmitService } from 'app/core/service/emit/emit.service';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +10,8 @@ export class HomeComponent implements OnInit {
 
   condition = true;
 
-
   constructor(
-    private auth: AuthService
+    private emitService: EmitService
   ) { }
 
   ngOnInit() {
@@ -29,14 +28,6 @@ export class HomeComponent implements OnInit {
     signInButton.addEventListener('click', () => {
       container.classList.remove("right-panel-active");
     });
-  }
-
-  public login(data: string[]) {
-    this.auth.SigninEmail(data[0], data[1]);
-  }
-
-  public signup(data: string[]) {
-    this.auth.SignupEmail(data[0], data[1]);
   }
 
   public btnClick(): void {

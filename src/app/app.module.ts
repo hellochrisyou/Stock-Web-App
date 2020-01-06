@@ -7,15 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
-import { MyListComponent } from '@feature/main/my-list/my-list.component';
 import { SearchModule } from '@feature/main/search/search.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
-import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { LoginComponent } from './feature/login/login.component';
-import { ProfileComponent } from './feature/profile/profile.component';
 import { HomeModule } from '@feature/home/home.module';
 
 @NgModule({
@@ -27,13 +23,14 @@ import { HomeModule } from '@feature/home/home.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    HomeModule,
     CoreModule,
     SharedModule,
     SearchModule,
     HomeModule,
+    AngularFireModule.initializeApp(environment.firebase, 'Stock Web App'),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule
   ],
   providers: [],

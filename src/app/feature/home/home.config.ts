@@ -1,42 +1,32 @@
 import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
 
-export const SIGNUP_SET_VALIDATOR = (fg: FormGroup) => {
-    fg.get('signupEmailCtrl').setValidators([
-        Validators.minLength(10),
-        Validators.required,
-    ]);
-    fg.get('signupPasstrl').setValidators([
-        Validators.minLength(8),
-        Validators.required,
-    ]);
-}
+export const CREATE_LOGIN_FG = (fb: FormBuilder): FormGroup => {
 
-export const LOGIN_SET_VALIDATOR = (fg: FormGroup) => {
-    fg.get('loginEmailCtrl').setValidators([
-        Validators.minLength(10),
-        Validators.required,
-    ]);
-    fg.get('loginPassCtrl').setValidators([
-        Validators.minLength(8),
-        Validators.required,
-    ]);
-}
-
-export const CREATE_LOGIN_FG = (formBuilder: FormBuilder): FormGroup => {
-
-    const loginFg: FormGroup = formBuilder.group({
-        loginEmailCtrl: [''],
-        loginPassCtrl: ['']
+    const loginFb: FormGroup = fb.group({
+        loginEmailCtrl: ['', [
+            Validators.required,
+            Validators.minLength(10),
+        ]],
+        loginPassCtrl: ['', [
+            Validators.required,
+            Validators.minLength(8),
+        ]]
     });
-    LOGIN_SET_VALIDATOR(loginFg);
-    return loginFg;
+    return loginFb;
 };
-export const CREATE_SIGNUP_FG = (formBuilder: FormBuilder): FormGroup | FormArray => {
 
-    const signupFg: FormGroup = formBuilder.group({
-        signupEmailCtrl: [''],
-        singupPassCtrl: ['']
+export const CREATE_SIGNUP_FG = (fb: FormBuilder): FormGroup => {
+
+    const signupFb: FormGroup = fb.group({
+        signupEmailCtrl: ['', [
+            Validators.required,
+            Validators.minLength(10),
+            Validators.maxLength(30)]],
+        signupPassCtrl: ['', [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.maxLength(30)
+        ]]
     });
-    SIGNUP_SET_VALIDATOR(signupFg);
-    return signupFg;
+    return signupFb;
 };
