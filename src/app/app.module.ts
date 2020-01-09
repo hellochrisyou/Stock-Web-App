@@ -13,6 +13,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HomeModule } from '@feature/home/home.module';
+import { MainModule } from '@feature/main/main.module';
 
 @NgModule({
   declarations: [
@@ -23,10 +24,9 @@ import { HomeModule } from '@feature/home/home.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    HomeModule,
     CoreModule,
     SharedModule,
-    SearchModule,
+    MainModule,
     HomeModule,
     AngularFireModule.initializeApp(environment.firebase, 'Stock Web App'),
     AngularFireAuthModule,

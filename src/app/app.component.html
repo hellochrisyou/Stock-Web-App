@@ -43,22 +43,8 @@
         d="M644.6,141S143.02,215.537,147.049,870.207s342.774,201.755,342.774,201.755S404.659,847.213,388.815,762.2c-27.116-145.51-11.551-384.124,271.9-609.1C671.15,139.365,644.6,141,644.6,141Z"
         transform="translate(-147.025 -140.939)" fill="#f5f5f5" />
     </svg>
-
   </div>
 
-
-  <!-- Navgate -->
-  <br />
-  <div class="card-container">
-    <a class="card mat-elevation-z1" routerLink="/search-stock" routerLinkActive="active">
-      <mat-icon>search</mat-icon>
-      <span>Search</span>
-    </a>
-    <a class="card mat-elevation-z1" routerLink="/my-list" routerLinkActive="active">
-      <mat-icon>assignment</mat-icon>
-      <span>My list</span>
-    </a>
-  </div>
   <main [@routerTransition]="getState(o)? o.activatedRoute : ''">
     <router-outlet #o="outlet"></router-outlet>
   </main>

@@ -5,7 +5,6 @@ import { FORM_TOUCHED } from '@feature/home/home.utils';
 import { CREATE_SIGNUP_FG } from '@feature/home/home.config';
 import { EmitService } from 'app/core/service/emit/emit.service';
 import { AuthService } from 'app/core/service/auth/auth.service';
-import { RequiredErrorStateMatcher } from '@shared/error-state-matcher';
 
 @Component({
   selector: 'signup-logic',
@@ -13,14 +12,6 @@ import { RequiredErrorStateMatcher } from '@shared/error-state-matcher';
   styleUrls: ['./signup-logic.component.scss']
 })
 export class SignupLogicComponent extends CreateBaseForm implements OnInit, OnDestroy {
-
-  public signupEmailErrors() {
-    return this.formGroup.get('signupEmailCtrl').errors;
-  }
-
-  public signupPassErrors() {
-    return this.formGroup.get('signupPassCtrl').errors;
-  }
 
   constructor(
     protected fb: FormBuilder,
@@ -30,9 +21,6 @@ export class SignupLogicComponent extends CreateBaseForm implements OnInit, OnDe
   ) {
     super(fb, changeDetectorRef);
     this.formName = 'signupForm';
-    // this.emitService.logingOutput.subscribe(x => {
-    //   this.auth.SigninEmail(this.formGroup.get('signupEmailCtrl').value, this.formGroup.get('signupPassCtrl').value);
-    // });
   }
 
   public signup(): boolean {
@@ -46,15 +34,7 @@ export class SignupLogicComponent extends CreateBaseForm implements OnInit, OnDe
   }
   public ngOnInit(): void {
     super.ngOnInit();
-    this.formGroup = this.fb.group({
-      signupEmailCtrl: ['', [
-        Validators.required
-      ]],
-      signupPassCtrl: ['', [
-        Validators.required
-      ]]
-    });
-    this.changeDetectorRef.markForCheck();
+    this.formGroup = CREATE_SIGNUP_FG(this.fb);
   }
 
   public ngOnDestroy(): void {

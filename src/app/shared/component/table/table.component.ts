@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Stock, Ipo } from '@shared/interface/models';
 import { FirebaseService } from 'app/core/service/crud/firebase.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'base-table',
@@ -78,7 +79,8 @@ export class TableComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -125,8 +127,16 @@ export class TableComponent implements OnInit {
         // Delete Ipo
       }
     }
+    this.openSnackBar('Item added to your list', 'SUCCESS');
+
   }
   resetFields() {
     throw new Error("Method not implemented.");
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

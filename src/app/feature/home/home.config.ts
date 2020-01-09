@@ -1,15 +1,15 @@
 import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { VALIDATOR_ALPHANUM_NO_SPACES } from '@shared/validator/validators/alphanumeric';
 
 export const CREATE_LOGIN_FG = (fb: FormBuilder): FormGroup => {
 
     const loginFb: FormGroup = fb.group({
         loginEmailCtrl: ['', [
             Validators.required,
-            Validators.minLength(10),
+            Validators.email,
         ]],
         loginPassCtrl: ['', [
             Validators.required,
-            Validators.minLength(8),
         ]]
     });
     return loginFb;
@@ -20,12 +20,13 @@ export const CREATE_SIGNUP_FG = (fb: FormBuilder): FormGroup => {
     const signupFb: FormGroup = fb.group({
         signupEmailCtrl: ['', [
             Validators.required,
-            Validators.minLength(10),
-            Validators.maxLength(30)]],
+            Validators.email,
+            Validators.maxLength(30),
+        ]],
         signupPassCtrl: ['', [
             Validators.required,
             Validators.minLength(8),
-            Validators.maxLength(30)
+            Validators.maxLength(30),
         ]]
     });
     return signupFb;

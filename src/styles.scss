@@ -24,8 +24,10 @@ div.mat-select-panel {
     max-height:100%;    
 }
 
-section {
+section, main {
     margin: 0 auto;
+    height:100%;
+    width: 100%;
 } 
 
 table thead tr.mat-header-row {
@@ -338,4 +340,31 @@ button.ghost {
 
 h1 {
     color:black !important;
+}
+
+mat-error {
+    color:#DD0031 !important;
+}
+div.mat-form-field-infix, input {
+    color:black;
+}
+
+.button-home {
+    margin-top:20px;
+}
+
+.gold {
+    color:goldenrod !important;
+}
+
+mat-hint {
+    text-align: justify;
+}
+
+span.mat-option-text {
+    color: black;
+}
+
+span.mat-form-field-label-wrapper label.mat-form-field-label span{
+    color:black;
 }

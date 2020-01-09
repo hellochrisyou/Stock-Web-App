@@ -16,7 +16,7 @@ import { SearchCacheStockService } from 'app/core/service/cache/search-cache-sto
 })
 export class SearchLogicComponent implements OnInit {
 
-  dataArr: Stock[] | Ipo[] = [];
+  dataArr: Stock[] | Ipo[];
   isStock: boolean;
   tmpAccount: Account;
   tmpMat: MatTableDataSource<Stock | Ipo>;

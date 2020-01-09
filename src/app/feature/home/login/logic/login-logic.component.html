@@ -1,7 +1,7 @@
 <div class="presentation">
     <form [formGroup]="formGroup">
         <h1>Sign In</h1>
-        <div><span>with your social media</span></div>
+        <div><span>with your <span class="gold">social media</span></span></div>
         <div class="social-container">
             <a (click)="loginGoogle()" class="social">
                 <i class="fa fa-google"></i>
@@ -10,15 +10,31 @@
                 <i class="fa fa-github"></i>
             </a>
         </div>
-        <span>or use your account</span>
+        <span>or use your <span class="gold">email</span></span>
         <mat-form-field>
             <mat-label>Email</mat-label>
-            <input placeholder="Email" matInput formControlName="loginEmailCtrl">
+            <input matInput placeholder="Email" formControlName="loginEmailCtrl" required [errorStateMatcher]="matcher">
+            <mat-error *ngIf="formGroup.controls.loginEmailCtrl.hasError('maxlength')">
+                Maximum of <strong>{{formGroup.controls.loginEmailCtrl.errors.maxlength.requiredLength}}</strong>
+                characters
+            </mat-error>
+            <mat-error
+                *ngIf="formGroup.controls.loginEmailCtrl.hasError('email') && !formGroup.controls.loginEmailCtrl.hasError('required')">
+                Please enter a <strong>valid</strong> email address
+            </mat-error>
+            <mat-error *ngIf="formGroup.controls.loginEmailCtrl.hasError('required')">
+                Email is <strong>required</strong>
+            </mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Password</mat-label>
-            <input placeholder="Password" matInput formControlName="loginPassCtrl">
+            <input matInput placeholder="Password" formControlName="loginPassCtrl" required
+                [errorStateMatcher]="matcher">
+            <mat-error *ngIf="formGroup.controls.loginPassCtrl.hasError('required')">
+                Password is <strong>required</strong>
+            </mat-error>
         </mat-form-field>
-        <button type="submit" (click)="login()">Log In</button>
+        <button class="button-home" type="submit" (click)="login()">Sign in</button>
+
     </form>
 </div>

@@ -2,10 +2,8 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter }
 import { AuthService } from 'app/core/service/auth/auth.service';
 import { CreateBaseForm } from '@shared/base/base-form';
 import { FormBuilder, AbstractControl, Validators } from '@angular/forms';
-import { CREATE_LOGIN_FG } from '@feature/home/home.config';
+import { CREATE_LOGIN_FG, CREATE_SIGNUP_FG } from '@feature/home/home.config';
 import { EmitService } from 'app/core/service/emit/emit.service';
-import { FORM_TOUCHED } from '@feature/home/home.utils';
-import { RequiredErrorStateMatcher } from '@shared/error-state-matcher';
 
 @Component({
   selector: 'login-logic',
@@ -14,12 +12,12 @@ import { RequiredErrorStateMatcher } from '@shared/error-state-matcher';
 })
 export class LoginLogicComponent extends CreateBaseForm implements OnInit, OnDestroy {
 
-  public loginEmailErrors() {
-    return this.formGroup.get('loginEmailCtrl').errors;
+  public loginEmail() {
+    return this.formGroup.get('loginEmailCtrl');
   }
 
-  public loginPassErrors() {
-    return this.formGroup.get('loginPassCtrl').errors;
+  public loginPass() {
+    return this.formGroup.get('loginPassCtrl');
   }
 
   constructor(
@@ -44,17 +42,10 @@ export class LoginLogicComponent extends CreateBaseForm implements OnInit, OnDes
     }
     this.auth.SigninEmail(this.formGroup.get('loginEmailCtrl').value, this.formGroup.get('loginPassCtrl').value);
   }
+
   public ngOnInit(): void {
     super.ngOnInit();
-    this.formGroup = this.fb.group({
-      loginEmailCtrl: ['', [
-        Validators.required,
-      ]],
-      loginPassCtrl: ['', [
-        Validators.required,
-      ]]
-    });
-    this.changeDetectorRef.markForCheck();
+    this.formGroup = CREATE_LOGIN_FG(this.fb);
   }
 
   public ngOnDestroy(): void {
