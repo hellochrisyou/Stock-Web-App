@@ -4,6 +4,7 @@ import { CreateBaseForm } from '@shared/base/base-form';
 import { FormBuilder, AbstractControl, Validators } from '@angular/forms';
 import { CREATE_LOGIN_FG, CREATE_SIGNUP_FG } from '@feature/home/home.config';
 import { EmitService } from 'app/core/service/emit/emit.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login-logic',
@@ -24,7 +25,8 @@ export class LoginLogicComponent extends CreateBaseForm implements OnInit, OnDes
     protected auth: AuthService,
     protected fb: FormBuilder,
     protected changeDetectorRef: ChangeDetectorRef,
-    protected emitService: EmitService
+    protected emitService: EmitService,
+    protected router: Router
   ) {
     super(fb, changeDetectorRef);
     this.formName = 'loginForm';
@@ -40,7 +42,9 @@ export class LoginLogicComponent extends CreateBaseForm implements OnInit, OnDes
     } else {
       console.log(this.formGroup.value)
     }
-    this.auth.SigninEmail(this.formGroup.get('loginEmailCtrl').value, this.formGroup.get('loginPassCtrl').value);
+    console.log('check 1', this.formGroup.get('loginEmailCtrl').value);
+    this.auth.signinEmail(this.formGroup.get('loginEmailCtrl').value, this.formGroup.get('loginPassCtrl').value);
+    this.router.navigate(['/main']);
   }
 
   public ngOnInit(): void {
@@ -59,7 +63,8 @@ export class LoginLogicComponent extends CreateBaseForm implements OnInit, OnDes
     } else {
       console.log(this.formGroup.value)
     }
-    this.auth.SigninGithub();
+    this.auth.signinGithub();
+    this.router.navigate(['/main']);
   }
 
   public loginGoogle(): boolean {
@@ -69,7 +74,8 @@ export class LoginLogicComponent extends CreateBaseForm implements OnInit, OnDes
     } else {
       console.log(this.formGroup.value)
     }
-    this.auth.SigninGoogle();
+    this.auth.signinGoogle();
+    this.router.navigate(['/main']);
   }
 
 }

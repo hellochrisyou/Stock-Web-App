@@ -30,7 +30,8 @@ export class SignupLogicComponent extends CreateBaseForm implements OnInit, OnDe
     } else {
       console.log(this.formGroup.value)
     }
-    this.auth.SigninEmail(this.formGroup.get('signupEmailCtrl').value, this.formGroup.get('signupPassCtrl').value);
+    console.log('check 1211', this.formGroup.get('signupEmailCtrl').value);
+    this.auth.signupEmail(this.formGroup.get('signupEmailCtrl').value, this.formGroup.get('signupPassCtrl').value);
   }
   public ngOnInit(): void {
     super.ngOnInit();
