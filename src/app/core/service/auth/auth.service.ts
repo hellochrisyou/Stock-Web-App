@@ -77,7 +77,7 @@ export class AuthService {
         this.updateUserData(res.user) //Added with UserStore
         this.ngZone.run(() => {
           console.log('ngZone Run', res);
-          this.router.navigate(['profile']);
+          this.router.navigate(['home']);
         });
       }).catch((error) => {
         window.alert(error);

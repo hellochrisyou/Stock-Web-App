@@ -10,6 +10,7 @@ import { AuthService } from 'app/core/service/auth/auth.service';
 })
 export class HomeComponent implements OnInit {
 
+  routerTag: string;
   condition = true;
 
   constructor(
@@ -40,10 +41,20 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
   public btnClick(): void {
     this.condition = !this.condition;
     console.log(this.condition);
   }
 
+  // public goToprofile(): void {
+  //   this.routerTag = 'profile';
+  // }
+
+  // public goTosearch(): void {
+  //   this.routerTag = 'search';
+  // }
+
+  // public goTolist(): void {
+  //   this.routerTag = 'list';
+  // }
 }
