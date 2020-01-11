@@ -44,10 +44,10 @@ table thead tr.mat-header-row, th.mat-header-cell div.mat-sort-header-container 
 }
 
 .presentation form {
-    background: rgba(45, 52, 54, 1.0);
+    background: rgb(25,118,210);
     display: flex;
     flex-direction: column;
-    padding: 0 50px;
+    padding: 0 100px;
     height: 100%;
     justify-content: center;
     align-items: center;
@@ -135,11 +135,11 @@ a {
 // }
 
 .social-container {
-    margin: 20px 0;
+    margin: 8px 0 0 0;    
 }
-
 .social-container a {
     border: 1px solid #ddd;
+    background-color: whitesmoke;    
     border-radius: 50%;
     display: inline-flex;
     justify-content: center;
@@ -240,6 +240,7 @@ button.ghost {
 // }
 
 .sign-in-container {
+    background: transparent;
     left: 0;
     width: 50%;
     z-index: 2;
@@ -247,6 +248,7 @@ button.ghost {
 
 .sign-up-container {
     left: 0;
+    background: transparent;
     width: 50%;
     z-index: 1;
     opacity: 0;
@@ -367,4 +369,8 @@ span.mat-option-text {
 
 span.mat-form-field-label-wrapper label.mat-form-field-label span{
     color:black;
+}
+
+a.card span {
+    color: black;
 }

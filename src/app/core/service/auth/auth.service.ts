@@ -1,67 +1,48 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '@shared/interface/models';
 import { auth } from 'firebase';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { ConfirmComponent } from '@shared/dialog/confirm/confirm.component';
+import { CloseDialogService } from '../close-dialog/close-dialog.service';
+import { switchMap } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  user: User;
-  userData: Observable<firebase.User>;
+  // user: User;
+  // userData: Observable<firebase.User>;
+  user: Observable<User>; // Added with UserStore
 
 
   constructor(
     public router: Router,
     public ngZone: NgZone,
     public afAuth: AngularFireAuth,
-    private angularFireAuth: AngularFireAuth
+    private angularFireAuth: AngularFireAuth,
+    private snackBar: MatSnackBar,
+    private afs: AngularFirestore,
+    public dialog: MatDialog,
+    private closeDialogService: CloseDialogService
+
   ) {
-    this.afAuth.authState.subscribe(user => {
-      this.user = user;
-      this.userData = angularFireAuth.authState;
-    })
-  }
-
-  // Firebase SignInWithPopup
-  OAuthProvider(provider) {
-    return this.afAuth.auth.signInWithPopup(provider)
-      .then((res) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
-        })
-      }).catch((error) => {
-        window.alert(error)
+    // this.afAuth.authState.subscribe(user => {
+    //   this.user = user;
+    //   this.userData = angularFireAuth.authState;
+    // })
+    this.user = this.afAuth.authState.pipe( // Added with User Store
+      switchMap(user => {
+        if (user) {
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+        } else {
+          return of(null);
+        }
       })
-  }
-
-  // Firebase Google Sign-in
-  public signinGoogle() {
-    return this.OAuthProvider(new auth.GoogleAuthProvider())
-      .then(res => {
-        console.log('Google Successfully logged in!')
-      }).catch(error => {
-        console.log(error)
-      });
-  }
-
-  // Firebase Google Sign-in
-  public signinGithub() {
-    return this.OAuthProvider(new auth.GithubAuthProvider())
-      .then(res => {
-        console.log('Github Successfully logged in!')
-      }).catch(error => {
-        console.log(error)
-      });
-  }
-
-  // Firebase Logout 
-  public signOut() {
-    return this.afAuth.auth.signOut().then(() => {
-      this.router.navigate(['login']);
-    })
+    );
   }
 
   /* Sign up */
@@ -71,11 +52,71 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
         console.log('Successfully signed up!', res);
+        this.snackBar.open('Sign Up', 'SUCCESS', {
+        });
+        this.closeDialogService.closeSignupDialog();
       })
       .catch(error => {
-        console.log('Something is wrong:', error.message);
+        this.signupErrorPopup(error.message);
       });
   }
+
+  // Firebase SignInWithPopup
+  OAuthProvider(provider) {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then((res) => {
+        this.updateUserData(res.user) //Added with UserStore
+        this.ngZone.run(() => {
+          console.log('ngZone Run', res);
+          this.router.navigate(['profile']);
+        });
+      }).catch((error) => {
+        window.alert(error);
+      });
+  }
+
+  // Firebase Google Sign-in
+  public signinGoogle() {
+    return this.OAuthProvider(new auth.GoogleAuthProvider())
+      .then(res => {
+        console.log('Google Successfully logged in!', res);
+      }).catch(error => {
+        console.log(error);
+      });
+  }
+
+  // Firebase Google Sign-in
+  public signinGithub() {
+    return this.OAuthProvider(new auth.GithubAuthProvider())
+      .then(res => {
+        console.log('Github Successfully logged in!');
+      }).catch(error => {
+        console.log(error);
+      });
+  }
+
+  private updateUserData(user) { // Added with UserStore
+    // Sets user data to firestore on login
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL
+    };
+
+    return userRef.set(data, { merge: true });
+
+  }
+
+
+  signOut() {
+    this.afAuth.auth.signOut().then(() => {
+      this.router.navigate(['/home']);
+    });
+  }
+
 
   /* Sign in */
   public signinEmail(email: string, password: string) {
@@ -84,12 +125,23 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(res => {
         console.log('Successfully signed in!', res);
+        this.router.navigate(['main']);
       })
       .catch(err => {
         console.log('Something is wrong:', err.message);
       });
   }
 
-
+  signupErrorPopup(message: string): void {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      width: '25vw',
+      data: {
+        title: 'Error',
+        subTitle: 'Signup Failed',
+        text: message
+      }
+    });
+    dialogRef.afterClosed().subscribe();
+  }
 }
 

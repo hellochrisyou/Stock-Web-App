@@ -1,5 +1,4 @@
 import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
-import { VALIDATOR_ALPHANUM_NO_SPACES } from '@shared/validator/validators/alphanumeric';
 
 export const CREATE_LOGIN_FG = (fb: FormBuilder): FormGroup => {
 

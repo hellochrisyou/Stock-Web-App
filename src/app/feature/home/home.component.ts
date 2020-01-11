@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { EmitService } from 'app/core/service/emit/emit.service';
+import { CloseDialogService } from 'app/core/service/close-dialog/close-dialog.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,8 @@ export class HomeComponent implements OnInit {
   condition = true;
 
   constructor(
-    private emitService: EmitService
+    private emitService: EmitService,
+    private closeDialogService: CloseDialogService
   ) { }
 
   ngOnInit() {
@@ -19,19 +21,24 @@ export class HomeComponent implements OnInit {
     const signInButton = document.getElementById('signIn');
     const container = document.getElementById('container');
 
+    // signUpButton.addEventListener('click', () => {
+    //   container.classList.add('right-panel-active');
+    // });
 
-    signUpButton.addEventListener('click', () => {
-      container.classList.add("right-panel-active");
-    });
 
+    // signInButton.addEventListener('click', () => {
+    //   container.classList.remove('right-panel-active');
+    // });
 
-    signInButton.addEventListener('click', () => {
-      container.classList.remove("right-panel-active");
+    this.closeDialogService.emitSignupSuccess.subscribe(x => {
+      this.btnClick();
     });
   }
 
+
   public btnClick(): void {
     this.condition = !this.condition;
+    console.log(this.condition);
   }
 
 }

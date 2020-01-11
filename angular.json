@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "Stock-Web-App"
+  "defaultProject": "Stock-Web-App",
+  "cli": {
+    "analytics": "a3b68dab-dc19-4d9d-a995-233a251600d0"
+  }
 }

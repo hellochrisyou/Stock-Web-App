@@ -2,7 +2,7 @@
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'); 
 form h1, span, i, a {
     color: black;
-    margin: 8px 0 8px;
+    margin-bottom: 8px;
 }
 
 i, a{
@@ -16,5 +16,14 @@ i, a{
 }
 
 a i:hover {
-    color: white;
+    color: red;
+}
+
+mat-toolbar.HomeComponent {
+    top:0;
+    width:100%;
+}
+
+#signinTitle {
+    margin-top:-5vw;
 }

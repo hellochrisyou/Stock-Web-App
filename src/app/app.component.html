@@ -45,6 +45,30 @@
     </svg>
   </div>
 
+  <section>
+    <!-- Navigate -->
+    <br />
+    <div class="card-container">
+      <!-- <a class="card mat-elevation-z1" routerLink="[{ outlets: { nested-outlet: ['/search-stock'] } }]"
+        routerLinkActive="active">
+        <mat-icon>meeting_room</mat-icon>
+        <span>Login</span>
+      </a> -->
+      <a class="card mat-elevation-z1" routerLink="/profile" routerLinkActive="active">
+        <mat-icon>account_circle</mat-icon>
+        <span>Account Profile</span>
+      </a>
+      <a class="card mat-elevation-z1" routerLink="/my-list" routerLinkActive="active">
+        <mat-icon>assignment</mat-icon>
+        <span>My list</span>
+      </a>
+      <a class="card mat-elevation-z1" routerLink="/search-stock" routerLinkActive="active">
+        <mat-icon>search</mat-icon>
+        <span>Search</span>
+      </a>
+    </div>
+  </section>
+
   <main [@routerTransition]="getState(o)? o.activatedRoute : ''">
     <router-outlet #o="outlet"></router-outlet>
   </main>

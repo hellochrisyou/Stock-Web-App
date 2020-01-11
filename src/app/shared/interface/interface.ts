@@ -7,8 +7,8 @@ export interface RequestCacheEntry {
 }
 
 export interface ColumnObject {
-    columnId: string,
-    propertyName: string
+    columnId: string;
+    propertyName: string;
 }
 
 export interface SearchGroup {
@@ -20,4 +20,10 @@ export interface SearchGroup {
 export interface SearchOption {
     value: string;
     viewValue: string;
+}
+
+export interface DialogData {
+    title: string;
+    subTitle: string;
+    text: string;
 }

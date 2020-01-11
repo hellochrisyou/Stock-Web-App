@@ -7,9 +7,9 @@ import { EmitService } from 'app/core/service/emit/emit.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'login-logic',
-  templateUrl: './login-logic.component.html',
-  styleUrls: ['./login-logic.component.scss']
+  selector: 'home-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginLogicComponent extends CreateBaseForm implements OnInit, OnDestroy {
 
@@ -56,26 +56,24 @@ export class LoginLogicComponent extends CreateBaseForm implements OnInit, OnDes
     super.ngOnDestroy();
   }
 
-  public loginGithub(): boolean {
-    if (!this.formGroup.valid) {
-      alert('Please fill all the required fields')
-      return false;
-    } else {
-      console.log(this.formGroup.value)
-    }
+  public loginGithub(): void {
+    // if (!this.formGroup.valid) {
+    //   alert('Please fill all the required fields')
+    //   return false;
+    // } else {
+    //   console.log(this.formGroup.value)
+    // }
     this.auth.signinGithub();
-    this.router.navigate(['/main']);
   }
 
-  public loginGoogle(): boolean {
-    if (!this.formGroup.valid) {
-      alert('Please fill all the required fields')
-      return false;
-    } else {
-      console.log(this.formGroup.value)
-    }
+  public loginGoogle(): void {
+    // if (!this.formGroup.valid) {
+    //   alert('Please fill all the required fields')
+    //   return false;
+    // } else {
+    //   console.log(this.formGroup.value)
+    // }
     this.auth.signinGoogle();
-    this.router.navigate(['/main']);
   }
 
 }

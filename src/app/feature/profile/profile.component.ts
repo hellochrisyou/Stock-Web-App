@@ -8,13 +8,10 @@ import { AuthService } from 'app/core/service/auth/auth.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private auth: AuthService) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
-  logout() {
-    // this.auth.signOut();
-  }
 
-}  
+}

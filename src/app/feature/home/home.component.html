@@ -1,23 +1,23 @@
 <main>
-    <div class="container" id="container">
+    <div class="container" id="container" [ngClass]="condition?'right-panel-active':''">
         <div class="form-container sign-up-container">
-            <login-logic></login-logic>
+            <home-login></home-login>
         </div>
         <!-- Login -->
         <div class="form-container sign-in-container">
-            <signup-logic></signup-logic>
+            <home-signup></home-signup>
         </div>
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
                     <h1>Welcome back!</h1>
-                    <p>Please login with your email or social media account</p>
-                    <button class="ghost" id="signIn">Sign up</button>
+                    <p>Sign up with an account if you don't have a social media or email account registered.</p>
+                    <button class="ghost" id="signIn" (click)="btnClick()">Sign up</button>
                 </div>
                 <div class="overlay-panel overlay-right">
                     <h1>Hi!</h1>
                     <p>Enter your registration details</p>
-                    <button class="ghost" id="signUp">Sign in</button>
+                    <button class="ghost" id="signUp" (click)="btnClick()">Sign in</button>
                 </div>
             </div>
         </div>
