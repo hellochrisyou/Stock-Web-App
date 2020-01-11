@@ -42,6 +42,7 @@ export interface Ipo {
 
 export interface User {
     uid: string;
+    stateId?: number;
     email: string;
     photoURL?: string;
     displayName?: string;

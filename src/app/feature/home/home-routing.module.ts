@@ -10,7 +10,7 @@ import { ProfileComponent } from '@home/profile/profile.component';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomeComponent
   },
   {
@@ -20,18 +20,6 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupLogicComponent
-  },
-  {
-    path: 'search-stock',
-    component: SearchLogicComponent
-  },
-  {
-    path: 'portfolio',
-    component: ProfileComponent
-  },
-  {
-    path: 'my-list',
-    component: MyListComponent
   },
   {
     path: '',

@@ -60,6 +60,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
         console.log('Successfully signed up!', res);
+        this.updateUserData(res.user) //Added with UserStore
         this.snackBar.open('Sign Up', 'SUCCESS', {
         });
         this.closeDialogService.closeSignupDialog();

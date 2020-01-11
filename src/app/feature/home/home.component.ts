@@ -16,12 +16,15 @@ export class HomeComponent implements OnInit {
     private emitService: EmitService,
     private closeDialogService: CloseDialogService,
     public auth: AuthService
-  ) { }
+  ) {
+    console.log('console', this.auth.user);
+  }
 
   ngOnInit() {
     const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');
     const container = document.getElementById('container');
+
 
     // signUpButton.addEventListener('click', () => {
     //   container.classList.add('right-panel-active');
