@@ -1,12 +1,13 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
-import { AuthService } from 'app/core/service/auth/auth.service';
-import { CreateBaseForm } from '@shared/base/base-form';
-import { FormBuilder, AbstractControl, Validators } from '@angular/forms';
-import { CREATE_LOGIN_FG, CREATE_SIGNUP_FG } from '@feature/home/home.config';
-import { EmitService } from 'app/core/service/emit/emit.service';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CREATE_LOGIN_FG } from '@home/home.config';
+import { CreateBaseForm } from '@shared/base/base-form';
+import { AuthService } from 'app/core/service/auth/auth.service';
+import { EmitService } from 'app/core/service/emit/emit.service';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'home-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']

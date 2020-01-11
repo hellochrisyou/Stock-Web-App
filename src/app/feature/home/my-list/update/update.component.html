@@ -1,0 +1,15 @@
+<section fxLayout="column" fxLayoutAlign="space-around center">
+    <div class="mat-typography">
+        <h1 class="mat-display-1">Pending Updates</h1>
+    </div>
+    <button mat-button (click)="update()"></button>
+    <base-table *ngIf="stockUpdateMatTable" [dataSource]="stockUpdateMatTable" [columnIds]="stockCol"
+        [columnObjects]="stockCol" [dataArray]="stockArr">
+    </base-table>
+    <div class="mat-typography">
+        <h1 class="mat-display-1">IPO</h1>
+    </div>
+    <base-table *ngIf="ipoUpdateMatTable" [dataSource]="ipoUpdateMatTable" [columnIds]="ipoCol" [columnObjects]="ipoCol"
+        [dataArray]="ipoArr">
+    </base-table>
+</section>

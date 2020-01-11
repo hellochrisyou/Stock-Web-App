@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Stock, Ipo } from '@shared/interface/models';
 import { FirebaseService } from 'app/core/service/crud/firebase.service';
 import { MatSnackBar } from '@angular/material';
+import { StateStockService } from 'app/core/service/state-management/state-stock.service';
+import { StateIpoService } from 'app/core/service/state-management/state-ipo.service';
 
 @Component({
   selector: 'base-table',
@@ -19,6 +21,7 @@ export class TableComponent implements OnInit {
   private _columnIds: string[] = [];
   private _dataArray: any[];
   private _columnObjects: any[];
+
   router: any;
 
   @Input()
@@ -80,7 +83,9 @@ export class TableComponent implements OnInit {
 
   constructor(
     private firebaseService: FirebaseService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private stateStockService: StateStockService,
+    private stateIpoService: StateIpoService
   ) { }
 
   ngOnInit() {
@@ -100,23 +105,25 @@ export class TableComponent implements OnInit {
     if (this.isSearch) {
       // Add
       if (this.isStock) {
-        // Add Stock
-        this.firebaseService.addStock(this.dataArray[value])
-          .then(
-            res => {
-              this.resetFields();
-              // use snack bar
-            }
-          )
+        //   // Add Stock
+        //   this.firebaseService.addStock(this.dataArray[value])
+        //     .then(
+        //       res => {
+        //         this.resetFields();
+        //         // use snack bar
+        //       }
+        //     )
+        this.stateStockService.addStock(this.dataArray[value]);
       } else {
-        // Add Ipo 
-        this.firebaseService.addIpo(this.dataArray[value])
-          .then(
-            res => {
-              this.resetFields();
-              // use snack bar
-            }
-          )
+        //   // Add Ipo 
+        //   this.firebaseService.addIpo(this.dataArray[value])
+        //     .then(
+        //       res => {
+        //         this.resetFields();
+        //         // use snack bar
+        //       }
+        //     )
+        this.stateIpoService.addIpo(this.dataArray[value]);
       }
     } else {
       // Delete

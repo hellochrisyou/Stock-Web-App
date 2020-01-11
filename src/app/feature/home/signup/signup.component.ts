@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { CreateBaseForm } from '@shared/base/base-form';
 import { FormBuilder, AbstractControl, Validators } from '@angular/forms';
-import { CREATE_SIGNUP_FG } from '@feature/home/home.config';
+import { CREATE_SIGNUP_FG } from '@home/home.config';
 import { EmitService } from 'app/core/service/emit/emit.service';
 import { AuthService } from 'app/core/service/auth/auth.service';
 

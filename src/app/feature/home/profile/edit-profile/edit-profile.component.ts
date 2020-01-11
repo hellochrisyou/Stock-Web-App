@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { AuthService } from 'app/core/service/auth/auth.service';
-import { CreateBaseForm } from '@shared/base/base-form';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { CREATE_PROFILE_FG } from '@feature/profile/profile.config';
+import { CREATE_PROFILE_FG } from '@home/profile/profile.config';
+import { CreateBaseForm } from '@shared/base/base-form';
+import { AuthService } from 'app/core/service/auth/auth.service';
 
 @Component({
   selector: 'edit-profile',
@@ -11,13 +11,12 @@ import { CREATE_PROFILE_FG } from '@feature/profile/profile.config';
 })
 export class EditProfileComponent extends CreateBaseForm implements OnInit, OnDestroy {
 
+  minDate = Date.now();
+  maxDate = new Date();
+
   public displayName() {
     return this.formGroup.get('displayNameCtrl');
   }
-
-
-  minDate = Date.now();
-  maxDate = new Date();
 
   constructor(
     protected fb: FormBuilder,

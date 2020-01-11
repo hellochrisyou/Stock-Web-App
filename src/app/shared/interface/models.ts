@@ -1,4 +1,5 @@
 export interface Stock {
+    stateId?: number;
     Select?: string;
     Symbol?: string;
     Name?: string;
@@ -15,6 +16,7 @@ export interface Stock {
 }
 
 export interface Ipo {
+    stateId?: number;
     Select?: string;
     Symbol?: string;
     Name?: string;

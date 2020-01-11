@@ -21,8 +21,8 @@
       "@interface/*": [
         "app/interface/*"
       ],
-      "@feature/*": [
-        "app/feature/*"
+      "@home/*": [
+        "app/feature/home/*"
       ],
       "@constant/*": [
         "app/constant/*"

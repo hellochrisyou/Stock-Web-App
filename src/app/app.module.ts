@@ -11,8 +11,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { HomeModule } from '@feature/home/home.module';
-import { ProfileModule } from '@feature/profile/profile.module';
+import { HomeModule } from '@home/home.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import { ProfileModule } from '@feature/profile/profile.module';
     CoreModule,
     SharedModule,
     HomeModule,
-    ProfileModule,
     AngularFireModule.initializeApp(environment.firebase, 'Stock Web App'),
     AngularFireAuthModule,
     AngularFirestoreModule,

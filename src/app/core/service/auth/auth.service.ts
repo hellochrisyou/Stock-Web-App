@@ -16,7 +16,15 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 export class AuthService {
   // user: User;
   // userData: Observable<firebase.User>;
-  user: Observable<User>; // Added with UserStore
+  // tslint:disable-next-line: variable-name
+  private _user: Observable<User>; // Added with UserStore
+
+  public get user(): Observable<User> {
+    return this._user;
+  }
+  public set user(value: Observable<User>) {
+    this._user = value;
+  }
 
 
   constructor(

@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { EmitService } from 'app/core/service/emit/emit.service';
 import { CloseDialogService } from 'app/core/service/close-dialog/close-dialog.service';
+import { AuthService } from 'app/core/service/auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private emitService: EmitService,
-    private closeDialogService: CloseDialogService
+    private closeDialogService: CloseDialogService,
+    public auth: AuthService
   ) { }
 
   ngOnInit() {

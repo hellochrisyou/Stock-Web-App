@@ -10,6 +10,7 @@ import { SearchCacheIpoService } from 'app/core/service/cache/search-cache-ipo.s
 import { SearchCacheStockService } from 'app/core/service/cache/search-cache-stock.service';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'search-stock',
   templateUrl: './search-logic.component.html',
   styleUrls: ['./search-logic.component.scss']
@@ -37,7 +38,7 @@ export class SearchLogicComponent implements OnInit {
 
   onSubmit(value: string) {
     if (value.includes('collection')) {
-      let newValue = value.slice(31)
+      const newValue = value.slice(31);
       this.colObj = STOCK_COL_OBJ;
       this.isStock = true;
       if (this.searchCacheStockService.isExist(newValue)) {
