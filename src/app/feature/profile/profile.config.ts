@@ -44,12 +44,10 @@ export const CREATE_PROFILE_FG = (fb: FormBuilder): FormGroup => {
             VALIDATOR_NUMBER,
             Validators.required,
         ]],
-        expectDateCtrl: ['', [
+        dateCtrl: ['', [
             MAT_DATEPICKER_VALIDATORS,
             Validators.required
         ]]
-
-
     });
     return profileFb;
 };

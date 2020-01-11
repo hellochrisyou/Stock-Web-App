@@ -1,21 +1,13 @@
 <section>
+    <div class="presentation">
+        <h1>User Profile</h1>
+    </div>
     <mat-tab-group mat-align-tabs="center" animationDuration="1700ms">
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <i class="fa fa-home tab-icon" aria-hidden="true"></i>
-                View
-            </ng-template>
-            <ng-template matTabContent>
-                <view-profile></view-profile>
-            </ng-template>
+        <mat-tab label="View">
+            <view-profile></view-profile>
         </mat-tab>
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <i class="fa fa-tasks tab-icon"></i>
-                Edit
-            </ng-template>
-            <edit-profile></edit-profile>>
-            <!-- </mat-tab> -->
+        <mat-tab label="Edit">
+            <edit-profile></edit-profile>
         </mat-tab>
     </mat-tab-group>
 </section>
