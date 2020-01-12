@@ -10,7 +10,7 @@ import { EmitService } from 'app/core/service/emit/emit.service';
   // tslint:disable-next-line: component-selector
   selector: 'home-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['../home.component.scss']
 })
 export class LoginLogicComponent extends CreateBaseForm implements OnInit, OnDestroy {
 
@@ -45,7 +45,6 @@ export class LoginLogicComponent extends CreateBaseForm implements OnInit, OnDes
     }
     console.log('check 1', this.formGroup.get('loginEmailCtrl').value);
     this.auth.signinEmail(this.formGroup.get('loginEmailCtrl').value, this.formGroup.get('loginPassCtrl').value);
-    this.router.navigate(['/main']);
   }
 
   public ngOnInit(): void {

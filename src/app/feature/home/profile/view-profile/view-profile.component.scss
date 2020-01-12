@@ -1,3 +1,7 @@
+@import '../../../../../assets/styles/button';
+
+@include button();
+
 section {
     margin: 0 auto;
 }

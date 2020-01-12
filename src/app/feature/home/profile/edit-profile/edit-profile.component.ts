@@ -11,7 +11,7 @@ import { AuthService } from 'app/core/service/auth/auth.service';
 })
 export class EditProfileComponent extends CreateBaseForm implements OnInit, OnDestroy {
 
-  minDate = Date.now();
+  minDate = new Date();
   maxDate = new Date();
 
   public displayName() {
@@ -34,6 +34,7 @@ export class EditProfileComponent extends CreateBaseForm implements OnInit, OnDe
     const year = today.getFullYear();
     const month = today.getMonth();
     const day = today.getDate();
+    this.minDate = new Date(year, month, day);
     this.maxDate = new Date(year + 100, month, day);
 
     this.formGroup = CREATE_PROFILE_FG(this.fb);

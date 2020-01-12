@@ -15,15 +15,15 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    loadChildren: () => import('./feature/home/profile/profile.module').then(mod => mod.ProfileModule),
   },
   {
     path: 'search-stock',
-    component: SearchLogicComponent
+    loadChildren: () => import('./feature/home/search/search.module').then(mod => mod.SearchModule),
   },
   {
     path: 'my-list',
-    component: MyListComponent
+    loadChildren: () => import('./feature/home/my-list/my-list.module').then(mod => mod.MyListModule),
   },
   {
     path: '',

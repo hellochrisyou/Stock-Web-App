@@ -35,7 +35,7 @@ import { SignupLogicComponent } from '@home/signup/signup.component';
     SearchModule,
     MyListModule,
     ProfileModule,
-    AngularFireModule.initializeApp(environment.firebase, 'Stock Web App'),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AppRoutingModule

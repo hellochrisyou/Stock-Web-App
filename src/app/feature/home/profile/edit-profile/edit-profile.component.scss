@@ -1,4 +1,14 @@
+@import '../../../../../assets/styles/button';
+@import '../../../../../assets/styles/font';
+
+@include button();
+@include font();
+
 section {
     height:100%;
     width:100%;
+}
+
+.edit-profile-input {
+    width: auto;
 }

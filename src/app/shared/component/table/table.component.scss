@@ -1,4 +1,6 @@
+@import '../../../../assets/styles/button';
 
+@include button();
 
 .icon-red {
     color:red;

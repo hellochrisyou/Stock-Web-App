@@ -45,6 +45,7 @@
 
   <div *ngIf="auth.user | async as user">
     <section>
+
       <!-- Navigate -->
       <br />
       <div class="card-container">
@@ -61,10 +62,9 @@
           <span>Account Profile</span>
         </a>
       </div>
-
-      <section [@routerTransition]="getState(o)? o.activatedRoute : ''">
-        <router-outlet #o="outlet"></router-outlet>
-      </section>
     </section>
   </div>
+  <section [@routerTransition]="getState(o)? o.activatedRoute : ''">
+    <router-outlet #o="outlet"></router-outlet>
+  </section>
 </main>

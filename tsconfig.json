@@ -27,8 +27,8 @@
       "@constant/*": [
         "app/constant/*"
       ],
-      "@toolComponent/*": [
-        "app/core/component/*"
+      "@styles/*": [
+        "src/assets/styles/*"
       ],
     },
     "outDir": "./dist/out-tsc",

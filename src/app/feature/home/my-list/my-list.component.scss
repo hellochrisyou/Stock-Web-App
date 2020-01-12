@@ -1,3 +1,7 @@
+@import '../../../../assets/styles/tab';
+
+@include tab(); 
+
 div h1 {
     margin: 5vh 0 0 0;
 }

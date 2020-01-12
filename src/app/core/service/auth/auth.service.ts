@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { ConfirmComponent } from '@shared/dialog/confirm/confirm.component';
 import { CloseDialogService } from '../close-dialog/close-dialog.service';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, first } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Injectable({
@@ -36,16 +36,19 @@ export class AuthService {
     private afs: AngularFirestore,
     public dialog: MatDialog,
     private closeDialogService: CloseDialogService
-
   ) {
     // this.afAuth.authState.subscribe(user => {
     //   this.user = user;
     //   this.userData = angularFireAuth.authState;
     // })
-    this.user = this.afAuth.authState.pipe( // Added with User Store
+    this.user = this.authenticate();
+  }
+
+  public authenticate() {
+    return this.afAuth.authState.pipe( // Added with User Store
       switchMap(user => {
         if (user) {
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges().pipe(first()).toPromise();
         } else {
           return of(null);
         }
@@ -134,7 +137,8 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(res => {
         console.log('Successfully signed in!', res);
-        this.router.navigate(['main']);
+        this.updateUserData(this._user);
+        this.router.navigate(['home']);
       })
       .catch(err => {
         console.log('Something is wrong:', err.message);
