@@ -8,8 +8,10 @@ import { StockDto } from '@shared/interface/dto.interface';
 export class SearchStockResolveService {
 
   stockArr: Stock[];
+  // tslint:disable-next-line: variable-name
   private _curStock: Stock = {
-    Select: 'Select'
+    Select: 'Select',
+    Chart: 'Chart'
   };
 
 
@@ -19,7 +21,8 @@ export class SearchStockResolveService {
     this.stockArr = [];
     data.forEach(x => {
       this.curStock = {
-        Select: 'Select'
+        Select: 'Select',
+        Chart: 'Chart'
       };
       this.curStock.Symbol = x.symbol;
       this.curStock.Exchange = x.primaryExchange;
@@ -36,7 +39,7 @@ export class SearchStockResolveService {
 
         ;
       this.stockArr.push(this.curStock);
-    })
+    });
     return this.stockArr;
   }
 

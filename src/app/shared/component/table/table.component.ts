@@ -4,22 +4,30 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Stock, Ipo } from '@shared/interface/models';
 import { FirebaseService } from 'app/core/service/crud/firebase.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { StateStockService } from 'app/core/service/state-management/state-stock.service';
 import { StateIpoService } from 'app/core/service/state-management/state-ipo.service';
+import { ChartComponent } from '@shared/dialog/chart/chart.component';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'base-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
 
+  // tslint:disable-next-line: variable-name
   private _isStock: boolean;
-  private _isSearch: boolean;
+  // tslint:disable-next-line: variable-name
+  private _isSearch: string;
+  // tslint:disable-next-line: variable-name
   private _dataSource: MatTableDataSource<Stock | Ipo>;
+  // tslint:disable-next-line: variable-name
   private _columnIds: string[] = [];
+  // tslint:disable-next-line: variable-name
   private _dataArray: any[];
+  // tslint:disable-next-line: variable-name
   private _columnObjects: any[];
 
   router: any;
@@ -33,10 +41,10 @@ export class TableComponent implements OnInit {
   }
 
   @Input()
-  public get isSearch(): boolean {
+  public get isSearch(): string {
     return this._isSearch;
   }
-  public set isSearch(value: boolean) {
+  public set isSearch(value: string) {
     this._isSearch = value;
   }
 
@@ -83,9 +91,10 @@ export class TableComponent implements OnInit {
 
   constructor(
     private firebaseService: FirebaseService,
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private stateStockService: StateStockService,
-    private stateIpoService: StateIpoService
+    private stateIpoService: StateIpoService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -115,7 +124,7 @@ export class TableComponent implements OnInit {
         //     )
         this.stateStockService.addStock(this.dataArray[value]);
       } else {
-        //   // Add Ipo 
+        //   // Add Ipo
         //   this.firebaseService.addIpo(this.dataArray[value])
         //     .then(
         //       res => {
@@ -138,11 +147,23 @@ export class TableComponent implements OnInit {
 
   }
   resetFields() {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
+  public openDialog(index: number) {
+    const dialogRef = this.dialog.open(ChartComponent, {
+      data: {
+        keyword: this.dataArray[index]
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  public openSnackBar(message: string, action: string): void {
+    this.snackBar.open(message, action, {
       duration: 2000,
     });
   }

@@ -1,7 +1,8 @@
 import { ColumnObject } from '@shared/interface/interface';
 
 export const STOCK_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Select', propertyName: 'Select' },
+    { columnId: 'Select', propertyName: '' },
+    { columnId: 'Chart', propertyName: '' },
     { columnId: 'Symbol', propertyName: 'Symbol' },
     { columnId: 'Name', propertyName: 'Name' },
     { columnId: 'Exchange', propertyName: 'Exchange' },
@@ -30,4 +31,10 @@ export const IPO_COL_OBJ: ColumnObject[] = [
     { columnId: 'StockholdEquity', propertyName: 'StockholderEquity' },
     { columnId: 'CompanyDesc', propertyName: 'CompanyDescription' },
     { columnId: 'PercentOffered', propertyName: 'PercentOffered' }
+];
+
+export const HISTORY_COL_OBJ: ColumnObject[] = [
+    { columnId: 'email', propertyName: 'email' },
+    { columnId: 'name', propertyName: 'title' },
+    { columnId: 'givenDate', propertyName: 'givenDate' },
 ];

@@ -8,8 +8,11 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{col.propertyName}}</th>
                 <td mat-cell *matCellDef="let dataArray">{{dataArray[col.propertyName]}}
                     <button *ngIf="col.columnId==='Select'" mat-button class="customize-button" (click)="select(i)">
-                        <mat-icon *ngIf="isSearch" class="icon-green">add</mat-icon>
-                        <mat-icon *ngIf="!isSearch" class="icon-red">clear</mat-icon>
+                        <mat-icon *ngIf="isSearch==='yes'" class="icon-green">add</mat-icon>
+                        <mat-icon *ngIf="isSearch==='no'" class="icon-red">clear</mat-icon>
+                    </button>
+                    <button *ngIf="col.columnId==='Chart'" mat-button class="customize-button" (click)="openDialog(i)">
+                        <mat-icon class="icon-green">show_chart</mat-icon>
                     </button>
                 </td>
             </ng-container>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
-import { Ipo, Stock } from '@shared/interface/models';
+import { Ipo, Stock, SearchHistory, ActivityHistory } from '@shared/interface/models';
+import { ValueTransformer } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,19 @@ export class FirebaseService {
   constructor(public db: AngularFirestore) { }
 
   public getStocks() {
-    return this.db.collection('stock').valueChanges()
+    return this.db.collection('Stocks').valueChanges();
   }
 
   public getIpos() {
-    return this.db.collection('IPO').valueChanges()
+    return this.db.collection('Ipo').valueChanges();
+  }
+
+  public getSearchHistory() {
+    return this.db.collection('SearchHistory').valueChanges();
+  }
+
+  public getActivityHistory() {
+    return this.db.collection('ActvityHistory').valueChanges();
   }
 
   public addStock(value: Stock): Promise<DocumentReference> {
@@ -56,6 +65,22 @@ export class FirebaseService {
       totalAssets: value.TotalAssets,
       url: value.URL,
       useOfProceeds: value.UseOfProceeds
+    });
+  }
+
+  public addSearchHistory(value: SearchHistory): Promise<DocumentReference> {
+    return this.db.collection('SearchHistory').add({
+      email: value.email,
+      title: value.title,
+      givenDate: value.givenDate
+    });
+  }
+
+  public addActivityHistory(value: ActivityHistory): Promise<DocumentReference> {
+    return this.db.collection('SearchHistory').add({
+      email: value.email,
+      title: value.move,
+      givenDate: value.givenDate
     });
   }
 

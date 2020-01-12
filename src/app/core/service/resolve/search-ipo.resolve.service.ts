@@ -6,6 +6,7 @@ import { Stock, Ipo } from '@shared/interface/models';
 })
 export class SearchIpoResolveService {
 
+  // tslint:disable-next-line: variable-name
   private _ipoArr: Ipo[];
 
   curIpo: Ipo = {
@@ -39,10 +40,10 @@ export class SearchIpoResolveService {
         this.curIpo.UseOfProceeds = x.useOfProceeds,
         this.curIpo.Competition = x.competition,
         this.curIpo.Amount = x.amount,
-        this.curIpo.PercentOffered = x.percentOffered
+        this.curIpo.PercentOffered = x.percentOffered;
 
       this.ipoArr.push(this.curIpo);
-    })
+    });
     return this.ipoArr;
   }
 
@@ -52,6 +53,4 @@ export class SearchIpoResolveService {
   public set ipoArr(value: Ipo[]) {
     this._ipoArr = value;
   }
-
-
 }

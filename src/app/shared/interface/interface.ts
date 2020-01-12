@@ -26,4 +26,10 @@ export interface DialogData {
     title: string;
     subTitle: string;
     text: string;
+    keyword?: string;
+}
+
+interface KeyValuePair {
+    key: string;
+    value: string;
 }

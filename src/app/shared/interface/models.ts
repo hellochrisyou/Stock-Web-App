@@ -1,6 +1,7 @@
 export interface Stock {
     stateId?: number;
     Select?: string;
+    Chart?: string;
     Symbol?: string;
     Name?: string;
     Exchange?: string;
@@ -54,3 +55,14 @@ export interface User {
     age?: number;
 }
 
+export interface SearchHistory {
+    email?: string;
+    title?: string;
+    givenDate?: Date;
+}
+
+export interface ActivityHistory {
+    email?: string;
+    move?: string;
+    givenDate?: Date;
+}

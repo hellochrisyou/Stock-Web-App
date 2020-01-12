@@ -1,6 +1,16 @@
-<section>
-    <search-bar (emitValue)="onSubmit($event)"></search-bar>
-    <base-table *ngIf="dataArr" [dataSource]="tmpMat" [columnIds]="colObj" [columnObjects]="colObj"
-        [dataArray]="dataArr" [isSearch]="isSearch" [isStock]="isStock">
-    </base-table>
-</section>
+<mat-tab-group class="tab-list" mat-align-tabs="center" animationDuration="1700ms">
+    <mat-tab label="Search">
+        <section>
+            <search-bar (emitValue)="onSubmit($event)"></search-bar>
+            <base-table *ngIf="searchDataArr" [dataSource]="searchMat" [columnIds]="searchColObj"
+                [columnObjects]="searchColObj" [dataArray]="searchDataArr" [isSearch]="isSearch" [isStock]="isStock">
+            </base-table>
+        </section>
+    </mat-tab>
+    <mat-tab label="Search History">
+        <button mat-button class="margin-center">Clear History</button>
+        <base-table *ngIf="historyDataArr" [dataSource]="historyMat" [columnIds]="historyColObj"
+            [columnObjects]="historyColObj" [dataArray]="historyDataArr" [isSearch]="isSearch" [isStock]="isStock">
+        </base-table>
+    </mat-tab>
+</mat-tab-group>

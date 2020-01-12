@@ -4,7 +4,6 @@ import { SharedModule } from '@shared/shared.module';
 import { SearchLogicComponent } from './logic/search-logic.component';
 import { SearchPresentationComponent } from './presentation/search-presentation.component';
 import { SearchRoutingModule } from './search-routing.module';
-
 @NgModule({
   declarations: [SearchLogicComponent, SearchPresentationComponent],
   imports: [
@@ -15,6 +14,9 @@ import { SearchRoutingModule } from './search-routing.module';
   exports: [
     SearchLogicComponent,
     SearchPresentationComponent
+  ],
+  providers: [
+
   ]
 })
 export class SearchModule { }

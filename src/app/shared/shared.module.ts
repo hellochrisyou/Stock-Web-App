@@ -1,22 +1,22 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from './module/material.module';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { TableComponent } from './component/table/table.component';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { ConfirmComponent } from './dialog/confirm/confirm.component';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
-
+import { TableComponent } from './component/table/table.component';
+import { ChartComponent } from './dialog/chart/chart.component';
+import { ConfirmComponent } from './dialog/confirm/confirm.component';
+import { MaterialModule } from './module/material.module';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
-  declarations: [TableComponent, ConfirmComponent],
+  declarations: [TableComponent, ConfirmComponent, ChartComponent],
   imports: [
     MaterialModule,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    ChartsModule,
   ],
   exports: [
     MaterialModule,
@@ -24,6 +24,7 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     FormsModule,
     TableComponent,
+    ChartsModule
   ],
   providers: [
     {
@@ -31,7 +32,8 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
     }
   ],
   entryComponents: [
-    ConfirmComponent
+    ConfirmComponent,
+    ChartComponent
   ]
 })
 export class SharedModule { }
