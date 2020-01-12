@@ -4,6 +4,6 @@
         <img class="margin-center" [src]="user.photoURL">
         <p>UID: {{ user.uid }}</p>
         <p>Favorite Color: {{ user?.displayName }} </p>
-        <button (click)="auth.signOut()">Logout</button>
+        <button class="non-home-button" (click)="auth.signOut()">Logout</button>
     </section>
 </div>

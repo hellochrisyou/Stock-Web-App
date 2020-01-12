@@ -8,9 +8,13 @@
         </section>
     </mat-tab>
     <mat-tab label="Search History">
-        <button mat-button class="margin-center">Clear History</button>
-        <base-table *ngIf="historyDataArr" [dataSource]="historyMat" [columnIds]="historyColObj"
-            [columnObjects]="historyColObj" [dataArray]="historyDataArr" [isSearch]="isSearch" [isStock]="isStock">
-        </base-table>
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
+            <button class="non-home-button margin-center" mat-flat-button color="primary"><span
+                    class="button-span">Clear
+                    History</span></button>
+            <base-table *ngIf="historyDataArr" [dataSource]="historyMat" [columnIds]="historyColObj"
+                [columnObjects]="historyColObj" [dataArray]="historyDataArr" [isSearch]="isSearch" [isStock]="isStock">
+            </base-table>
+        </div>
     </mat-tab>
 </mat-tab-group>

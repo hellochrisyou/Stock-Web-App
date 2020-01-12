@@ -2,14 +2,25 @@
     <div class="mat-typography">
         <h1 class="mat-display-1">Pending Updates</h1>
     </div>
-    <button mat-button (click)="update()"></button>
-    <base-table *ngIf="stockUpdateMatTable" [dataSource]="stockUpdateMatTable" [columnIds]="stockCol"
-        [columnObjects]="stockCol" [dataArray]="stockArr">
-    </base-table>
-    <div class="mat-typography">
-        <h1 class="mat-display-1">IPO</h1>
-    </div>
-    <base-table *ngIf="ipoUpdateMatTable" [dataSource]="ipoUpdateMatTable" [columnIds]="ipoCol" [columnObjects]="ipoCol"
-        [dataArray]="ipoArr">
-    </base-table>
+    <button mat-button class="non-home-button" (click)="update()"></button>
+    <mat-tab-group mat-align-tabs="center" animationDuration="1700ms">
+        <mat-tab label="Stock">
+            <button mat-button class="non-home-button" (click)="update()"></button>
+            <base-table *ngIf="pendAddStockTable" [dataSource]="pendAddStockTable" [isSearch]="isSearch"
+                [columnIds]="stockCol" [columnObjects]="stockCol" [dataArray]="pendAddStockArr">
+            </base-table>
+            <base-table *ngIf="pendRmStockTable" [dataSource]="pendRmStockTable" [isSearch]="isSearch"
+                [columnIds]="stockCol" [columnObjects]="stockCol" [dataArray]="pendRmStockArr">
+            </base-table>
+        </mat-tab>
+        <mat-tab label="Ipo">
+            <button mat-button class="non-home-button" (click)="update()"></button>
+            <base-table *ngIf="pendAddIpoTable" [dataSource]="pendAddIpoTable" [isSearch]="isSearch"
+                [columnIds]="ipoCol" [columnObjects]="ipoCol" [dataArray]="pendAddIpoArr">
+            </base-table>
+            <base-table *ngIf="pendRmIpoTable" [dataSource]="pendRmIpoTable" [isSearch]="isSearch" [columnIds]="ipoCol"
+                [columnObjects]="ipoCol" [dataArray]="pendRmIpoArr">
+            </base-table>
+        </mat-tab>
+    </mat-tab-group>
 </section>

@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { DialogData } from '@shared/interface/interface';
 import { HttpService } from 'app/core/service/api/http.service';
 import { ChartService } from 'app/core/service/resolve/chart.service';
-import { ChartDataSets, ChartOptions } from 'chart.js';
+import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 
 
@@ -14,9 +14,9 @@ import { Color, Label } from 'ng2-charts';
 })
 export class ChartComponent implements OnInit {
 
-  chartData: ChartDataSets[];
 
-  lineChartLabels: Label[] = ['Low', 'High', 'Latest Price', 'Change'];
+  chartData: ChartDataSets[];
+  lineChartLabels: Label[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   lineChartOptions = {
     responsive: true,
@@ -24,7 +24,19 @@ export class ChartComponent implements OnInit {
 
   lineChartColors: Color[] = [
     {
-      borderColor: 'black',
+      borderColor: '#4169E1',
+      backgroundColor: 'rgba(255,255,0,0.28)',
+    },
+    {
+      borderColor: 'rgba(245, 171, 53, 1)',
+      backgroundColor: 'rgba(255,255,0,0.28)',
+    },
+    {
+      borderColor: 'green',
+      backgroundColor: 'rgba(255,255,0,0.28)',
+    },
+    {
+      borderColor: 'rgba(211, 84, 0, 1)',
       backgroundColor: 'rgba(255,255,0,0.28)',
     },
   ];
@@ -33,15 +45,24 @@ export class ChartComponent implements OnInit {
   lineChartPlugins = [];
   lineChartType = 'line';
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, private httpService: HttpService, private chartService: ChartService) { }
+  constructor(
+    private dialogRef: MatDialogRef<ChartComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private httpService: HttpService,
+    private chartService: ChartService
+  ) {
+
+
+  }
 
   ngOnInit(): void {
+    this.dialogRef.updateSize('100vw');
 
-    this.httpService.getChart(this.data.keyword).subscribe(data => {
-      console.log('chartdata', this.chartService.resolveChartArray(data, this.data.keyword));
+    this.httpService.getChart(this.data.keyword.Symbol).subscribe(data => {
+      this.chartData = [];
+      this.chartService.resolveChartArray(data, this.data.keyword.Symbol);
       this.chartData.push(this.chartService.getLow());
       this.chartData.push(this.chartService.getHigh());
-      this.chartData.push(this.chartService.getLatestPrice());
       this.chartData.push(this.chartService.getChange());
     });
 

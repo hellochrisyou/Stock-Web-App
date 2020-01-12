@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { StateIpoService } from '../state-management/state-ipo.service';
+import { StateIpoService } from '../state-management/state-ipo-add.service';
 
 describe('StateIpoService', () => {
   let service: StateIpoService;

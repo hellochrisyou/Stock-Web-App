@@ -60,7 +60,7 @@ export class HttpService {
 
   public getChart(value: string) {
     this.fullUrl = this.chart_url + value + '/chart/5y' + this.token2;
-    return this.http.get<KeyValuePair>(this.api_url + value + this.token).pipe(
+    return this.http.get<KeyValuePair[]>(this.chart_url + value + '/chart/1y' + this.token2).pipe(
       // retry sending the request for 3 extra time
       retry(3),
       // error handling

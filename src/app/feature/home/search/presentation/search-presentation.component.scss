@@ -1,9 +1,8 @@
-@import '../../../../../assets/styles/button';
 @import '../../../../../assets/styles/control';
 
-@include button();
 @include select();
 
 form {
     margin-top:20px;
 }
+

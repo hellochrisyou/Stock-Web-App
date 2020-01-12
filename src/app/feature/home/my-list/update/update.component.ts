@@ -1,41 +1,53 @@
 import { Component, OnInit } from '@angular/core';
 import { Stock, Ipo } from '@shared/interface/models';
-import { MatTableDataSource, MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { ColumnObject } from '@shared/interface/interface';
 import { STOCK_COL_OBJ, IPO_COL_OBJ } from '@shared/const/column.const';
-import { StateStockService } from 'app/core/service/state-management/state-stock.service';
-import { StateIpoService } from 'app/core/service/state-management/state-ipo.service';
+import { StateStockAddService } from 'app/core/service/state-management/state-stock-add.service';
+import { StateIpoAddService } from 'app/core/service/state-management/state-ipo-add.service';
 import { Observable } from 'rxjs';
+import { StateIpoRemoveService } from 'app/core/service/state-management/state-ipo-remove.service';
+import { StateStockRemoveService } from 'app/core/service/state-management/state-stock-remove.service';
 
 @Component({
-  selector: 'app-update',
+  selector: 'update-my-list',
   templateUrl: './update.component.html',
   styleUrls: ['./update.component.scss']
 })
 export class UpdateComponent implements OnInit {
 
-  stockArr: Stock[] = [];
-  ipoArr: Ipo[] = []
+  isSearch = 'no';
 
-  stockUpdateMatTable: Observable<Stock[]>;
-  ipoUpdateMatTable: Observable<Ipo[]>;
+  pendAddStockArr: Stock[] = [];
+  pendRmStockArr: Stock[] = [];
+  pendAddIpoArr: Ipo[] = [];
+  pendRmIpoArr: Ipo[] = [];
+
+  pendAddStockTable: Observable<Stock[]>;
+  pendRmStockTable: Observable<Stock[]>;
+  pendAddIpoTable: Observable<Ipo[]>;
+  pendRmIpoTable: Observable<Ipo[]>;
 
   stockCol: ColumnObject[] = STOCK_COL_OBJ;
   ipoCol: ColumnObject[] = IPO_COL_OBJ;
 
   constructor(
-    private stateStockService: StateStockService,
-    private stateIpoService: StateIpoService,
+    private stateIpoAddService: StateIpoAddService,
+    private stateIpoRemoveService: StateIpoRemoveService,
+    private stateStockAddService: StateStockAddService,
+    private stateStockRemoveService: StateStockRemoveService,
     private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
-    this.ipoUpdateMatTable = this.stateIpoService.ipos$;
-    this.stockUpdateMatTable = this.stateStockService.stocks$;
+    this.pendAddStockTable = this.stateIpoAddService.addIpos$;
+    this.pendRmStockTable = this.stateIpoRemoveService.rmIpos$;
+    this.pendAddIpoTable = this.stateStockAddService.addStocks$;
+    this.pendRmIpoTable = this.stateStockRemoveService.rmStocks$;
   }
 
   public update(): void {
-    this.snackBar.open('Sign Up', 'SUCCESS', {
+    this.snackBar.open('Updated', 'SUCCESS', {
     });
   }
 }

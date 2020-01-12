@@ -11,7 +11,6 @@ import { MyListModule } from '@home/my-list/my-list.module';
 import { ProfileModule } from '@home/profile/profile.module';
 import { SearchModule } from '@home/search/search.module';
 import { SignupLogicComponent } from '@home/signup/signup.component';
-
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,7 +36,6 @@ import { SharedModule } from './shared/shared.module';
     SearchModule,
     MyListModule,
     ProfileModule,
-
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Stock, Ipo } from '@shared/interface/models';
-import { FirebaseService } from 'app/core/service/crud/firebase.service';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import { StateStockService } from 'app/core/service/state-management/state-stock.service';
-import { StateIpoService } from 'app/core/service/state-management/state-ipo.service';
 import { ChartComponent } from '@shared/dialog/chart/chart.component';
+import { Ipo, Stock } from '@shared/interface/models';
+import { FirebaseService } from 'app/core/service/crud/firebase.service';
+import { StateIpoAddService } from 'app/core/service/state-management/state-ipo-add.service';
+import { StateStockAddService } from 'app/core/service/state-management/state-stock-add.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -92,8 +92,8 @@ export class TableComponent implements OnInit {
   constructor(
     private firebaseService: FirebaseService,
     private snackBar: MatSnackBar,
-    private stateStockService: StateStockService,
-    private stateIpoService: StateIpoService,
+    private stateStockddService: StateStockAddService,
+    private stateIpoddService: StateIpoAddService,
     public dialog: MatDialog
   ) { }
 
@@ -122,7 +122,7 @@ export class TableComponent implements OnInit {
         //         // use snack bar
         //       }
         //     )
-        this.stateStockService.addStock(this.dataArray[value]);
+        this.stateStockddService.add(this.dataArray[value]);
       } else {
         //   // Add Ipo
         //   this.firebaseService.addIpo(this.dataArray[value])
@@ -132,13 +132,12 @@ export class TableComponent implements OnInit {
         //         // use snack bar
         //       }
         //     )
-        this.stateIpoService.addIpo(this.dataArray[value]);
+        this.stateIpoddService.add(this.dataArray[value]);
       }
     } else {
       // Delete
       if (this.isStock) {
         // Delete Stock
-
       } else {
         // Delete Ipo
       }

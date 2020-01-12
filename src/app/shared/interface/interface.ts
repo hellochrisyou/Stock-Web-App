@@ -1,4 +1,5 @@
 import { HttpResponse } from '@angular/common/http';
+import { Stock } from './models';
 
 export interface RequestCacheEntry {
     url: string;
@@ -26,7 +27,7 @@ export interface DialogData {
     title: string;
     subTitle: string;
     text: string;
-    keyword?: string;
+    keyword?: Stock;
 }
 
 interface KeyValuePair {

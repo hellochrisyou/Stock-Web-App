@@ -1,5 +1,8 @@
+<!-- <form *ngIf="formGroup" [formGroup]="formGroup"> -->
 <form [formGroup]="formGroup">
-    <h1 class="mat-typography mat-display-1">Edit</h1>
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+        <h1 class="mat-typography mat-display-1">Edit</h1>
+    </div>
     <section fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
 
         <div fxLayout="column" fxLayoutAlign="space-around center">
@@ -99,6 +102,6 @@
                 Retirement Date is <strong>required</strong>
             </mat-error> -->
         </mat-form-field>
-        <button class="button-home" type="submit" (click)="submit()">Sign Up</button>
+        <button class="non-home-button" type="submit" (click)="submit()">Submit</button>
     </div>
 </form>

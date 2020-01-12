@@ -28,40 +28,33 @@ export class ChartService {
     { data: [], label: 'High' },
   ];
   latestPriceData: ChartDataSets[] = [
-    { data: [], label: 'Latest Price' },
+    { data: [], label: 'Volume' },
   ];
   changeData: ChartDataSets[] = [
     { data: [], label: 'Change' },
   ];
+
   constructor() { }
 
-  resolveChartArray(data: any, symbol: string): Stock[] {
+  public resolveChartArray(data: any, symbol: string): void {
     this.stockArr = [];
     data.forEach(x => {
       this.curStock = {
-        Select: 'Select',
-        Chart: 'Chart'
+        Select: null,
+        Chart: null
       };
       this.curStock.Symbol = symbol;
-      this.curStock.Open = x.open;
       this.curStock.Low = x.low;
       this.curStock.High = x.high;
-      this.curStock.LatestPrice = x.latestPrice;
       this.curStock.Change = x.change;
-      this.curStock.ChangePercent = x.changePercent;
-      this.curStock.Week52Low = x.week52Low;
-      this.curStock.Week52High = x.week52High;
-      this.curStock.YtdChange = Math.round(x.ytdChange * 100000) / 100000
 
-        ;
       this.stockArr.push(this.curStock);
     });
-    return this.stockArr;
   }
 
-  getLow(): ChartKeyValue {
+  public getLow(): ChartKeyValue {
     this.stockData = {
-      data: [],
+      data: [] = [],
       label: 'Low'
     };
     this.stockArr.forEach(element => {
@@ -71,9 +64,9 @@ export class ChartService {
     return this.stockData;
   }
 
-  getHigh(): ChartKeyValue {
+  public getHigh(): ChartKeyValue {
     this.stockData = {
-      data: [],
+      data: [] = [],
       label: 'High'
     };
     this.stockArr.forEach(element => {
@@ -83,21 +76,9 @@ export class ChartService {
     return this.stockData;
   }
 
-  getLatestPrice(): ChartKeyValue {
+  public getChange(): ChartKeyValue {
     this.stockData = {
-      data: [],
-      label: 'Latest Price'
-    };
-    this.stockArr.forEach(element => {
-      this.stockData.data.push(element.LatestPrice);
-    });
-
-    return this.stockData;
-  }
-
-  getChange(): ChartKeyValue {
-    this.stockData = {
-      data: [],
+      data: [] = [],
       label: 'Change'
     };
     this.stockArr.forEach(element => {

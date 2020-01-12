@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { StateStockService } from '../state-management/state-stock.service';
+import { StateStockService } from '../state-management/state-stock-add.service';
 
 describe('StateStockService', () => {
   let service: StateStockService;
