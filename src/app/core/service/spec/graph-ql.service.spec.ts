@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { StateIpoService } from '../state-management/state-ipo-add.service';
+import { GraphQLService } from '../graphQL/graph-ql.service';
 
-describe('StateIpoService', () => {
-  let service: StateIpoService;
+describe('GraphQLService', () => {
+  let service: GraphQLService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(StateIpoService);
+    service = TestBed.inject(GraphQLService);
   });
 
   it('should be created', () => {

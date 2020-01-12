@@ -2,10 +2,9 @@
     <div class="mat-typography">
         <h1 class="mat-display-1">Pending Updates</h1>
     </div>
-    <button mat-button class="non-home-button" (click)="update()"></button>
     <mat-tab-group mat-align-tabs="center" animationDuration="1700ms">
         <mat-tab label="Stock">
-            <button mat-button class="non-home-button" (click)="update()"></button>
+            <button mat-button class="non-home-button mat-elevation-z7" (click)="update()">Discard Changes</button>
             <base-table *ngIf="pendAddStockTable" [dataSource]="pendAddStockTable" [isSearch]="isSearch"
                 [columnIds]="stockCol" [columnObjects]="stockCol" [dataArray]="pendAddStockArr">
             </base-table>
@@ -14,7 +13,7 @@
             </base-table>
         </mat-tab>
         <mat-tab label="Ipo">
-            <button mat-button class="non-home-button" (click)="update()"></button>
+            <button mat-button class="non-home-button mat-elevation-z7" (click)="update()">Discard Changes</button>
             <base-table *ngIf="pendAddIpoTable" [dataSource]="pendAddIpoTable" [isSearch]="isSearch"
                 [columnIds]="ipoCol" [columnObjects]="ipoCol" [dataArray]="pendAddIpoArr">
             </base-table>

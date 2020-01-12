@@ -45,26 +45,17 @@ export class FirebaseService {
 
   public addIpo(value: Ipo): Promise<DocumentReference> {
     return this.db.collection('IPO').add({
-      amount: value.Amount,
-      businessDesc: value.BusinessDescription,
       ceo: value.CEO,
       city: value,
       cmpnyDesc: value.CompanyDescription,
       coName: value.Name,
-      competition: value.Competition,
       market: value.Market,
-      netIncome: value.NetIncome,
       percentOffered: value.PercentOffered,
-      priceHigh: value.PriceHigh,
-      priceLow: value.PriceLow,
       revenue: value.Revenue,
-      sharedOffered: value.SharesOffered,
       state: value.State,
       stockholderEquity: value.StockholderEquity,
       symbol: value.Symbol,
-      totalAssets: value.TotalAssets,
       url: value.URL,
-      useOfProceeds: value.UseOfProceeds
     });
   }
 
@@ -72,15 +63,15 @@ export class FirebaseService {
     return this.db.collection('SearchHistory').add({
       email: value.email,
       title: value.title,
-      givenDate: value.givenDate
+      dateRecorded: value.dateRecorded
     });
   }
 
   public addActivityHistory(value: ActivityHistory): Promise<DocumentReference> {
     return this.db.collection('SearchHistory').add({
       email: value.email,
-      title: value.move,
-      givenDate: value.givenDate
+      title: value.action,
+      dateRecorded: value.dateRecorded
     });
   }
 

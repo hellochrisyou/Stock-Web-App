@@ -26,18 +26,9 @@ export interface Ipo {
     State?: string;
     CEO?: string;
     URL?: string;
-    SharesOffered?: number;
-    PriceLow?: number;
-    PriceHigh?: number;
     Revenue?: number;
-    NetIncome?: number;
-    TotalAssets?: number;
     StockholderEquity?: number;
     CompanyDescription?: string;
-    BusinessDescription?: string;
-    UseOfProceeds?: string;
-    Competition?: string;
-    Amount?: number;
     PercentOffered?: number;
 }
 
@@ -58,11 +49,11 @@ export interface User {
 export interface SearchHistory {
     email?: string;
     title?: string;
-    givenDate?: Date;
+    dateRecorded?: Date;
 }
 
 export interface ActivityHistory {
     email?: string;
-    move?: string;
-    givenDate?: Date;
+    action?: string;
+    dateRecorded?: Date;
 }

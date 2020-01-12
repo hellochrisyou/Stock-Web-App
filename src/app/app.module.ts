@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { ErrorComponent } from './error/error.component';
 import { SharedModule } from './shared/shared.module';
+import { GraphQLModule } from './core/module/graphql.module';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { SharedModule } from './shared/shared.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    GraphQLModule,
     AppRoutingModule
   ],
   providers: [

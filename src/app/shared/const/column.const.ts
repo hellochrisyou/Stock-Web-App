@@ -21,13 +21,11 @@ export const IPO_COL_OBJ: ColumnObject[] = [
     { columnId: 'Select', propertyName: 'Select' },
     { columnId: 'Symbol', propertyName: 'Symbol' },
     { columnId: 'Name', propertyName: 'Name' },
+    { columnId: 'Market', propertyName: 'Market' },
     { columnId: 'State', propertyName: 'State' },
     { columnId: 'CEO', propertyName: 'CEO' },
     { columnId: 'URL', propertyName: 'URL' },
-    { columnId: 'SharesOffered', propertyName: 'SharesOffered' },
     { columnId: 'Revenue', propertyName: 'Revenue' },
-    { columnId: 'NetIncome', propertyName: 'NetIncome' },
-    { columnId: 'TotalAssets', propertyName: 'TotalAssets' },
     { columnId: 'StockholdEquity', propertyName: 'StockholderEquity' },
     { columnId: 'CompanyDesc', propertyName: 'CompanyDescription' },
     { columnId: 'PercentOffered', propertyName: 'PercentOffered' }
@@ -36,5 +34,5 @@ export const IPO_COL_OBJ: ColumnObject[] = [
 export const HISTORY_COL_OBJ: ColumnObject[] = [
     { columnId: 'email', propertyName: 'email' },
     { columnId: 'name', propertyName: 'title' },
-    { columnId: 'givenDate', propertyName: 'givenDate' },
+    { columnId: 'dateRecorded', propertyName: 'dateRecorded' },
 ];

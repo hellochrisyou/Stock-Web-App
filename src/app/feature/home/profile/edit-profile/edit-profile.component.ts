@@ -14,6 +14,7 @@ export class EditProfileComponent extends CreateBaseForm implements OnInit, OnDe
   minDate = new Date();
   maxDate = new Date();
 
+
   public displayName() {
     return this.formGroup.get('displayNameCtrl');
   }

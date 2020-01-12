@@ -8,7 +8,7 @@
         <div fxLayout="column" fxLayoutAlign="space-around center">
             <mat-form-field>
                 <mat-label>DisplayName</mat-label>
-                <input class="edit-profile-input" matInput placeholder="Name" formControlName="displayNameCtrl" required
+                <input matInput placeholder="Name" formControlName="displayNameCtrl" required
                     [errorStateMatcher]="matcher">
                 <!-- <mat-error *ngIf="formGroup.controls.displayNameCtrl.hasError('minlength')">
             Miniumum of <strong>{{formGroup.controls.displayNameCtrl.errors.minlength.requiredLength}}</strong>
@@ -17,16 +17,16 @@
         <mat-error *ngIf="formGroup.controls.displayNameCtrl.hasError('maxlength')">
             Maximum of <strong>{{formGroup.controls.displayNameCtrl.errors.maxlength.requiredLength}}</strong>
             characters
-        </mat-error>
+        </mat-error>--
         <mat-error *ngIf="formGroup.controls.displayNameCtrl.hasError('required')">
             Name is <strong>required</strong>
-        </mat-error> -->
+        </mat-error> 
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Phone Number</mat-label>
                 <input class="edit-profile-input" matInput placeholder="000000000" formControlName="phoneNumCtrl"
                     required [errorStateMatcher]="matcher">
-                <!-- <mat-error *ngIf="formGroup.controls.phoneNumCtrl.hasError('minlength')">
+                 <mat-error *ngIf="formGroup.controls.phoneNumCtrl.hasError('minlength')">
             Miniumum of <strong>{{formGroup.controls.phoneNumCtrl.errors.minlength.requiredLength}}</strong>
             characters
         </mat-error>
@@ -40,8 +40,7 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Age</mat-label>
-                <input class="edit-profile-input" matInput placeholder="21" formControlName="ageCtrl" required
-                    [errorStateMatcher]="matcher">
+                <input matInput placeholder="21" formControlName="ageCtrl" required [errorStateMatcher]="matcher">
                 <!-- <mat-error *ngIf="formGroup.controls.ageCtrl.hasError('maxlength')">
                 Maximum of <strong>{{formGroup.controls.ageCtrl.errors.maxlength.requiredLength}}</strong>
                 characters
@@ -54,8 +53,7 @@
         <div fxLayout="column" fxLayoutAlign="space-around center">
             <mat-form-field>
                 <mat-label>Address</mat-label>
-                <input class="edit-profile-input" matInput placeholder="Address" formControlName="addyCtrl" required
-                    [errorStateMatcher]="matcher">
+                <input matInput placeholder="Address" formControlName="addyCtrl" required [errorStateMatcher]="matcher">
                 <!-- <mat-error *ngIf="formGroup.controls.addyCtrl.hasError('maxlength')">
             Address of <strong>{{formGroup.controls.addyCtrl.errors.maxlength.requiredLength}}</strong>
             characters
@@ -63,8 +61,7 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>City</mat-label>
-                <input class="edit-profile-input" matInput placeholder="City" formControlName="cityCtrl" required
-                    [errorStateMatcher]="matcher">
+                <input matInput placeholder="City" formControlName="cityCtrl" required [errorStateMatcher]="matcher">
                 <!-- <mat-error *ngIf="formGroup.controls.cityCtrl.hasError('minlength')">
             Miniumum of <strong>{{formGroup.controls.cityCtrl.errors.minlength.requiredLength}}</strong>
             characters
@@ -79,8 +76,7 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>State</mat-label>
-                <input class="edit-profile-input" matInput placeholder="VA" formControlName="stateCtrl" required
-                    [errorStateMatcher]="matcher">
+                <input matInput placeholder="VA" formControlName="stateCtrl" required [errorStateMatcher]="matcher">
                 <!-- <mat-error *ngIf="formGroup.controls.stateCtrl.hasError('maxlength')">
             Maximum of <strong>{{formGroup.controls.stateCtrl.errors.maxlength.requiredLength}}</strong>
             characters
@@ -102,6 +98,6 @@
                 Retirement Date is <strong>required</strong>
             </mat-error> -->
         </mat-form-field>
-        <button class="non-home-button" type="submit" (click)="submit()">Submit</button>
+        <button class="non-home-button mat-elevation-z7" type="submit" (click)="submit()">Submit</button>
     </div>
 </form>
