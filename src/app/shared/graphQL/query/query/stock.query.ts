@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
-export const userInfoNoVar = gql`query allIpo {
-  allStocks {
+export const GET_ALL_STOCKS = gql`query allIpo {
+  getAllStocks {
     Symbol
     Name
     Exchange

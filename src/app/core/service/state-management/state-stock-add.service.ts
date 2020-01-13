@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Stock } from '@shared/interface/models';
 import { BehaviorSubject } from 'rxjs';
+import { StateStockListService } from './state-stock-list.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,9 @@ export class StateStockAddService {
     this._addStocks.next(stock);
   }
 
-  add(stock: Stock) {
+  constructor(private stateStockListService: StateStockListService) { }
+
+  public add(stock: Stock) {
     // we assaign a new copy of todos by adding a new todo to it
     // with automatically assigned ID ( don't do this at home, use uuid() )
     this.addStocks = [
@@ -47,8 +50,16 @@ export class StateStockAddService {
     ];
   }
 
-  remove(id: number) {
-    this.addStocks = this.addStocks.filter(addStock => addStock.stateId !== id);
+  public remove(id: number) {
+    this.addStocks = this.addStocks.filter(stock => stock.stateId !== id);
   }
 
+  public pushToList(): void {
+    this.addStocks.forEach(ipo => {
+      this.stateStockListService.add(ipo);
+    });
+    this.addStocks.forEach(ipo => {
+      this.remove(this.addStocks.length);
+    });
+  }
 }

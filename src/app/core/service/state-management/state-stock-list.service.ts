@@ -1,29 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Stock } from '@shared/interface/models';
 import { BehaviorSubject } from 'rxjs';
-import { StateStockListService } from './state-stock-list.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StateStockRemoveService {
+export class StateStockListService {
 
   // tslint:disable-next-line: variable-name
-  private readonly _rmStocks = new BehaviorSubject<Stock[]>([]);
+  private readonly _stockList = new BehaviorSubject<Stock[]>([]);
 
   // Expose the observable$ part of the _todos subject (read only stream)
-  readonly rmStocks$ = this._rmStocks.asObservable();
-
+  readonly stockList$ = this._stockList.asObservable();
 
   // the getter will return the last value emitted in _todos subject
-  get rmStocks(): Stock[] {
-    return this._rmStocks.getValue();
+  get stockList(): Stock[] {
+    return this._stockList.getValue();
   }
 
   // assigning a value to this.todos will push it onto the observable
   // and down to all of its subsribers (ex: this.todos = [])
-  set rmStocks(stock: Stock[]) {
-    this._rmStocks.next(stock);
+  set stockList(stock: Stock[]) {
+    this._stockList.next(stock);
   }
 
   constructor(private stateStockListService: StateStockListService) { }
@@ -31,10 +29,10 @@ export class StateStockRemoveService {
   public add(stock: Stock) {
     // we assaign a new copy of todos by adding a new todo to it
     // with automatically assigned ID ( don't do this at home, use uuid() )
-    this.rmStocks = [
-      ...this.rmStocks,
+    this.stockList = [
+      ...this.stockList,
       {
-        stateId: this.rmStocks.length + 1,
+        stateId: this.stockList.length + 1,
         Symbol: stock.Symbol,
         Name: stock.Name,
         Exchange: stock.Exchange,
@@ -52,15 +50,6 @@ export class StateStockRemoveService {
   }
 
   public remove(id: number) {
-    this.rmStocks = this.rmStocks.filter(stock => stock.stateId !== id);
-  }
-
-  public pushToList(): void {
-    this.rmStocks.forEach(stock => {
-      this.stateStockListService.add(stock);
-    });
-    this.rmStocks.forEach(ipo => {
-      this.remove(this.rmStocks.length);
-    });
+    this.stockList = this.stockList.filter(stock => stock.stateId !== id);
   }
 }

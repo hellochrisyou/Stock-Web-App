@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Ipo, Stock } from '@shared/interface/models';
+import { StateIpoListService } from './state-ipo-list.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,9 @@ export class StateIpoAddService {
     this._addIpos.next(ipo);
   }
 
-  add(ipo: Ipo) {
+  constructor(private stateIpoListService: StateIpoListService) { }
+
+  public add(ipo: Ipo) {
     // we assaign a new copy of todos by adding a new todo to it 
     // with automatically assigned ID ( don't do this at home, use uuid() )
     this.addIpos = [
@@ -36,26 +39,24 @@ export class StateIpoAddService {
         City: ipo.City,
         CEO: ipo.CEO,
         URL: ipo.URL,
-        SharesOffered: ipo.SharesOffered,
-        PriceLow: ipo.PriceLow,
-        PriceHigh: ipo.PriceHigh,
         Revenue: ipo.Revenue,
-        NetIncome: ipo.NetIncome,
-        TotalAssets: ipo.TotalAssets,
         StockholderEquity: ipo.StockholderEquity,
         CompanyDescription: ipo.CompanyDescription,
-        BusinessDescription: ipo.BusinessDescription,
-        UseOfProceeds: ipo.UseOfProceeds,
-        Competition: ipo.Competition,
-        Amount: ipo.Amount,
         PercentOffered: ipo.PercentOffered
       }
     ];
   }
 
-  remove(id: number) {
-    this.addIpos = this.addIpos.filter(addIpo => addIpo.stateId !== id);
+  public remove(id: number): void {
+    this.addIpos = this.addIpos.filter(ipo => ipo.stateId !== id);
   }
 
-
+  public pushToList(): void {
+    this.addIpos.forEach(ipo => {
+      this.stateIpoListService.add(ipo);
+    });
+    this.addIpos.forEach(ipo => {
+      this.remove(this.addIpos.length);
+    });
+  }
 }

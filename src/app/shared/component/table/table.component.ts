@@ -4,10 +4,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ChartComponent } from '@shared/dialog/chart/chart.component';
-import { Ipo, Stock } from '@shared/interface/models';
+import { Ipo, Stock, SearchHistory } from '@shared/interface/models';
 import { FirebaseService } from 'app/core/service/crud/firebase.service';
 import { StateIpoAddService } from 'app/core/service/state-management/state-ipo-add.service';
 import { StateStockAddService } from 'app/core/service/state-management/state-stock-add.service';
+import { Apollo } from 'apollo-angular';
+import { ADD_SEARCH_HISTORY } from '@shared/graphQL/query/mutation/history.mutation';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -94,12 +96,23 @@ export class TableComponent implements OnInit {
     private snackBar: MatSnackBar,
     private stateStockddService: StateStockAddService,
     private stateIpoddService: StateIpoAddService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private apollo: Apollo
   ) { }
 
-  ngOnInit() {
-
+  tmpSearchHistory: SearchHistory = {
+    email: 'dd@d.com',
+    title: '',
+    dateRecorded: new Date()
   }
+  ngOnInit() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const day = today.getDate();
+    this.tmpSearchHistory.dateRecorded = new Date(year, month, day);
+  }
+
 
   public applyFilter(filterValue: string): void {
     this._dataSource.filter = filterValue.trim().toLowerCase();
@@ -122,7 +135,16 @@ export class TableComponent implements OnInit {
         //         // use snack bar
         //       }
         //     )
+        this.tmpSearchHistory.title = 'yahoo';
         this.stateStockddService.add(this.dataArray[value]);
+        this.apollo.mutate<SearchHistory>({
+          mutation: ADD_SEARCH_HISTORY,
+          variables: {
+            searchHisArr: this.tmpSearchHistory
+          }
+        }).subscribe(({ data }) => {
+          console.log('we did it', data);
+        });
       } else {
         //   // Add Ipo
         //   this.firebaseService.addIpo(this.dataArray[value])

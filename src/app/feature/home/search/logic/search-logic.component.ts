@@ -36,7 +36,8 @@ export class SearchLogicComponent implements OnInit {
     private searchStockResolveService: SearchStockResolveService,
     private searchIpoResolveService: SearchIpoResolveService,
     private searchCacheStockService: SearchCacheStockService,
-    private searchCacheIpoService: SearchCacheIpoService
+    private searchCacheIpoService: SearchCacheIpoService,
+
   ) { }
 
   ngOnInit() {
@@ -63,27 +64,27 @@ export class SearchLogicComponent implements OnInit {
               x.Select = newValue;
               this.searchCacheStockService.addStock(x);
             });
+          } else {
+            this.searchColObj = IPO_COL_OBJ;
+            this.isStock = false;
+            if (this.searchCacheIpoService.isExist(value)) {
+              this.searchDataArr = this.searchCacheIpoService.ipos;
+              this.searchMat = new MatTableDataSource(this.searchCacheIpoService.ipos);
+            } else {
+              // SEARCH IPO API CALLED
+              this.httpService.get(value).subscribe(data => {
+                this.searchMat = new MatTableDataSource(this.searchIpoResolveService.resolveIpoArray(data));
+                this.searchDataArr = this.searchIpoResolveService.ipoArr;
+                if (!this.searchCacheIpoService.isExist(value)) {
+                  this.searchDataArr.forEach(x => {
+                    x.Select = value;
+                    this.searchCacheIpoService.addIpo(x);
+                  });
+                }
+              });
+            }
           }
-        });
-      }
-    } else {
-      this.searchColObj = IPO_COL_OBJ;
-      this.isStock = false;
-      if (this.searchCacheIpoService.isExist(value)) {
-        this.searchDataArr = this.searchCacheIpoService.ipos;
-        this.searchMat = new MatTableDataSource(this.searchCacheIpoService.ipos);
-      } else {
-        // SEARCH IPO API CALLED
-        this.httpService.get(value).subscribe(data => {
-          this.searchMat = new MatTableDataSource(this.searchIpoResolveService.resolveIpoArray(data));
-          this.searchDataArr = this.searchIpoResolveService.ipoArr;
-          if (!this.searchCacheIpoService.isExist(value)) {
-            this.searchDataArr.forEach(x => {
-              x.Select = value;
-              this.searchCacheIpoService.addIpo(x);
-            });
-          }
-        });
+        })
       }
     }
   }
