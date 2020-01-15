@@ -31,16 +31,16 @@ export class MyListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.firebaseService.getStocks()
-      .subscribe(result => {
-        this.stockArr = result;
-        this.stockMatTable = new MatTableDataSource(this.stockArr);
-      });
-    this.firebaseService.getIpos()
-      .subscribe(result => {
-        this.ipoArr = result;
-        this.ipoMatTable = new MatTableDataSource(this.ipoArr);
-      });
+    // this.firebaseService.getStocks()
+    //   .subscribe(result => {
+    //     this.stockArr = result;
+    //     this.stockMatTable = new MatTableDataSource(this.stockArr);
+    //   });
+    // this.firebaseService.getIpos()
+    //   .subscribe(result => {
+    //     this.ipoArr = result;
+    //     this.ipoMatTable = new MatTableDataSource(this.ipoArr);
+    //   });
   }
 
 }

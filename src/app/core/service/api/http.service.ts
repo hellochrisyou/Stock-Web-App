@@ -51,7 +51,7 @@ export class HttpService {
   // REFACTOR BY ADDING URL TO PARAMETER
   public get(value: string) {
     this.fullUrl = this.api_url + value + this.token;
-    return this.http.get<KeyValuePair>(this.api_url + value + this.token).pipe(
+    return this.http.get<KeyValuePair>(this.fullUrl).pipe(
       // retry sending the request for 3 extra time
       retry(3),
       // error handling

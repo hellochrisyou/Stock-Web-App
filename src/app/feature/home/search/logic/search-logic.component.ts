@@ -2,12 +2,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { HISTORY_COL_OBJ, IPO_COL_OBJ, STOCK_COL_OBJ } from '@shared/const/column.const';
 import { ColumnObject } from '@shared/interface/interface';
-import { Ipo, SearchHistory, Stock } from '@shared/interface/models';
+import { Ipo, Stock, BaseHistory, Response_History } from '@shared/interface/models';
 import { HttpService } from 'app/core/service/api/http.service';
 import { SearchCacheIpoService } from 'app/core/service/cache/search-cache-ipo.service';
 import { SearchCacheStockService } from 'app/core/service/cache/search-cache-stock.service';
 import { SearchIpoResolveService } from 'app/core/service/resolve/search-ipo.resolve.service';
 import { SearchStockResolveService } from 'app/core/service/resolve/search-stock.resolve.service';
+import { HistoryService } from 'app/core/service/graphQL/history.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -23,10 +24,10 @@ export class SearchLogicComponent implements OnInit {
   tmpAccount: Account;
 
   searchDataArr: Stock[] | Ipo[];
-  historyDataArr: SearchHistory[];
+  historyDataArr: BaseHistory[];
 
   searchMat: MatTableDataSource<Stock | Ipo>;
-  historyMat: MatTableDataSource<SearchHistory>;
+  historyMat: MatTableDataSource<BaseHistory>;
 
   historyColObj: ColumnObject[] = HISTORY_COL_OBJ;
   searchColObj: ColumnObject[];
@@ -37,11 +38,14 @@ export class SearchLogicComponent implements OnInit {
     private searchIpoResolveService: SearchIpoResolveService,
     private searchCacheStockService: SearchCacheStockService,
     private searchCacheIpoService: SearchCacheIpoService,
-
+    private historyService: HistoryService
   ) { }
 
   ngOnInit() {
     // service to pull in data for search history from spring via graphql
+    this.historyService.query('dd@d.com').valueChanges.subscribe(({data}) => {
+      console.log('hheelll', data.data);
+    });
   }
 
   onSubmit(value: string) {

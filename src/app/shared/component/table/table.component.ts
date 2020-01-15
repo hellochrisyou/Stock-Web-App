@@ -4,12 +4,17 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ChartComponent } from '@shared/dialog/chart/chart.component';
-import { Ipo, Stock, SearchHistory } from '@shared/interface/models';
+import { Ipo, Stock, BaseHistory, Response_History, APIRequestStatus, HistoryInput } from '@shared/interface/models';
 import { FirebaseService } from 'app/core/service/crud/firebase.service';
 import { StateIpoAddService } from 'app/core/service/state-management/state-ipo-add.service';
 import { StateStockAddService } from 'app/core/service/state-management/state-stock-add.service';
 import { Apollo } from 'apollo-angular';
 import { ADD_SEARCH_HISTORY } from '@shared/graphQL/query/mutation/history.mutation';
+import { of, throwError } from 'rxjs';
+import { catchError, switchMap, map } from 'rxjs/operators';
+import { subscribe } from 'graphql';
+import { GRAPHQL_ERROR } from '@shared/const/error.const';
+import { HistoryService } from 'app/core/service/graphQL/history.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -97,20 +102,22 @@ export class TableComponent implements OnInit {
     private stateStockddService: StateStockAddService,
     private stateIpoddService: StateIpoAddService,
     public dialog: MatDialog,
-    private apollo: Apollo
+    private historyService: HistoryService
   ) { }
 
-  tmpSearchHistory: SearchHistory = {
+  tmpSearchHistory: HistoryInput = {
     email: 'dd@d.com',
     title: '',
+    type: 'Stock',
     dateRecorded: new Date()
   }
+  tmpSHArr: BaseHistory[] =[];
   ngOnInit() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth();
-    const day = today.getDate();
-    this.tmpSearchHistory.dateRecorded = new Date(year, month, day);
+    // const today = new Date();
+    // const year = today.getFullYear();
+    // const month = today.getMonth();
+    // const day = today.getDate();
+    // this.tmpSearchHistory.dateRecorded = new Date(year, month, day);
   }
 
 
@@ -123,7 +130,6 @@ export class TableComponent implements OnInit {
   }
 
   public select(value: number): void {
-    console.log('valuevalue', value);
     if (this.isSearch) {
       // Add
       if (this.isStock) {
@@ -137,14 +143,10 @@ export class TableComponent implements OnInit {
         //     )
         this.tmpSearchHistory.title = 'yahoo';
         this.stateStockddService.add(this.dataArray[value]);
-        this.apollo.mutate<SearchHistory>({
-          mutation: ADD_SEARCH_HISTORY,
-          variables: {
-            searchHisArr: this.tmpSearchHistory
-          }
-        }).subscribe(({ data }) => {
-          console.log('we did it', data);
-        });
+        // this.tmpSHArr.push(this.tmpSearchHistory);
+        const searchHisArr = this.tmpSearchHistory;
+        this.historyService.mutate(this.tmpSearchHistory)
+        .subscribe();
       } else {
         //   // Add Ipo
         //   this.firebaseService.addIpo(this.dataArray[value])
@@ -183,8 +185,8 @@ export class TableComponent implements OnInit {
     });
   }
 
-  public openSnackBar(message: string, action: string): void {
-    this.snackBar.open(message, action, {
+  public openSnackBar(message: string, title: string): void {
+    this.snackBar.open(message, title, {
       duration: 2000,
     });
   }
