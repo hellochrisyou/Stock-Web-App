@@ -8,11 +8,9 @@ import { Ipo, Stock, BaseHistory, Response_History, APIRequestStatus, HistoryInp
 import { FirebaseService } from 'app/core/service/crud/firebase.service';
 import { StateIpoAddService } from 'app/core/service/state-management/state-ipo-add.service';
 import { StateStockAddService } from 'app/core/service/state-management/state-stock-add.service';
-import { Apollo } from 'apollo-angular';
 import { ADD_SEARCH_HISTORY } from '@shared/graphQL/query/mutation/history.mutation';
 import { of, throwError } from 'rxjs';
 import { catchError, switchMap, map } from 'rxjs/operators';
-import { subscribe } from 'graphql';
 import { GRAPHQL_ERROR } from '@shared/const/error.const';
 import { HistoryService } from 'app/core/service/graphQL/history.service';
 
@@ -99,11 +97,13 @@ export class TableComponent implements OnInit {
   constructor(
     private firebaseService: FirebaseService,
     private snackBar: MatSnackBar,
-    private stateStockddService: StateStockAddService,
+    private stateStockService: StateStockAddService,
     private stateIpoddService: StateIpoAddService,
     public dialog: MatDialog,
     private historyService: HistoryService
   ) { }
+
+  tmpSearchArr: HistoryInput[] = []
 
   tmpSearchHistory: HistoryInput = {
     email: 'dd@d.com',
@@ -111,7 +111,7 @@ export class TableComponent implements OnInit {
     type: 'Stock',
     dateRecorded: new Date()
   }
-  tmpSHArr: BaseHistory[] =[];
+  tmpSHArr: BaseHistory[] = [];
   ngOnInit() {
     // const today = new Date();
     // const year = today.getFullYear();
@@ -142,11 +142,11 @@ export class TableComponent implements OnInit {
         //       }
         //     )
         this.tmpSearchHistory.title = 'yahoo';
-        this.stateStockddService.add(this.dataArray[value]);
-        // this.tmpSHArr.push(this.tmpSearchHistory);
-        const searchHisArr = this.tmpSearchHistory;
-        this.historyService.mutate(this.tmpSearchHistory)
-        .subscribe();
+        this.stateStockService.add(this.dataArray[value]);
+        this.tmpSearchArr.push(this.tmpSearchHistory);
+
+        this.historyService.mutate(this.tmpSearchArr)
+          .subscribe();
       } else {
         //   // Add Ipo
         //   this.firebaseService.addIpo(this.dataArray[value])

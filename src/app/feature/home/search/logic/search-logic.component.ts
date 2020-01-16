@@ -43,7 +43,7 @@ export class SearchLogicComponent implements OnInit {
 
   ngOnInit() {
     // service to pull in data for search history from spring via graphql
-    this.historyService.query('dd@d.com').valueChanges.subscribe(({data}) => {
+    this.historyService.query('dd@d.com').valueChanges.subscribe(({ data }) => {
       console.log('hheelll', data.data);
     });
   }

@@ -16,26 +16,25 @@ export class HistoryService {
   private doFetch = true;
 
   constructor(protected apollo: Apollo) { }
- 
+
   public query(argEmail: string) {
-   return this.apollo
+    return this.apollo
       .watchQuery<Response_History>({
         query: GET_ALL_HISTORY,
         variables: {
-          emailInput: argEmail 
+          emailInput: argEmail
         },
         fetchPolicy: this.doFetch ? 'cache-and-network' : 'cache-first',
-      })   
+      })
   }
 
-  public mutate(argHistory: HistoryInput) {
+  public mutate(argHistory: HistoryInput[]) {
     return this.apollo.mutate({
       mutation: ADD_SEARCH_HISTORY,
-      variables: { 
-        history: argHistory
+      variables: {
+        historyInput: argHistory
       }
     })
-      // .pipe(map((result) => result.data ));
+    // .pipe(map((result) => result.data ));
   }
 }
- 
