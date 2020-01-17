@@ -1,8 +1,5 @@
 <section>
-    <mat-tab-group mat-align-tabs="center" animationDuration="1700ms">
-        <mat-tab label="Pending">
-            <update-my-list></update-my-list>
-        </mat-tab>
+    <mat-tab-group mat-align-tabs="center" animationDuration="1700ms">        
         <mat-tab label="Stock">
             <base-table *ngIf="stockMatTable" [dataSource]="stockMatTable" [isSearch]="isSearch" [columnIds]="stockCol"
                 [columnObjects]="stockCol" [dataArray]="stockArr">
@@ -13,5 +10,4 @@
                 [columnIds]="ipoCol" [columnObjects]="ipoCol" [dataArray]="ipoArr">
             </base-table>
         </mat-tab>
-    </mat-tab-group>
-</section>
+    </mat-tab-group></section>

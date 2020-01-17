@@ -4,11 +4,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ChartComponent } from '@shared/dialog/chart/chart.component';
-import { Ipo, Stock, BaseHistory, Response_History, APIRequestStatus, HistoryInput } from '@shared/interface/models';
+import { Ipo, Stock, BaseHistory, HistoryInput } from '@shared/interface/models';
 import { FirebaseService } from 'app/core/service/crud/firebase.service';
 import { StateIpoAddService } from 'app/core/service/state-management/state-ipo-add.service';
 import { StateStockAddService } from 'app/core/service/state-management/state-stock-add.service';
-import { ADD_SEARCH_HISTORY } from '@shared/graphQL/query/mutation/history.mutation';
+import { ADD_HISTORY } from '@shared/graphQL/query/mutation/history.mutation';
 import { of, throwError } from 'rxjs';
 import { catchError, switchMap, map } from 'rxjs/operators';
 import { GRAPHQL_ERROR } from '@shared/const/error.const';
@@ -103,15 +103,13 @@ export class TableComponent implements OnInit {
     private historyService: HistoryService
   ) { }
 
-  tmpSearchArr: HistoryInput[] = []
-
   tmpSearchHistory: HistoryInput = {
     email: 'dd@d.com',
     title: '',
     type: 'Stock',
-    dateRecorded: new Date()
+    // dateRecorded: new Date()
   }
-  tmpSHArr: BaseHistory[] = [];
+  tmpSearchArr: BaseHistory[] = [];
   ngOnInit() {
     // const today = new Date();
     // const year = today.getFullYear();
@@ -142,8 +140,18 @@ export class TableComponent implements OnInit {
         //       }
         //     )
         this.tmpSearchHistory.title = 'yahoo';
-        this.stateStockService.add(this.dataArray[value]);
         this.tmpSearchArr.push(this.tmpSearchHistory);
+
+        this.tmpSearchHistory = {
+          email: 'dd@d.com',
+          title: '',
+          type: 'Stock',
+          // dateRecorded: new Date()
+        }
+
+        this.tmpSearchArr.push(this.tmpSearchHistory);
+
+        this.stateStockService.add(this.dataArray[value]);
 
         this.historyService.mutate(this.tmpSearchArr)
           .subscribe();

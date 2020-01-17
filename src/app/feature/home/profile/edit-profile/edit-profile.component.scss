@@ -1,8 +1,10 @@
 @import '../../../../../assets/styles/button';
 @import '../../../../../assets/styles/font';
+@import '../../../../../assets/styles/form';
 
 @include button();
 @include font();
+@include form();
 
 section {
     height:100%;

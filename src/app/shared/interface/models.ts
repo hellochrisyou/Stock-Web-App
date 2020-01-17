@@ -51,7 +51,7 @@ export interface BaseHistory {
   email?: string;
   title?: string;
   type?: string;
-  dateRecorded?: Date;
+  // dateRecorded?: Date;
 }
 
 
@@ -61,60 +61,11 @@ export interface HistoryInput {
   email?: string,
   title?: string,
   type?: string,
-  dateRecorded?: Date
+  // dateRecorded?: Date
 }
 
 export interface Response_History {
+  id?: string,
   data: BaseHistory[]
 }
 
-export interface ErrorDto {
-  code: string; f
-  description: string;
-  severity: string;
-}
-
-export interface ValidationError {
-  errors: ErrorDto[];
-  path: string;
-  sourceValue: string;
-}
-
-export interface Response {
-  message: string;
-  recordCount: number;
-  startPosition: number;
-  status: string;
-  totalNumberOfRecords: number;
-  validationErrors: ValidationError[];
-}
-
-// export interface HistoryResponse extends Response  {
-//     data: BaseHistory[];
-//   }
-
-export interface APIRequestStatus<T> {
-  status: string;
-  message: string;
-  validationErrors: ValidationError[];
-  data?: T[];
-}
-
-export interface ErrorDto {
-  code: string;
-  description: string;
-  severity: string;
-}
-
-export interface ValidationError {
-  errors: ErrorDto[];
-  path: string;
-  sourceValue: string;
-}
-
-export interface APIRequestStatus<T> {
-  status: string;
-  message: string;
-  validationErrors: ValidationError[];
-  data?: T[];
-}

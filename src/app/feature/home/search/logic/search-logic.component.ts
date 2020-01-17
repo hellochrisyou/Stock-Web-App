@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { HISTORY_COL_OBJ, IPO_COL_OBJ, STOCK_COL_OBJ } from '@shared/const/column.const';
 import { ColumnObject } from '@shared/interface/interface';
@@ -17,7 +17,7 @@ import { HistoryService } from 'app/core/service/graphQL/history.service';
   styleUrls: ['./search-logic.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SearchLogicComponent implements OnInit {
+export class SearchLogicComponent implements AfterViewInit {
 
   isSearch = 'yes';
   isStock: boolean;
@@ -41,14 +41,23 @@ export class SearchLogicComponent implements OnInit {
     private historyService: HistoryService
   ) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     // service to pull in data for search history from spring via graphql
     this.historyService.query('dd@d.com').valueChanges.subscribe(({ data }) => {
-      console.log('hheelll', data.data);
-    });
-  }
+      console.log('hello', data);
 
-  onSubmit(value: string) {
+      data.data.forEach((history) => { 
+        if (history.type === 'stock') {
+          this.historyDataArr.push(history);
+        } 
+      }      
+    );
+    this.historyMat = new MatTableDataSource(this.historyDataArr)
+  });
+}
+
+
+  public onSubmit(value: string): void {
     console.log('reached here', value);
     if (value.includes('collection')) {
       const newValue = value.slice(31);

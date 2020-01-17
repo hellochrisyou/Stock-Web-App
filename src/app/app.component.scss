@@ -20,12 +20,6 @@
     margin: 0;
   }
 
-
-
-
-
-
-
   svg.material-icons {
 	height: 24px;
 	width: auto;
@@ -41,14 +35,11 @@
 	}
 }
 
-
-  
-
   svg#rocket {
     width: 80px;
     position: absolute;
     left: -10px;
-    top: -24px;
+    top: -2.5vw;
   }
 
   svg#rocket-smoke {
@@ -58,6 +49,11 @@
     right: 180px;
     z-index: -10;
   }
+
+  :host ::ng-deep .mat-tab-body-wrapper .mat-tab-body {
+    min-height: 100vh;
+  }
+  
 
   a,
   a:visited,
@@ -69,7 +65,6 @@
   a:hover {
     color: #125699;
   }
-
 
   .circle-link {
     height: 40px;
@@ -138,7 +133,6 @@
   }
 
   main {
-      position: absolute;
       top: 0;
       left:0;
       min-height:100%;
@@ -185,7 +179,7 @@
   }
 
   .active {
-      font-size:1.25rem;
+      font-size:1rem;
   }
 
   // Card Naviagate
@@ -195,11 +189,24 @@
     width: 100%;
 }
 
+#div-router, router-outlet {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+
 
 svg.material-icons {
     height: 24px;
     width: auto;
   }
+  
+svg:hover {
+  transform: scale3d(1.2, 1.2, 1); 
+	-webkit-transform: scale3d(1.2, 1.2, 1); 
+	transition: all 0.35s cubic-bezier(0.000, 1.270, 0.460, 1.650); 
+	-webkit-transition: all 0.35s cubic-bezier(0.000, 1.270, 0.460, 1.650); 
+}
 
   mat-icon {
       color:rgb(221,0,49);
@@ -263,7 +270,7 @@ svg.material-icons {
     background-color: #1976d2;
     color: white;
     font-weight: 600;
-    top: 0;
+    top: 1vw;
     border: none;
     width:  30%;
     min-width: 30%;
@@ -282,6 +289,5 @@ mat-icon {
 
   header {
     width: 100vw;
-    top: 20px;
     position: relative;
   }

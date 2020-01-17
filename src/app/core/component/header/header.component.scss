@@ -22,3 +22,27 @@
   .spacer {
     flex: 1;
   }
+  
+  mat-toolbar {
+	  padding-top: 1.5vh;
+  }
+
+  span i {
+	  color: white;
+	  margin: 0 2px 0;
+	  background: rgba(255,255,255,0.1);
+  }
+
+  span i:hover, mat-toolbar a {
+	transform: scale3d(1.2, 1.2, 1); 
+	-webkit-transform: scale3d(1.2, 1.2, 1); 
+	transition: all 0.35s cubic-bezier(0.000, 1.270, 0.460, 1.650); 
+	-webkit-transition: all 0.35s cubic-bezier(0.000, 1.270, 0.460, 1.650); 
+  }
+
+  span {
+	margin: 0 10px 0;
+  }
+ mat-toolbar a svg#twitter-logo {
+	  margin-left: 0;
+  }

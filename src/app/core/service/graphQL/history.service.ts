@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, switchMap, catchError } from 'rxjs/operators';
-import { ADD_SEARCH_HISTORY } from '@shared/graphQL/query/mutation/history.mutation';
+import { ADD_HISTORY } from '@shared/graphQL/query/mutation/history.mutation';
 import { Apollo } from 'apollo-angular';
 import { FetchResult } from 'apollo-link';
 import { BaseHistory, HistoryInput, Response_History } from '@shared/interface/models';
@@ -22,17 +22,17 @@ export class HistoryService {
       .watchQuery<Response_History>({
         query: GET_ALL_HISTORY,
         variables: {
-          emailInput: argEmail
+          email: argEmail
         },
         fetchPolicy: this.doFetch ? 'cache-and-network' : 'cache-first',
       })
   }
 
-  public mutate(argHistory: HistoryInput[]) {
+  public mutate(history: HistoryInput[]) {
     return this.apollo.mutate({
-      mutation: ADD_SEARCH_HISTORY,
+      mutation: ADD_HISTORY,
       variables: {
-        historyInput: argHistory
+        history: history
       }
     })
     // .pipe(map((result) => result.data ));
