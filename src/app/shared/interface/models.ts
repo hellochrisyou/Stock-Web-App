@@ -54,8 +54,6 @@ export interface BaseHistory {
   // dateRecorded?: Date;
 }
 
-
-
 export interface HistoryInput {
   id?: string,
   email?: string,
@@ -65,7 +63,6 @@ export interface HistoryInput {
 }
 
 export interface Response_History {
-  id?: string,
-  data: BaseHistory[]
+  historyArr?: BaseHistory[]
 }
 

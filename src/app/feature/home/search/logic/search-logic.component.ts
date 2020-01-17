@@ -1,14 +1,19 @@
-import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { HISTORY_COL_OBJ, IPO_COL_OBJ, STOCK_COL_OBJ } from '@shared/const/column.const';
+import { FIND_ALL_HISTORY } from '@shared/graphQL/query/query/history.query';
 import { ColumnObject } from '@shared/interface/interface';
-import { Ipo, Stock, BaseHistory, Response_History } from '@shared/interface/models';
+import { BaseHistory, Ipo, Response_History, Stock } from '@shared/interface/models';
 import { HttpService } from 'app/core/service/api/http.service';
 import { SearchCacheIpoService } from 'app/core/service/cache/search-cache-ipo.service';
 import { SearchCacheStockService } from 'app/core/service/cache/search-cache-stock.service';
+import { HistoryService } from 'app/core/service/graphQL/history.service';
 import { SearchIpoResolveService } from 'app/core/service/resolve/search-ipo.resolve.service';
 import { SearchStockResolveService } from 'app/core/service/resolve/search-stock.resolve.service';
-import { HistoryService } from 'app/core/service/graphQL/history.service';
+import { map } from 'rxjs/internal/operators/map';
+import { switchMap } from 'rxjs/operators';
+import { ApolloQueryResult } from 'apollo-client';
+import { of } from 'rxjs/internal/observable/of';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -43,18 +48,28 @@ export class SearchLogicComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     // service to pull in data for search history from spring via graphql
-    this.historyService.query('dd@d.com').valueChanges.subscribe(({ data }) => {
+    // Data is expected to be an object, with keys that match the requested root fields in your document (pos in this case). 
+    // Apollo expects to a value at data.pos, but since data is an array and doesn't have this property, it returns undefined.
+    this.historyService.query<{ findAllHistoryQuery: Response_History}>({
+      query: FIND_ALL_HISTORY,
+      variables: {
+        includeOptions: true,
+        email: 'dd@d.com',
+      },
+      fetchPolicy: 'cache-and-network'
+    })
+    .pipe( 
+      switchMap((x: ApolloQueryResult<{findAllHistoryQuery: Response_History}>) => {
+        return of(x.data.findAllHistoryQuery.historyArr);
+      }))
+    .subscribe(( data ) => {
       console.log('hello', data);
-
-      data.data.forEach((history) => { 
-        if (history.type === 'stock') {
-          this.historyDataArr.push(history);
-        } 
-      }      
-    );
+      this.historyDataArr = data;     
     this.historyMat = new MatTableDataSource(this.historyDataArr)
   });
 }
+
+
 
 
   public onSubmit(value: string): void {

@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import { map, switchMap, catchError } from 'rxjs/operators';
 import { ADD_HISTORY } from '@shared/graphQL/query/mutation/history.mutation';
+import { HistoryInput } from '@shared/interface/models';
 import { Apollo } from 'apollo-angular';
-import { FetchResult } from 'apollo-link';
-import { BaseHistory, HistoryInput, Response_History } from '@shared/interface/models';
-import { ApolloQueryResult } from 'apollo-client';
-import { throwError, of, Observable } from 'rxjs';
-import { GRAPHQL_ERROR } from '@shared/const/error.const';
-import { GET_ALL_HISTORY } from '@shared/graphQL/query/query/history.query';
+import { ApolloQueryResult, WatchQueryOptions } from 'apollo-client';
+import { Observable, throwError } from 'rxjs';
+import { catchError, filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,15 +14,30 @@ export class HistoryService {
 
   constructor(protected apollo: Apollo) { }
 
-  public query(argEmail: string) {
-    return this.apollo
-      .watchQuery<Response_History>({
-        query: GET_ALL_HISTORY,
-        variables: {
-          email: argEmail
-        },
-        fetchPolicy: this.doFetch ? 'cache-and-network' : 'cache-first',
-      })
+  public query<T>(options: WatchQueryOptions): Observable<ApolloQueryResult<T>>  {
+    return this.apollo.watchQuery<T>(
+      options
+    ).valueChanges
+      .pipe(
+        // tap((r) => {
+        //   console.log('XXX TAP:', r);
+        // }),
+        filter(result => !result.loading),
+        catchError((e: any) => {
+          return throwError(this.getApolloErrors(e));
+        })
+      );
+  }
+
+  public getApolloErrors(err: any): string[] {
+    // console.log('XXX api request error:', err);
+    if (err.graphQLErrors) {
+      return err.graphQLErrors.length > 0 ? err.graphQLErrors.length : [err.message];
+    }
+    if (err.networkError) {
+      return [err.networkError.message];
+    }
+    return ['Undefined Apollo/Graphql error'];
   }
 
   public mutate(history: HistoryInput[]) {
