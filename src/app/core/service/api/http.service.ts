@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpErrorResponse, HttpClient } from '@angular/common/http';
-import { retry, catchError } from 'rxjs/operators';
+import { HttpErrorResponse, HttpClient, HttpHeaders } from '@angular/common/http';
+import { retry, catchError, map } from 'rxjs/operators';
 import * as GLOBAL_URL from '@shared/const/url.const';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { KeyValuePair } from '@shared/interface/dto.interface';
+import { ErrorHandlerGlobal } from 'app/core/error-handler/error-handler';
+import { BaseHistory } from '@shared/interface/models';
+
+const httpOptions = {
+  headers: new HttpHeaders({})
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
+
+  errorHandlerGlobal = new ErrorHandlerGlobal();
 
   // tslint:disable-next-line: variable-name
   private _fullUrl = '';
@@ -48,43 +56,63 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
+  private extractData(res: Response) {
+    const body = res;
+    return body || {};
+  }
+
   // REFACTOR BY ADDING URL TO PARAMETER
   public get(value: string) {
-    this.fullUrl = this.api_url + value + this.token;
+    // this.fullUrl = this.api_url + value + this.token;
+    console.log(this.fullUrl);
     return this.http.get<KeyValuePair>(this.fullUrl).pipe(
       // retry sending the request for 3 extra time
       retry(3),
       // error handling
-      catchError(this.handleErrors));
+      catchError(this.handleError));
   }
 
   public getChart(value: string) {
     this.fullUrl = this.chart_url + value + '/chart/5y' + this.token2;
-    return this.http.get<KeyValuePair[]>(this.chart_url + value + '/chart/1y' + this.token2).pipe(
+    return this.http.get<KeyValuePair[]>(this.fullUrl).pipe(
       // retry sending the request for 3 extra time
       retry(3),
       // error handling
-      catchError(this.handleErrors));
+      catchError(this.handleError));
   }
 
-  public getUser(id: string) {
+  public getUser(id: string) {}
 
-    // return this.http.get<User>(`${this.api_url}${id}`).pipe(
-    //   // retry sending the request for 3 extra time
-    //   retry(3),
-    //   // error handling
-    //   catchError(this.handleErrors));
+  public getAll(url: string , pathVar: string): Observable<BaseHistory[]> {
+    return this.http.get<any[]>(url, httpOptions).pipe(catchError(this.handleError));
   }
 
-  public handleErrors(error: HttpErrorResponse) {
+  public post(url: string, bodyParam): Observable<any> {
+    return this.http.post(url, bodyParam, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.errorHandlerGlobal.handleError)
+    );
+  }
+
+  public put(url: string, bodyParam): Observable<any> {
+    return this.http.put(url, bodyParam, httpOptions).pipe(
+      map(this.extractData),
+      // catchError(this.handleError)
+      catchError(this.errorHandlerGlobal.handleError)
+    );
+  }
+
+  private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
-      // client side or network type of errors
-      console.log('An error occured: ', error.error.message);
+      // A client-side or network error occurred.
+      console.error('An error occurred:', error.error.message);
     } else {
-      // for any backend related issues
-      console.log(`Backend returnd code ${error.status}`);
+      // The backend returned an unsuccessful response code.
+      console.error(
+        `Backend returned code ${error.status}, ` + `body was: ${error.error}` + `Error message is: ${error.message}`
+      );
     }
-
-    return throwError('Something bad happened');
+    // return an observable with a user-facing error message
+    return throwError(error);
   }
 }

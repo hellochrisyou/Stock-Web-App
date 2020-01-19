@@ -4,15 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ChartComponent } from '@shared/dialog/chart/chart.component';
-import { Ipo, Stock, BaseHistory, HistoryInput } from '@shared/interface/models';
-import { FirebaseService } from 'app/core/service/crud/firebase.service';
+import { BaseHistory, Ipo, Stock } from '@shared/interface/models';
+import { HttpService } from 'app/core/service/api/http.service';
 import { StateIpoAddService } from 'app/core/service/state-management/state-ipo-add.service';
-import { StateStockAddService } from 'app/core/service/state-management/state-stock-add.service';
-import { ADD_HISTORY } from '@shared/graphQL/query/mutation/history.mutation';
-import { of, throwError } from 'rxjs';
-import { catchError, switchMap, map } from 'rxjs/operators';
-import { GRAPHQL_ERROR } from '@shared/const/error.const';
-import { HistoryService } from 'app/core/service/graphQL/history.service';
+import * as GLOBAL from '@shared/const/url.const';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -34,6 +29,7 @@ export class TableComponent implements OnInit {
   private _dataArray: any[];
   // tslint:disable-next-line: variable-name
   private _columnObjects: any[];
+  private _type: string;
 
   router: any;
 
@@ -91,19 +87,25 @@ export class TableComponent implements OnInit {
     this._dataArray = dataArray;
   }
 
+  @Input()
+  public get type(): string {
+    return this._type;
+  }
+  public set type(value: string) {
+    this._type = value;
+  }
+
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(
-    private firebaseService: FirebaseService,
+  constructor(    
     private snackBar: MatSnackBar,
-    private stateStockService: StateStockAddService,
     private stateIpoddService: StateIpoAddService,
-    public dialog: MatDialog,
-    private historyService: HistoryService
+    private httpService: HttpService,
+    public dialog: MatDialog
   ) { }
 
-  tmpSearchHistory: HistoryInput = {
+  tmpSearchHistory: BaseHistory = {
     email: 'dd@d.com',
     title: '',
     type: 'Stock',
@@ -116,6 +118,9 @@ export class TableComponent implements OnInit {
     // const month = today.getMonth();
     // const day = today.getDate();
     // this.tmpSearchHistory.dateRecorded = new Date(year, month, day);
+    this.httpService.getAll(GLOBAL.APIURLS.findAllHistory, this.type).subscribe( data => {
+      console.log('data returned from addsearchhistor', data); 
+     });
   }
 
 
@@ -131,14 +136,7 @@ export class TableComponent implements OnInit {
     if (this.isSearch) {
       // Add
       if (this.isStock) {
-        //   // Add Stock
-        //   this.firebaseService.addStock(this.dataArray[value])
-        //     .then(
-        //       res => {
-        //         this.resetFields();
-        //         // use snack bar
-        //       }
-        //     )
+
         this.tmpSearchHistory.title = 'yahoo';
         this.tmpSearchArr.push(this.tmpSearchHistory);
 
@@ -147,23 +145,9 @@ export class TableComponent implements OnInit {
           title: '',
           type: 'Stock',
           // dateRecorded: new Date()
-        }
+        } 
 
-        this.tmpSearchArr.push(this.tmpSearchHistory);
 
-        this.stateStockService.add(this.dataArray[value]);
-
-        this.historyService.mutate(this.tmpSearchArr)
-          .subscribe();
-      } else {
-        //   // Add Ipo
-        //   this.firebaseService.addIpo(this.dataArray[value])
-        //     .then(
-        //       res => {
-        //         this.resetFields();
-        //         // use snack bar
-        //       }
-        //     )
         this.stateIpoddService.add(this.dataArray[value]);
       }
     } else {

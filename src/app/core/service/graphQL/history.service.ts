@@ -40,12 +40,28 @@ export class HistoryService {
     return ['Undefined Apollo/Graphql error'];
   }
 
-  public mutate(history: HistoryInput[]) {
+  public mutate(searchName: string) {
     return this.apollo.mutate({
       mutation: ADD_HISTORY,
       variables: {
-        history: history
-      }
+        email: 'dd@d.com',
+        title: 'hoe',
+        type: 'search',
+        __typename: 'BaseHistory',
+      },
+      fetchPolicy: 'no-cache'
+    })
+    // .pipe(map((result) => result.data ));
+  }
+
+  public addSearchHistory(history: HistoryInput) {
+    return this.apollo.mutate({
+      mutation: ADD_HISTORY,
+      variables: {
+        history: history,
+        __typename: 'BaseHistory',
+      },
+      fetchPolicy: 'no-cache'
     })
     // .pipe(map((result) => result.data ));
   }

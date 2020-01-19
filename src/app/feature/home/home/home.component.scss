@@ -1,9 +1,9 @@
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'); 
-@import '../../../assets/styles/container';
-@import '../../../assets/styles/button';
-@import '../../../assets/styles/font';
-@import '../../../assets/styles/presentation_form';
-@import '../../../assets/styles/control';
+@import '../../../../assets/styles/container';
+@import '../../../../assets/styles/button';
+@import '../../../../assets/styles/font';
+@import '../../../../assets/styles/presentation_form';
+@import '../../../../assets/styles/control'; 
 
 @include container();
 @include font();
@@ -38,9 +38,9 @@ p {
 
 
 form h1, span, i, a {
-    color: black;
+    color: black; 
     margin-bottom: 8px;
-}
+} 
 
 i, a{
     margin: 5px;
@@ -63,4 +63,10 @@ mat-toolbar.HomeComponent {
 
 #signinTitle {
     margin-top:-5vw;
+}
+
+main {
+    position: relative;
+    top: 0;
+
 }

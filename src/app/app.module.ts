@@ -5,7 +5,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from '@home/home.component';
+import { HomeComponent } from '@home/home/home.component';
 import { LoginLogicComponent } from '@home/login/login.component';
 import { MyListModule } from '@home/my-list/my-list.module';
 import { ProfileModule } from '@home/profile/profile.module';
@@ -17,22 +17,21 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { ErrorComponent } from './error/error.component';
 import { SharedModule } from './shared/shared.module';
-import { GraphQLModule } from './core/module/graphql.module';
+import { HomeModule } from '@home/home/home.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorComponent,
-    HomeComponent,
-    LoginLogicComponent,
-    SignupLogicComponent
+    // HomeComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
+    HomeModule,
     SharedModule,
     SearchModule,
     MyListModule,
@@ -40,7 +39,6 @@ import { GraphQLModule } from './core/module/graphql.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    GraphQLModule,
     AppRoutingModule
   ],
   providers: [

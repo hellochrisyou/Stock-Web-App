@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CREATE_LOGIN_FG } from '@home/home.config';
+import { CREATE_LOGIN_FG } from '@home/home/home.config';
 import { CreateBaseForm } from '@shared/base/base-form';
 import { AuthService } from 'app/core/service/auth/auth.service';
 import { EmitService } from 'app/core/service/emit/emit.service';
@@ -10,7 +10,7 @@ import { EmitService } from 'app/core/service/emit/emit.service';
   // tslint:disable-next-line: component-selector
   selector: 'home-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../home.component.scss']
+  styleUrls: ['../home/home.component.scss']
 })
 export class LoginLogicComponent extends CreateBaseForm implements OnInit, OnDestroy {
 
