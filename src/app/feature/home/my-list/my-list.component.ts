@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Stock, Ipo } from '@shared/interface/models';
 import { MatTableDataSource } from '@angular/material';
 import { ColumnObject } from '@shared/interface/interface';
-import { STOCK_COL_OBJ, IPO_COL_OBJ } from '@shared/const/column.const';
+import { STOCK_COL_OBJ } from '@shared/const/column.const';
 import { FirebaseService } from 'app/core/service/crud/firebase.service';
 import { KeyValue } from '@angular/common';
 import { KeyValuePair } from '@shared/interface/dto.interface';
+import { HttpService } from 'app/core/service/http/http.service';
+import * as GLOBAL from '@shared/const/url.const';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -20,27 +22,22 @@ export class MyListComponent implements OnInit {
   stockArr: Stock[] = [];
   ipoArr: Ipo[] = [];
 
-  stockMatTable: MatTableDataSource<Stock>;
-  ipoMatTable: MatTableDataSource<Ipo>;
+  stockMat: MatTableDataSource<Stock>;
 
   stockCol: ColumnObject[] = STOCK_COL_OBJ;
-  ipoCol: ColumnObject[] = IPO_COL_OBJ;
 
   constructor(
-    private firebaseService: FirebaseService
+    private httpService: HttpService,
   ) { }
 
   ngOnInit() {
-    // this.firebaseService.getStocks()
-    //   .subscribe(result => {
-    //     this.stockArr = result;
-    //     this.stockMatTable = new MatTableDataSource(this.stockArr);
-    //   });
-    // this.firebaseService.getIpos()
-    //   .subscribe(result => {
-    //     this.ipoArr = result;
-    //     this.ipoMatTable = new MatTableDataSource(this.ipoArr);
-    //   });
+    this.httpService.getAll(GLOBAL.APIURL.addStock, 'dd@d.com').subscribe( data => {      
+      this.stockArr = data.data;
+      this.stockMat = new MatTableDataSource(this.stockArr);
+    },
+      err => console.log('HTTP Error', err),
+      () => console.log('HTTP request completed.')
+    );
   }
 
 }

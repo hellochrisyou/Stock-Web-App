@@ -1,5 +1,4 @@
 @mixin table() {
-    table {
 	thead {
 		tr.mat-header-row {
 			background-color: rgb(221,0,49);
@@ -21,4 +20,3 @@ th.mat-header-cell {
 	}
 }
 
-}

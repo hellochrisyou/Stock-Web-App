@@ -30,7 +30,7 @@ export interface DialogData {
     keyword?: Stock;
 }
 
-interface KeyValuePair {
-    key: string;
-    value: string;
-}
+// export interface KeyValuePair {
+//     key: string;
+//     value: string;
+// }

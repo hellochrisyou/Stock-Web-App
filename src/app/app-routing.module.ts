@@ -22,6 +22,10 @@ const routes: Routes = [
     loadChildren: () => import('./feature/home/my-list/my-list.module').then(mod => mod.MyListModule),
   },
   {
+    path: 'history',
+    loadChildren: () => import('./feature/home/history/history.module').then(mod => mod.HistoryModule),
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'

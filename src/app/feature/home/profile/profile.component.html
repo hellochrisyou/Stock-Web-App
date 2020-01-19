@@ -5,16 +5,4 @@
     <mat-tab label="Edit">
         <edit-profile></edit-profile>
     </mat-tab>
-    <mat-tab label="Activity History">
-        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
-            <br/>
-            <button class="non-home-button margin-center mat-elevation-z7" mat-flat-button color="primary"><span
-                    class="button-span">Clear
-                    History</span></button>
-            <base-table *ngIf="historyDataArr" [dataSource]="historyMat" [columnIds]="historyColObj"
-                [columnObjects]="historyColObj" [dataArray]="historyDataArr" [isSearch]="isSearch">
-            </base-table>
-        </div>
-
-    </mat-tab>
 </mat-tab-group>

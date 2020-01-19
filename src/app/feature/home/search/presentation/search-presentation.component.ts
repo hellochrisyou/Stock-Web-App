@@ -35,10 +35,11 @@ export class SearchPresentationComponent implements OnInit {
 
   public submitForm(): void {
     if (this.searchGroup[0].option.forEach(x => { x === this.searchOptCtrl.value }) !== null) {
-      this.value = 'collection/list?collectionName=' + this.searchOptCtrl.value
+      this.value = this.searchOptCtrl.value
     } else {
       this.value = this.searchOptCtrl.value;
     }
+    console.log('submitformvalue', this.value)
     this.emitValue.emit(this.value);
   }
 

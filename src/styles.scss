@@ -14,10 +14,8 @@ html, body, main {
 }
 
 // Table
-table, mat-paginator {
-    min-width: 100vw;
+table, mat-paginator {    
     position: relative;
-    margin: 0 auto;
 }
 
 mat-form-field {

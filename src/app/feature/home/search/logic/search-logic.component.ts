@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-import { HISTORY_COL_OBJ, IPO_COL_OBJ, STOCK_COL_OBJ } from '@shared/const/column.const';
-import { ColumnObject } from '@shared/interface/interface';
-import { BaseHistory, Ipo, Stock } from '@shared/interface/models';
-import { HttpService } from 'app/core/service/api/http.service';
+import { STOCK_COL_OBJ } from '@shared/const/column.const';
 import * as GLOBAL from '@shared/const/url.const';
+import { ColumnObject } from '@shared/interface/interface';
+import { Ipo, SearchHistory, Stock } from '@shared/interface/models';
+import { HttpService } from 'app/core/service/http/http.service';
+import { StockMapperService } from 'app/core/service/mapper/stock-mapper.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -13,57 +14,50 @@ import * as GLOBAL from '@shared/const/url.const';
   styleUrls: ['./search-logic.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SearchLogicComponent implements AfterViewInit {
+export class SearchLogicComponent implements OnInit {
 
   isSearch = 'yes';
-  isStock: boolean;
   tmpAccount: Account;
 
-  searchDataArr: Stock[] | Ipo[];
-  historyDataArr: BaseHistory[] = [];
+  stockArr: Stock[] | Ipo[];
+  stockMat: MatTableDataSource<Stock | Ipo>;
+  stockCol: ColumnObject[] = STOCK_COL_OBJ;
 
-  searchMat: MatTableDataSource<Stock | Ipo>;
-  historyMat: MatTableDataSource<BaseHistory>;
-
-  historyColObj: ColumnObject[] = HISTORY_COL_OBJ;
-  searchColObj: ColumnObject[];
-
-  saveHistory: BaseHistory = {
+  saveHistory: SearchHistory = {
     email: 'dd@d.com',
-    title: '',
-    type: 'Search',
+    name: '',
     // dateRecorded: new Date()
   }
 
   constructor(
     private httpService: HttpService,
+    private stockMapperService: StockMapperService
   ) { }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     // service to pull in data for search history from spring via graphql
     // Data is expected to be an object, with keys that match the requested root fields in your document (pos in this case). 
     // Apollo expects to a value at data.pos, but since data is an array and doesn't have this property, it returns undefined.
+
   }
 
   public onSubmit(value: string): void {
     console.log('reached here', value);
-    if (value.includes('collection')) {
-      const newValue = value.slice(31);
-      this.searchColObj = STOCK_COL_OBJ;
-      this.isStock = true;
-    }
-    this.httpService.get(value).subscribe( data => {
-      console.log('Data retrieved from Api')
-      this.addSearchHistory(value);
-      }
-    );
-  }
 
-  public addSearchHistory(searchName: string) {
-    this.saveHistory.title = searchName;
-    this.httpService.post(GLOBAL.APIURLS.addHistory, this.saveHistory).subscribe( data => {
-     console.log('data returned from addsearchhistor', data); 
-    }
-      );
+    this.httpService.postSearchHistory(GLOBAL.APIURL.addSearchHistory, value).subscribe(data => {
+      console.log('post search', data);
+    },
+      err => console.log('HTTP Error', err),
+      () => console.log('HTTP request completed.'
+      ));
+
+    this.httpService.getIex(value).subscribe(data => {
+      this.stockArr = this.stockMapperService.mapStockArray(data);
+      this.stockMat = new MatTableDataSource(this.stockArr);
+      console.log('Data retrieved from Api', this.stockArr);
+    },
+      err => console.log('HTTP Error', err),
+      () => console.log('HTTP request completed.')
+    );
   }
 }

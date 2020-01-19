@@ -1,13 +1,5 @@
 <section>
-    <mat-tab-group mat-align-tabs="center" animationDuration="1700ms">        
-        <mat-tab label="Stock">
-            <base-table *ngIf="stockMatTable" [dataSource]="stockMatTable" [isSearch]="isSearch" [columnIds]="stockCol"
-                [columnObjects]="stockCol" [dataArray]="stockArr">
-            </base-table>
-        </mat-tab>
-        <mat-tab label="Ipo">
-            <base-table class="ipoTable" *ngIf="ipoMatTable" [dataSource]="ipoMatTable" [isSearch]="isSearch"
-                [columnIds]="ipoCol" [columnObjects]="ipoCol" [dataArray]="ipoArr">
-            </base-table>
-        </mat-tab>
-    </mat-tab-group></section>
+    <base-table class="stockTable" *ngIf="stockMat" [dataSource]="stockMat" [isSearch]="isSearch"
+        [columnIds]="stockCol" [columnObjects]="stockCol" [dataArray]="stockArr">
+    </base-table>
+</section>

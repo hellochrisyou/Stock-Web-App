@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'app/core/service/auth/auth.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { ColumnObject } from '@shared/interface/interface';
-import { HISTORY_COL_OBJ } from '@shared/const/column.const';
-import { BaseHistory } from '@shared/interface/models';
+import { Stock, SearchHistory } from '@shared/interface/models';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -13,13 +12,13 @@ import { BaseHistory } from '@shared/interface/models';
 })
 export class ProfileComponent implements OnInit {
 
-  isSearch = 'neither';
+  // isSearch = 'neither';
 
-  historyDataArr: BaseHistory[];
+  historyDataArr: SearchHistory[];
 
-  historyMat: MatTableDataSource<BaseHistory>;
+  // historyMat: MatTableDataSource<SearchHistory>;
 
-  historyColObj: ColumnObject[] = HISTORY_COL_OBJ;
+  // historyColObj: ColumnObject[] = SEARCH_COL_OBJ;
 
 
   constructor() { }

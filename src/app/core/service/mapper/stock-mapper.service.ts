@@ -5,11 +5,10 @@ import { StockDto } from '@shared/interface/dto.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class SearchStockResolveService {
+export class StockMapperService {
 
   stockArr: Stock[];
-  // tslint:disable-next-line: variable-name
-  private _curStock: Stock = {
+  curStock: Stock = {
     Select: 'Select',
     Chart: 'Chart'
   };
@@ -17,7 +16,7 @@ export class SearchStockResolveService {
 
   constructor() { }
 
-  resolveStockArray(data: any): Stock[] {
+  public mapStockArray(data: any): Stock[] {
     this.stockArr = [];
     data.forEach(x => {
       this.curStock = {
@@ -36,17 +35,9 @@ export class SearchStockResolveService {
       this.curStock.Week52Low = x.week52Low;
       this.curStock.Week52High = x.week52High;
       this.curStock.YtdChange = Math.round(x.ytdChange * 100000) / 100000
-
         ;
       this.stockArr.push(this.curStock);
     });
     return this.stockArr;
-  }
-
-  public get curStock(): Stock {
-    return this._curStock;
-  }
-  public set curStock(value: Stock) {
-    this._curStock = value;
   }
 }

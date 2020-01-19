@@ -4,10 +4,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ChartComponent } from '@shared/dialog/chart/chart.component';
-import { BaseHistory, Ipo, Stock } from '@shared/interface/models';
-import { HttpService } from 'app/core/service/api/http.service';
+import { SearchHistory, Ipo, Stock } from '@shared/interface/models';
+import { HttpService } from 'app/core/service/http/http.service';
 import { StateIpoAddService } from 'app/core/service/state-management/state-ipo-add.service';
-import * as GLOBAL from '@shared/const/url.const';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -16,6 +15,8 @@ import * as GLOBAL from '@shared/const/url.const';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
+
+  tmpSearchArr: SearchHistory[] = [];
 
   // tslint:disable-next-line: variable-name
   private _isStock: boolean;
@@ -105,22 +106,12 @@ export class TableComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
-  tmpSearchHistory: BaseHistory = {
-    email: 'dd@d.com',
-    title: '',
-    type: 'Stock',
-    // dateRecorded: new Date()
-  }
-  tmpSearchArr: BaseHistory[] = [];
   ngOnInit() {
     // const today = new Date();
     // const year = today.getFullYear();
     // const month = today.getMonth();
     // const day = today.getDate();
     // this.tmpSearchHistory.dateRecorded = new Date(year, month, day);
-    this.httpService.getAll(GLOBAL.APIURLS.findAllHistory, this.type).subscribe( data => {
-      console.log('data returned from addsearchhistor', data); 
-     });
   }
 
 
@@ -133,31 +124,9 @@ export class TableComponent implements OnInit {
   }
 
   public select(value: number): void {
-    if (this.isSearch) {
-      // Add
-      if (this.isStock) {
 
-        this.tmpSearchHistory.title = 'yahoo';
-        this.tmpSearchArr.push(this.tmpSearchHistory);
+        // this.stateIpoddService.add(this.dataArray[value]);
 
-        this.tmpSearchHistory = {
-          email: 'dd@d.com',
-          title: '',
-          type: 'Stock',
-          // dateRecorded: new Date()
-        } 
-
-
-        this.stateIpoddService.add(this.dataArray[value]);
-      }
-    } else {
-      // Delete
-      if (this.isStock) {
-        // Delete Stock
-      } else {
-        // Delete Ipo
-      }
-    }
     this.openSnackBar('Item added to your list', 'SUCCESS');
 
   }

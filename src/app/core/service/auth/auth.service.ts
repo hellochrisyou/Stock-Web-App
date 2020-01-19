@@ -14,9 +14,9 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
   providedIn: 'root'
 })
 export class AuthService {
-  // user: User;
-  // userData: Observable<firebase.User>;
-  // tslint:disable-next-line: variable-name
+
+  data: User;
+  
   private _user: Observable<User>; // Added with UserStore
 
   public get user(): Observable<User> {
@@ -37,23 +37,15 @@ export class AuthService {
     public dialog: MatDialog,
     private closeDialogService: CloseDialogService
   ) {
-    // this.afAuth.authState.subscribe(user => {
-    //   this.user = user;
-    //   this.userData = angularFireAuth.authState;
-    // })
-    this.user = this.authenticate();
-  }
-
-  public authenticate() {
-    return this.afAuth.authState.pipe( // Added with User Store
+    this.user = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges().pipe(first()).toPromise();
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
         } else {
-          return of(null);
+          return of(null)
         }
       })
-    );
+    )
   }
 
   /* Sign up */
@@ -63,12 +55,13 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
         console.log('Successfully signed up!', res);
-        this.updateUserData(res.user) //Added with UserStore
+        this.updateUserData(true, res.user) //Added with UserStore
         this.snackBar.open('Sign Up', 'SUCCESS', {
         });
         this.closeDialogService.closeSignupDialog();
       })
       .catch(error => {
+        console.log(error);
         this.signupErrorPopup(error.message);
       });
   }
@@ -77,7 +70,7 @@ export class AuthService {
   OAuthProvider(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((res) => {
-        this.updateUserData(res.user) //Added with UserStore
+        this.updateUserData(false, res.user) //Added with UserStore
         this.ngZone.run(() => {
           console.log('ngZone Run', res);
           this.router.navigate(['home']);
@@ -107,45 +100,56 @@ export class AuthService {
       });
   }
 
-  private updateUserData(user) { // Added with UserStore
+  private updateUserData(firstTime: boolean, user: User) { // Added with UserStore
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-
-    const data: User = {
+    console.log('user', user);
+    if (firstTime) {
+    this.data = {
       uid: user.uid,
       email: user.email,
+      photoURL: user.photoURL,
       displayName: user.displayName,
-      photoURL: user.photoURL
+      city: 'Unknown',
+      state: 'Unknown', 
+      age: 18
     };
-
-    return userRef.set(data, { merge: true });
-
+   } else {
+    this.data = {
+      uid: user.uid,
+      email: user.email,
+      photoURL: user.photoURL,
+      displayName: user.displayName,
+      city: user.city,
+      state: user.state, 
+      age: user.age
+    };
+  }
+    return userRef.set(this.data, { merge: true });
   }
 
 
-  signOut() {
+  public signOut() {
     this.afAuth.auth.signOut().then(() => {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/']);
     });
   }
-
 
   /* Sign in */
   public signinEmail(email: string, password: string) {
     this.angularFireAuth
       .auth
       .signInWithEmailAndPassword(email, password)
-      .then(res => {
-        console.log('Successfully signed in!', res);
-        this.updateUserData(this._user);
-        this.router.navigate(['home']);
+      .then(credential => {
+        console.log('Successfully signed in!', credential);
+        this.updateUserData(false, credential.user);
       })
       .catch(err => {
         console.log('Something is wrong:', err.message);
       });
   }
 
-  signupErrorPopup(message: string): void {
+  public signupErrorPopup(message: string): void {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '25vw',
       data: {

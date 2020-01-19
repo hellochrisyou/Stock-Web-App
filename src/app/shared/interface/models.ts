@@ -33,36 +33,27 @@ export interface Ipo {
 }
 
 export interface User {
-  uid: string;
+  uid?: string;
   stateId?: string;
-  email: string;
+  email?: string;
   photoURL?: string;
-  displayName?: string;
-  dateCreated?: Date;
-  phoneNumber?: number;
-  address?: string;
+  displayName?: string;  
+  // dateCreated?: Date;
   city?: string;
-  state?: string;
+  state?: string;  
   age?: number;
 }
 
-export interface BaseHistory {
-  id?: string;
-  email?: string;
-  title?: string;
-  type?: string;
-  // dateRecorded?: Date;
-}
-
-export interface HistoryInput {
+export interface SearchHistory { 
   id?: string,
   email?: string,
-  title?: string,
-  type?: string,
-  // dateRecorded?: Date
+  name?: string,
+  url?: string
 }
 
-export interface Response_History {
-  historyArr?: BaseHistory[]
+export interface StockHistory {
+  id?: string,
+  email?: string,
+  name?: string,
+  action?: string;
 }
-

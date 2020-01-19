@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { MyListComponent } from './my-list.component';
+import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'app/core/service/guard/auth.guard';
+
+import { HistoryComponent } from './history.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: MyListComponent,  canActivate: [AuthGuard] 
+    component: HistoryComponent,  canActivate: [AuthGuard] 
   }
 ];
 
@@ -15,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MyListRoutingModule { }
+export class HistoryRoutingModule { }
