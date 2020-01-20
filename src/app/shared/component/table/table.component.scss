@@ -10,4 +10,21 @@ mat-snack {
     color:green;
 }
 
+tr.mat-header-row th {
+    color: white;
+    font-weight: 250;
+    text-align: center;
+  }
 
+
+  tr.mat-header-row {
+    background-color: #24292e;
+  }
+
+  .mat-row:nth-child(even) {
+    background-color: whitesmoke;
+  }
+  
+  .mat-row:nth-child(odd) {
+    background-color: #ffffff;
+  }

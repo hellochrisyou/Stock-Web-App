@@ -8,7 +8,7 @@ import { HistoryComponent } from './history.component';
 const routes: Routes = [
   {
     path: '',
-    component: HistoryComponent,  canActivate: [AuthGuard] 
+    component: HistoryComponent,  canActivate: [AuthGuard] , data: {state: 'history' } 
   }
 ];
 

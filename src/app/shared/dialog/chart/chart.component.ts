@@ -17,7 +17,7 @@ export class ChartComponent implements OnInit {
 
 
   chartData: ChartDataSets[];
-  lineChartLabels: Label[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  lineChartLabels: Label[] = ['day 1', 'day 2', 'day 3', 'day 4', 'Today'];
 
   lineChartOptions = {
     responsive: true,

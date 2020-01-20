@@ -19,7 +19,7 @@ export class StockHistoryComponent implements OnInit {
   stockMat: MatTableDataSource<StockHistory>;
   stockCol: ColumnObject[] = STOCK_HISTORY_COL_OBJ;
 
-  @Output() clearStockHistory = new EventEmitter<boolean>();
+  @Output() outputClearStock = new EventEmitter<boolean>();
 
   constructor(
     private httpService: HttpService,
@@ -37,6 +37,6 @@ export class StockHistoryComponent implements OnInit {
   }
 
   public emitClearStockHistory() {
-    this.clearStockHistory.emit(true);
+    this.outputClearStock.emit(true);
   }
 }

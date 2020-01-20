@@ -7,7 +7,7 @@ import { AuthGuard } from 'app/core/service/guard/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    component: MyListComponent,  canActivate: [AuthGuard] 
+    component: MyListComponent,  canActivate: [AuthGuard] , data: {state: 'my-list' } 
   }
 ];
 

@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { KeyValuePair } from '@shared/interface/dto.interface';
-import { SearchHistory } from '@shared/interface/models';
+import { SearchHistory, Stock } from '@shared/interface/models';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 import * as GLOBAL from '@shared/const/url.const';
@@ -22,7 +22,6 @@ export class HttpService {
   private iexUrl = GLOBAL.APIURL.iex;
   private chartUrl = GLOBAL.APIURL.chart;
   // tslint:disable-next-line: variable-name
-  private api_url = GLOBAL.APIURL.iex
   // tslint:disable-next-line: variable-name
   private token = '&token=Tsk_1ad1e73bfed34883a302621bf10db807';
   private token2 = '?token=Tsk_1ad1e73bfed34883a302621bf10db807';
@@ -41,7 +40,7 @@ export class HttpService {
   }
 
   public getChart(value: string) {
-    const chartFullUrl = this.chartUrl + value + '/chart/1y' + this.token2;
+    const chartFullUrl = this.chartUrl + value + '/chart/5d' + this.token2;
     return this.http.get<KeyValuePair[]>(chartFullUrl).pipe(
       retry(3),
       catchError(this.handleError));
@@ -69,6 +68,15 @@ export class HttpService {
   }
 
   public postClearHistory(url: string, value: string): Observable<any> {    
+    return this.http.post<any>(url, value, httpOptions).pipe(
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+
+  public postStock(url: string, value: Stock): Observable<any> {    
+    console.log('hellooo', value);
     return this.http.post<any>(url, value, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError)

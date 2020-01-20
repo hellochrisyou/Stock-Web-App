@@ -14,11 +14,11 @@ import * as GLOBAL from '@shared/const/url.const';
 })
 export class SearchHistoryComponent implements OnInit {
 
-  searchArr: SearchHistory[] = [];
+  searchArr: SearchHistory[];
   searchMat: MatTableDataSource<SearchHistory>;
   searchCol: ColumnObject[] = SEARCH_COL_OBJ;
 
-  @Output() clearSearchHistory = new EventEmitter<boolean>();
+  @Output() outputClearSearch = new EventEmitter<boolean>();
 
   constructor(
     private httpService: HttpService,
@@ -27,6 +27,7 @@ export class SearchHistoryComponent implements OnInit {
 
   ngOnInit() {
     this.httpService.getAll(GLOBAL.APIURL.findSearchHistory, 'dd@d.com').subscribe( data => {
+      this.searchArr = [];
       this.searchArr = this.searchMapperService.mapSearchArray(data);
       this.searchMat = new MatTableDataSource(this.searchArr);
     },
@@ -36,6 +37,6 @@ export class SearchHistoryComponent implements OnInit {
   }
 
   public emitClearStockHistory() {
-    this.clearSearchHistory.emit(true);
+    this.outputClearSearch.emit(true);
   }
 }

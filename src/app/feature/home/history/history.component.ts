@@ -16,7 +16,7 @@ export class HistoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  public clearSearchHistory(): void {
+  public clearSearchHistory(value: boolean): void {
     this.httpService.postClearHistory(GLOBAL.APIURL.addSearchHistory, 'Search').subscribe( data => {
       console.log ('clear search history data', data);
     },
@@ -24,7 +24,7 @@ export class HistoryComponent implements OnInit {
     () => console.log('HTTP request completed.'));
   }
 
-  public clearStockHistory(): void {
+  public clearStockHistory(value: boolean): void {
     this.httpService.postClearHistory(GLOBAL.APIURL.addSearchHistory, 'Stock').subscribe( data => {
       console.log ('clear search history data', data);
     },

@@ -1,13 +1,6 @@
-<ng-template mat-tab-label>
-    <!-- Sample -->
-    <i class="fa fa-home tab-icon" aria-hidden="true"></i>
-    Search
-    </ng-template>
-    <ng-template matTabContent>
-    <section>
-        <search-bar (emitValue)="onSubmit($event)"></search-bar>
-        <base-table *ngIf="stockArr" [dataSource]="stockMat" [columnIds]="stockCol"
-            [columnObjects]="stockCol" [dataArray]="stockArr" [isSearch]="isSearch">
-        </base-table>
-    </section>
-</ng-template>    
+<section>
+    <search-bar  (emitValue)="onSubmit($event)"></search-bar>
+    <base-table  *ngIf="stockArr" [dataSource]="stockMat" [columnIds]="stockCol"
+        [columnObjects]="stockCol" [dataArray]="stockArr" [isSearch]="isSearch">
+    </base-table>
+</section>

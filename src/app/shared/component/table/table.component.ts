@@ -3,10 +3,10 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import * as GLOBAL from '@shared/const/url.const';
 import { ChartComponent } from '@shared/dialog/chart/chart.component';
-import { SearchHistory, Ipo, Stock } from '@shared/interface/models';
+import { SearchHistory, Stock } from '@shared/interface/models';
 import { HttpService } from 'app/core/service/http/http.service';
-import { StateIpoAddService } from 'app/core/service/state-management/state-ipo-add.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -17,20 +17,21 @@ import { StateIpoAddService } from 'app/core/service/state-management/state-ipo-
 export class TableComponent implements OnInit {
 
   tmpSearchArr: SearchHistory[] = [];
+  tmpThisStock: Stock;
 
   // tslint:disable-next-line: variable-name
   private _isStock: boolean;
   // tslint:disable-next-line: variable-name
   private _isSearch: string;
   // tslint:disable-next-line: variable-name
-  private _dataSource: MatTableDataSource<Stock | Ipo>;
+  private _dataSource: MatTableDataSource<Stock>;
   // tslint:disable-next-line: variable-name
   private _columnIds: string[] = [];
   // tslint:disable-next-line: variable-name
-  private _dataArray: any[];
+  private _dataArray: Stock[];
   // tslint:disable-next-line: variable-name
   private _columnObjects: any[];
-  private _type: string;
+  private _type: string;  
 
   router: any;
 
@@ -51,10 +52,10 @@ export class TableComponent implements OnInit {
   }
 
   @Input()
-  public get dataSource(): MatTableDataSource<Stock | Ipo> {
+  public get dataSource(): MatTableDataSource<Stock> {
     return this._dataSource;
   }
-  public set dataSource(ds: MatTableDataSource<Stock | Ipo>) {
+  public set dataSource(ds: MatTableDataSource<Stock>) {
     if (ds) {
       ds.sort = this.sort;
       ds.paginator = this.paginator;
@@ -81,10 +82,10 @@ export class TableComponent implements OnInit {
   }
 
   @Input()
-  public get dataArray(): any[] {
+  public get dataArray(): Stock[] {
     return this._dataArray;
   }
-  public set dataArray(dataArray: any[]) {
+  public set dataArray(dataArray: Stock[]) {
     this._dataArray = dataArray;
   }
 
@@ -101,7 +102,6 @@ export class TableComponent implements OnInit {
 
   constructor(    
     private snackBar: MatSnackBar,
-    private stateIpoddService: StateIpoAddService,
     private httpService: HttpService,
     public dialog: MatDialog
   ) { }
@@ -124,8 +124,13 @@ export class TableComponent implements OnInit {
   }
 
   public select(value: number): void {
-
-        // this.stateIpoddService.add(this.dataArray[value]);
+    this.dataArray[value].email = 'dd@d.com';
+    console.log ('datararay number', this.dataArray[value]);
+    this.tmpThisStock = this.dataArray[value];
+    console.log ('datararay 2', this.tmpThisStock);
+   this.httpService.postStock(GLOBAL.APIURL.addStock, this.tmpThisStock).subscribe( data => {
+     console.log ('addstock data', data);
+   });
 
     this.openSnackBar('Item added to your list', 'SUCCESS');
 
@@ -152,3 +157,4 @@ export class TableComponent implements OnInit {
     });
   }
 }
+

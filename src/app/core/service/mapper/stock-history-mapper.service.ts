@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Ipo, SearchHistory, StockHistory } from '@shared/interface/models';
+import { StockHistory } from '@shared/interface/models';
 
 @Injectable({
   providedIn: 'root'

@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material';
 import { STOCK_COL_OBJ } from '@shared/const/column.const';
 import * as GLOBAL from '@shared/const/url.const';
 import { ColumnObject } from '@shared/interface/interface';
-import { Ipo, SearchHistory, Stock } from '@shared/interface/models';
+import { SearchHistory, Stock } from '@shared/interface/models';
 import { HttpService } from 'app/core/service/http/http.service';
 import { StockMapperService } from 'app/core/service/mapper/stock-mapper.service';
 
@@ -19,8 +19,8 @@ export class SearchLogicComponent implements OnInit {
   isSearch = 'yes';
   tmpAccount: Account;
 
-  stockArr: Stock[] | Ipo[];
-  stockMat: MatTableDataSource<Stock | Ipo>;
+  stockArr: Stock[];
+  stockMat: MatTableDataSource<Stock>;
   stockCol: ColumnObject[] = STOCK_COL_OBJ;
 
   saveHistory: SearchHistory = {

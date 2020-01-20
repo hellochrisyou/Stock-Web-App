@@ -1,35 +1,20 @@
 export interface Stock {
-  stateId?: number;
+  stateId?: string;
   Select?: string;
   Chart?: string;
+  email?: string;
   Symbol?: string;
   Name?: string;
   Exchange?: string;
-  Open?: number;
-  Low?: number;
-  High?: number;
-  LatestPrice?: number;
-  Change?: number;
-  ChangePercent?: number;
-  Week52Low?: number;
-  Week52High?: number;
-  YtdChange?: number;
-}
-
-export interface Ipo {
-  stateId?: number;
-  Select?: string;
-  Symbol?: string;
-  Name?: string;
-  Market?: string;
-  City?: string;
-  State?: string;
-  CEO?: string;
-  URL?: string;
-  Revenue?: number;
-  StockholderEquity?: number;
-  CompanyDescription?: string;
-  PercentOffered?: number;
+  Open?: string;
+  Low?: string;
+  High?: string;
+  LatestPrice?: string;
+  Change?: string;
+  ChangePercent?: string;
+  Week52Low?: string;
+  Week52High?: string;
+  YtdChange?: string;
 }
 
 export interface User {

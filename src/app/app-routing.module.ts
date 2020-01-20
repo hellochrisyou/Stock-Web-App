@@ -30,7 +30,7 @@ const routes: Routes = [
     redirectTo: '/home',
     pathMatch: 'full'
   },
-  { path: '**', component: ErrorComponent }
+  { path: '**', component: ErrorComponent, data: {state: 'error' } }
 ];
 
 @NgModule({

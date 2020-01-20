@@ -7,7 +7,7 @@ import { AuthGuard } from 'app/core/service/guard/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    component: SearchLogicComponent,  canActivate: [AuthGuard] 
+    component: SearchLogicComponent, data: {state: 'search-stock' } 
   }
 ];
 

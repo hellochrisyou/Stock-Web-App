@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Stock, Ipo } from '@shared/interface/models';
 import { MatTableDataSource } from '@angular/material';
-import { ColumnObject } from '@shared/interface/interface';
 import { STOCK_COL_OBJ } from '@shared/const/column.const';
-import { FirebaseService } from 'app/core/service/crud/firebase.service';
-import { KeyValue } from '@angular/common';
-import { KeyValuePair } from '@shared/interface/dto.interface';
-import { HttpService } from 'app/core/service/http/http.service';
 import * as GLOBAL from '@shared/const/url.const';
+import { ColumnObject } from '@shared/interface/interface';
+import { Stock } from '@shared/interface/models';
+import { HttpService } from 'app/core/service/http/http.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -20,7 +17,6 @@ export class MyListComponent implements OnInit {
   isSearch = 'no';
 
   stockArr: Stock[] = [];
-  ipoArr: Ipo[] = [];
 
   stockMat: MatTableDataSource<Stock>;
 
