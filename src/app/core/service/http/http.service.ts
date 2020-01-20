@@ -9,7 +9,6 @@ import * as GLOBAL from '@shared/const/url.const';
 export const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token'
   })
 };
 
@@ -17,7 +16,7 @@ export const httpOptions = {
   providedIn: 'root'
 })
 export class HttpService {
-
+  
   // tslint:disable-next-line: variable-name
   private iexUrl = GLOBAL.APIURL.iex;
   private chartUrl = GLOBAL.APIURL.chart;
@@ -56,35 +55,36 @@ export class HttpService {
     );
   }
 
-  public postSearchHistory(url: string, value: string): Observable<any> {
-    const fullUrl = url + value + this.token;
+  public postSearchHistory(url: string, bodyParam: string): Observable<any> {
+    const fullUrl = url + bodyParam + this.token;
     this.thisSearchHistory.email = 'dd@d.com';
     this.thisSearchHistory.url = fullUrl;
-    this.thisSearchHistory.name = value;
-    return this.http.post<any>(url, this.thisSearchHistory, httpOptions).pipe(
+    this.thisSearchHistory.name = bodyParam;
+    return this.http.post(url, this.thisSearchHistory, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError)
     );
   }
 
-  public postClearHistory(url: string, value: string): Observable<any> {    
-    return this.http.post<any>(url, value, httpOptions).pipe(
-      map(this.extractData),
+  public postClearHistory(url: string, bodyParam: string): Observable<any> {    
+    return this.http.post(url, bodyParam, httpOptions).pipe(
+      map(this.extractData), 
       catchError(this.handleError)
     );
   }
 
 
-  public postStock(url: string, value: Stock): Observable<any> {    
-    console.log('hellooo', value);
-    return this.http.post<any>(url, value, httpOptions).pipe(
+  public postStock(url: string, bodyParam): Observable<any> {
+    console.log('hellooo', this.tmpThisStock);
+    console.log('hello uel', url);
+    return this.http.post(url, bodyParam, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError)
     );
   }
 
   public put(url: string, value): Observable<any> {
-    return this.http.put<any>(url, value, httpOptions).pipe(
+    return this.http.put(url, value, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError)
     );

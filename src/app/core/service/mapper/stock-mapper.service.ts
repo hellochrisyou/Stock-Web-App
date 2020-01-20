@@ -9,8 +9,22 @@ export class StockMapperService {
 
   stockArr: Stock[];
   curStock: Stock = {
-    Select: 'Select',
-    Chart: 'Chart'
+        Select: 'Select',
+        Chart: 'Chart',
+        Symbol: '',
+        Exchange: '',
+        email: 'dd@d.com',
+        Name: '',
+        Open: 0,
+        Low: 0,
+        High: 0,
+        LatestPrice: 0,
+        stateId: 0,
+        Change: 0,
+        ChangePercent: 0,
+        Week52High: 0,
+        Week52Low: 0,
+        YtdChange: 0
   };
 
 
@@ -21,7 +35,21 @@ export class StockMapperService {
     data.forEach(x => {
       this.curStock = {
         Select: 'Select',
-        Chart: 'Chart'
+        Chart: 'Chart',
+        Symbol: 'dd',
+        Exchange: '',
+        email: 'dd@d.com',
+        Name: '',
+        Open: 0,
+        Low: 0,
+        High: 0,
+        LatestPrice: 0,
+        stateId: 0,
+        Change: 0,
+        ChangePercent: 0,
+        Week52High: 0,
+        Week52Low: 0,
+        YtdChange: 0
       };
       this.curStock.Symbol = x.symbol;
       this.curStock.Exchange = x.primaryExchange;

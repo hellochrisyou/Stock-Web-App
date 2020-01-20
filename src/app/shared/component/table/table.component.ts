@@ -17,7 +17,6 @@ import { HttpService } from 'app/core/service/http/http.service';
 export class TableComponent implements OnInit {
 
   tmpSearchArr: SearchHistory[] = [];
-  tmpThisStock: Stock;
 
   // tslint:disable-next-line: variable-name
   private _isStock: boolean;
@@ -32,8 +31,6 @@ export class TableComponent implements OnInit {
   // tslint:disable-next-line: variable-name
   private _columnObjects: any[];
   private _type: string;  
-
-  router: any;
 
   @Input()
   public get isStock(): boolean {
@@ -126,9 +123,9 @@ export class TableComponent implements OnInit {
   public select(value: number): void {
     this.dataArray[value].email = 'dd@d.com';
     console.log ('datararay number', this.dataArray[value]);
-    this.tmpThisStock = this.dataArray[value];
-    console.log ('datararay 2', this.tmpThisStock);
-   this.httpService.postStock(GLOBAL.APIURL.addStock, this.tmpThisStock).subscribe( data => {
+    this.dataArray[value];  
+
+   this.httpService.postStock(GLOBAL.APIURL.addStock, this.dataArray[value]).subscribe( data => {
      console.log ('addstock data', data);
    });
 
