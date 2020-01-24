@@ -11,7 +11,21 @@ export class ChartService {
   // tslint:disable-next-line: variable-name
   private _curStock: Stock = {
     Select: 'Select',
-    Chart: 'Chart'
+    Chart: 'Chart',
+    email: '',
+    Symbol: '',
+    Name: '',
+    Exchange: '',
+    Open: 0,
+    Low: 0,
+    High: 0,
+    LatestPrice: 0,
+    Change: 0,
+    ChangePercent: 0,
+    stateId: 0,
+    Week52Low: 0,
+    Week52High: 0,
+    YtdChange: 0,
   };
 
   dataArray: ChartKeyValue[];
