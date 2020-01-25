@@ -1,5 +1,5 @@
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'); 
-@import '../../../../assets/styles/container';
+@import '../../../../assets/styles/_container';
 @import '../../../../assets/styles/button';
 @import '../../../../assets/styles/font';
 @import '../../../../assets/styles/presentation_form';
@@ -68,5 +68,7 @@ mat-toolbar.HomeComponent {
 main {
     position: relative;
     top: 0;
-
+}
+.container {
+    top: 5vh;
 }

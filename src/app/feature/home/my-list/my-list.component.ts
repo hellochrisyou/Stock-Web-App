@@ -16,7 +16,7 @@ export class MyListComponent implements OnInit {
 
   isSearch = 'no';
 
-  stockArr: Stock[] = [];
+  stockArr: Stock[];
 
   stockMat: MatTableDataSource<Stock>;
 
@@ -27,8 +27,9 @@ export class MyListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.httpService.getAll(GLOBAL.APIURL.addStock, 'dd@d.com').subscribe( data => {      
-      this.stockArr = data.data;
+    this.httpService.getAll(GLOBAL.APIURL.findStocks, 'dd@d.com').subscribe( data => {      
+      console.log('data', data);
+      this.stockArr = data;
       this.stockMat = new MatTableDataSource(this.stockArr);
     },
       err => console.log('HTTP Error', err),

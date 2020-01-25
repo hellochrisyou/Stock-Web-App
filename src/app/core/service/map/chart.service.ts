@@ -38,12 +38,12 @@ export class ChartService {
 
   public resolveChartArray(data: any, symbol: string): void {
     this.stockArr = [];
-    data.forEach(x => {
+    data.forEach( x => {
       this.curStock = {
         Select: null,
         Chart: null
       };
-      this.curStock.Symbol = symbol; 
+      this.curStock.Symbol = symbol;
       this.curStock.Low = x.low;
       this.curStock.High = x.high;
       this.curStock.Change = x.change;

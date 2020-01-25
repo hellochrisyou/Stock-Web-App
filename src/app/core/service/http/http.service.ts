@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { KeyValuePair } from '@shared/interface/dto.interface';
-import { SearchHistory, Stock } from '@shared/interface/models';
+import { SearchHistory, Stock, JsonString } from '@shared/interface/models';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 import * as GLOBAL from '@shared/const/url.const';
@@ -17,6 +17,9 @@ export const httpOptions = {
 })
 export class HttpService {
   
+  bodyString: JsonString = {
+    jsonString: ''
+  }
   // tslint:disable-next-line: variable-name
   private iexUrl = GLOBAL.APIURL.iex;
   private chartUrl = GLOBAL.APIURL.chart;
@@ -47,10 +50,9 @@ export class HttpService {
 
   public getUser(id: string) {}
 
-  public getAll(url: string , email: string): Observable<any> {    
-    // const findSearchHistory = `http://localhost:8080/api/history/findSearchHistory/${email}`;
-    return this.http.post(url, email, httpOptions).pipe(
-      map(this.extractData),
+  public getAll(url: string , bodyParam: string): Observable<any> {    
+    this.bodyString.jsonString = bodyParam;
+    return this.http.post(url, this.bodyString, httpOptions).pipe(
       catchError(this.handleError)
     );
   }
@@ -75,7 +77,6 @@ export class HttpService {
 
 
   public postStock(url: string, bodyParam): Observable<any> {
-    console.log('hellooo', this.tmpThisStock);
     console.log('hello uel', url);
     return this.http.post(url, bodyParam, httpOptions).pipe(
       map(this.extractData),
@@ -83,8 +84,8 @@ export class HttpService {
     );
   }
 
-  public put(url: string, value): Observable<any> {
-    return this.http.put(url, value, httpOptions).pipe(
+  public put(url: string, bodyParam): Observable<any> {
+    return this.http.put(url, bodyParam, httpOptions).pipe(
       map(this.extractData),
       catchError(this.handleError)
     );

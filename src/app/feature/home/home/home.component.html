@@ -13,7 +13,7 @@
             <div class="overlay-container">
                 <div class="overlay">
                     <div class="overlay-panel overlay-left">
-                        <h1>Welcome back!</h1>
+                        <h1 class="mat-typography mat-display-1 text-center profile-typography">Welcome Back!</h1>
                         <p>Sign up with an account if you don't have a social media or email account registered.</p>
                         <button class="ghost" id="signIn" (click)="btnClick()">Sign up</button>
                     </div>
@@ -27,5 +27,7 @@
         </div>
     </ng-template>
     <ng-template #authenticated>
+        <!-- Put in photo -->
+        <h2 class="mat-typography mat-display-2 text-center profile-typography">You are currently logged in</h2>
     </ng-template>
 </main>

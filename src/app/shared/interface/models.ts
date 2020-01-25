@@ -1,20 +1,20 @@
 export interface Stock {
-  Select: string;
-  Chart: string;
-  email: string;
-  Symbol: string;
-  Name: string;
-  Exchange: string;
-  Open: number;
-  Low: number;
-  High: number;
-  LatestPrice: number;
-  Change: number;
-  ChangePercent: number;
-  stateId: number;
-  Week52Low: number;
-  Week52High: number;
-  YtdChange: number;
+  Select?: string;
+  Chart?: string;
+  email?: string;
+  Symbol?: string;
+  Name?: string;
+  Exchange?: string;
+  Open?: number;
+  Low?: number;
+  High?: number;
+  LatestPrice?: number;
+  Change?: number;
+  ChangePercent?: number;
+  stateId?: number;
+  Week52Low?: number;
+  Week52High?: number;
+  YtdChange?: number;
 }
 
 export interface User {
@@ -41,4 +41,8 @@ export interface StockHistory {
   email?: string,
   name?: string,
   action?: string;
+}
+
+export interface JsonString {
+  jsonString: String;
 }
