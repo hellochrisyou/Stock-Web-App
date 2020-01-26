@@ -32,7 +32,7 @@ export class ChartService {
   ];
   changeData: ChartDataSets[] = [
     { data: [], label: 'Change' },
-  ];
+  ]; 
 
   constructor() { }
 
@@ -43,10 +43,10 @@ export class ChartService {
         Select: null,
         Chart: null
       };
-      this.curStock.Symbol = symbol;
-      this.curStock.Low = x.low;
-      this.curStock.High = x.high;
-      this.curStock.Change = x.change;
+      this.curStock.symbol = symbol;
+      this.curStock.low = x.low;
+      this.curStock.high = x.high;
+      this.curStock.change = x.change;
 
       this.stockArr.push(this.curStock);
     });
@@ -58,7 +58,7 @@ export class ChartService {
       label: 'Low'
     };
     this.stockArr.forEach(element => {
-      this.stockData.data.push(element.Low);
+      this.stockData.data.push(element.low);
     });
 
     return this.stockData;
@@ -70,7 +70,7 @@ export class ChartService {
       label: 'High'
     };
     this.stockArr.forEach(element => {
-      this.stockData.data.push(element.High);
+      this.stockData.data.push(element.high);
     });
 
     return this.stockData;
@@ -82,7 +82,7 @@ export class ChartService {
       label: 'Change'
     };
     this.stockArr.forEach(element => {
-      this.stockData.data.push(element.Change);
+      this.stockData.data.push(element.change);
     });
     return this.stockData;
   }

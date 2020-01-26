@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatSnackBar } from '@angular/material';
 import { STOCK_COL_OBJ } from '@shared/const/column.const';
 import * as GLOBAL from '@shared/const/url.const';
 import { ColumnObject } from '@shared/interface/interface';
 import { SearchHistory, Stock } from '@shared/interface/models';
 import { HttpService } from 'app/core/service/http/http.service';
 import { StockMapperService } from 'app/core/service/mapper/stock-mapper.service';
+import { ErrorComponent } from '@shared/dialog/error/error.component';
+import { NanService } from 'app/core/service/mapper/nan.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -31,7 +33,9 @@ export class SearchLogicComponent implements OnInit {
 
   constructor(
     private httpService: HttpService,
-    private stockMapperService: StockMapperService
+    private stockMapperService: StockMapperService,
+    public dialog: MatDialog,
+    private nanService: NanService,
   ) { }
 
   ngOnInit() {
@@ -46,13 +50,15 @@ export class SearchLogicComponent implements OnInit {
 
     this.httpService.postSearchHistory(GLOBAL.APIURL.addSearchHistory, value).subscribe(data => {
       console.log('post search', data);
+      
     },
-      err => console.log('HTTP Error', err),
+      err => console.log(err),
       () => console.log('HTTP request completed.'
       ));
 
     this.httpService.getIex(value).subscribe(data => {
       this.stockArr = this.stockMapperService.mapStockArray(data);
+      this.stockArr= this.nanService.mapStockArray(this.stockArr);
       this.stockMat = new MatTableDataSource(this.stockArr);
       console.log('Data retrieved from Api', this.stockArr);
     },
@@ -60,4 +66,6 @@ export class SearchLogicComponent implements OnInit {
       () => console.log('HTTP request completed.')
     );
   }
+
+
 }

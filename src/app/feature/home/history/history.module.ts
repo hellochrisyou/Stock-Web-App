@@ -1,15 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { HistoryRoutingModule } from './history-routing.module';
-import { HistoryComponent } from './history.component';
-import { SearchHistoryComponent } from './search-history/search-history.component';
-import { StockHistoryComponent } from './stock-history/stock-history.component';
+import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
+import { HistoryRoutingModule } from './history-routing.module';
+import { HistoryLogicComponent } from './logic/history-logic/history-logic.component';
+import { SearchHistoryComponent } from './presentation/search-presentation/search-history.component';
+import { StockHistoryComponent } from './presentation/stock-presentation/stock-history.component';
 
 
 @NgModule({
-  declarations: [HistoryComponent, SearchHistoryComponent, StockHistoryComponent],
+  declarations: [HistoryLogicComponent, SearchHistoryComponent, StockHistoryComponent],
   imports: [
     CommonModule,
     SharedModule,

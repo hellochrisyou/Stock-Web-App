@@ -5,6 +5,8 @@ import { SearchHistory, Stock, JsonString } from '@shared/interface/models';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 import * as GLOBAL from '@shared/const/url.const';
+import { MatDialog } from '@angular/material';
+import { ChartComponent } from '@shared/dialog/chart/chart.component';
 
 export const httpOptions = {
   headers: new HttpHeaders({
@@ -30,7 +32,9 @@ export class HttpService {
 
   thisSearchHistory: SearchHistory = {}
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    public dialog: MatDialog,
+    ) { }
 
   // REFACTOR BY ADDING URL TO PARAMETER
   public getIex(value: string) {
@@ -80,7 +84,7 @@ export class HttpService {
     console.log('hello uel', url);
     return this.http.post(url, bodyParam, httpOptions).pipe(
       map(this.extractData),
-      catchError(this.handleError)
+      catchError(this.handleError)        
     );
   }
 
@@ -109,7 +113,8 @@ export class HttpService {
     return body || {};
   }
 
-  private handleError(error: HttpErrorResponse) {
+  // Error Console  
+  public handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
@@ -117,11 +122,13 @@ export class HttpService {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       console.error(
-        `Backend returned code ${error.status}, ` +
+        `Backend returned code ${error.status}, ` + 
         `body was: ${error.error}`);
-    }
+    }   
+    
     // return an observable with a user-facing error message
+    
     return throwError(
-      'Something bad happened; please try again later.');
+      'Something bad happened.');
   };
 }

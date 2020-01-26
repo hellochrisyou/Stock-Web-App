@@ -9,8 +9,8 @@ import { EmitService } from 'app/core/service/emit/emit.service';
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'home-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['../home/home.component.scss']
+  templateUrl: './login-presentation.component.html',
+  styleUrls: ['../../logic/home-logic.component.scss']
 })
 export class LoginLogicComponent extends CreateBaseForm implements OnInit, OnDestroy {
 

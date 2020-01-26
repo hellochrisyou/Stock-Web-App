@@ -1,6 +1,6 @@
-@import '../../../../../assets/styles/button';
-@import '../../../../../assets/styles/font';
-@import '../../../../../assets/styles/form';
+@import '_button';
+@import '_font';
+@import '_form';
 
 @include button();
 @include font();

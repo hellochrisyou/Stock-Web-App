@@ -26,16 +26,15 @@ export class StockMapperService {
       this.curStock.symbol = x.symbol;
       this.curStock.exchange = x.primaryExchange;
       this.curStock.name = x.companyName;
-      this.curStock.open = x.open;
-      this.curStock.low = x.low;
-      this.curStock.high = x.high;
-      this.curStock.latestPrice = x.latestPrice;
-      this.curStock.change = x.change;
-      this.curStock.changePercent = x.changePercent;
-      this.curStock.week52Low = x.week52Low;
-      this.curStock.week52High = x.week52High;
-      this.curStock.ytdChange = Math.round(x.ytdChange * 100000) / 100000
-        ;
+      this.curStock.open = Math.round(x.open* 100) / 100;
+      this.curStock.low = Math.round(x.low* 100) / 100;
+      this.curStock.high = Math.round(x.high* 100) / 100;
+      this.curStock.latestPrice = Math.round(x.latestPrice* 100) / 100;
+      this.curStock.change = Math.round(x.change* 100) / 100;
+      this.curStock.changePercent = Math.round(x.changePercent* 100) / 100;
+      this.curStock.week52Low = Math.round(x.week52Low* 100) / 100;
+      this.curStock.week52High = Math.round(x.week52High* 100) / 100;
+      this.curStock.ytdChange = Math.round(x.ytdChange * 100) / 100
       this.stockArr.push(this.curStock);
     });
     return this.stockArr;

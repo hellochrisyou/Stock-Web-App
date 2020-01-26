@@ -3,11 +3,11 @@ import { HttpService } from 'app/core/service/http/http.service';
 import * as GLOBAL from '@shared/const/url.const';
 
 @Component({
-  selector: 'app-history',
-  templateUrl: './history.component.html',
-  styleUrls: ['./history.component.scss']
+  selector: 'history-logic',
+  templateUrl: './history-logic.component.html',
+  styleUrls: ['./history-logic.component.scss']
 })
-export class HistoryComponent implements OnInit {
+export class HistoryLogicComponent implements OnInit {
 
   constructor(
     private httpService: HttpService

@@ -7,6 +7,8 @@ import * as GLOBAL from '@shared/const/url.const';
 import { ChartComponent } from '@shared/dialog/chart/chart.component';
 import { SearchHistory, Stock } from '@shared/interface/models';
 import { HttpService } from 'app/core/service/http/http.service';
+import { NanService } from 'app/core/service/mapper/nan.service';
+import { ErrorComponent } from '@shared/dialog/error/error.component';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -18,19 +20,16 @@ export class TableComponent implements AfterViewInit {
 
   tmpSearchArr: SearchHistory[] = [];
 
-  // tslint:disable-next-line: variable-name
   private _isStock: boolean;
-  // tslint:disable-next-line: variable-name
   private _isSearch: string;
-  // tslint:disable-next-line: variable-name
   private _dataSource: MatTableDataSource<Stock>;
-  // tslint:disable-next-line: variable-name
   private _columnIds: string[] = [];
-  // tslint:disable-next-line: variable-name
   private _dataArray: Stock[];
-  // tslint:disable-next-line: variable-name
   private _columnObjects: any[];
   private _type: string;
+
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   @Input()
   public get isStock(): boolean {
@@ -83,6 +82,7 @@ export class TableComponent implements AfterViewInit {
     return this._dataArray;
   }
   public set dataArray(dataArray: Stock[]) {
+    this.nanService.mapStockArray(dataArray);
     this._dataArray = dataArray;
   }
 
@@ -94,13 +94,11 @@ export class TableComponent implements AfterViewInit {
     this._type = value;
   }
 
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
   constructor(
-    private snackBar: MatSnackBar,
     private httpService: HttpService,
-    public dialog: MatDialog
+    private nanService: NanService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngAfterViewInit() {
@@ -112,26 +110,28 @@ export class TableComponent implements AfterViewInit {
     // this.tmpSearchHistory.dateRecorded = new Date(year, month, day);
   }
 
-
-  public applyFilter(filterValue: string): void {
-    this._dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this._dataSource.paginator) {
-      this._dataSource.paginator.firstPage();
-    }
-  }
-
   public select(value: number): void {
     if (this._isSearch === 'true') {
       this.dataArray[value].email = 'dd@d.com';
       console.log('datararay number', this.dataArray[value]);
       this.dataArray[value];
 
+      // Add Stock
       this.httpService.postStock(GLOBAL.APIURL.addStock, this.dataArray[value]).subscribe(data => {
+        // Check if stock Exists
+        if (Object.keys(data).length === 0) {
+          this.openErrorDialog("Duplicate Error")
+        } else { // Confirm item added
+          this.openSnackBar('Item added to your list', 'SUCCESS');
+        }
         console.log('addstock data', data);
-      });
+      },
+        err => {
+          console.log('HTTP Error', err);
+        },
+        () => console.log('HTTP request completed.'
+        ));
 
-      this.openSnackBar('Item added to your list', 'SUCCESS');
     } else {
       console.log('datararay number', this.dataArray[value]);
       this.httpService.deleteStock(GLOBAL.APIURL.deleteStock, this.dataArray[value].symbol).subscribe(data => {
@@ -143,10 +143,34 @@ export class TableComponent implements AfterViewInit {
     throw new Error('Method not implemented.');
   }
 
+  // SORTING
+  public applyFilter(filterValue: string): void {
+    this._dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this._dataSource.paginator) {
+      this._dataSource.paginator.firstPage();
+    }
+  }
+
+  // DIALOGS AND SNACKBARS
   public openDialog(index: number) {
     const dialogRef = this.dialog.open(ChartComponent, {
       data: {
         keyword: this.dataArray[index]
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  public openErrorDialog(errorMessage: String): void {
+    const dialogRef = this.dialog.open(ErrorComponent, {
+      data: {
+        title: errorMessage,
+        subtitle: 'Saving stock',
+        text: 'You have already saved this stock'
       }
     });
 
@@ -160,5 +184,16 @@ export class TableComponent implements AfterViewInit {
       duration: 2000,
     });
   }
-}
 
+  public setDataColor(value: number | string) {
+    if (typeof value !== 'string') {
+      if (value > 0) {
+        return '#4bb543'
+      } else {
+        return '#dd0031';
+      }
+    } else {
+      return;
+    }
+  }
+}

@@ -135,16 +135,27 @@
     }
   }
 
+  .active:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.35s cubic-bezier(0.000, 1.270, 0.460, 1.650); 
+    -webkit-transition: all 0.35s cubic-bezier(0.000, 1.270, 0.460, 1.650); 
+    }
   .active {
-      font-size:1rem;
+    font-size:1.25rem;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 10px rgba(black, 0.35);
+    transition: all 0.35s cubic-bezier(0.000, 1.270, 0.460, 1.650); 
+    -webkit-transition: all 0.35s cubic-bezier(0.000, 1.270, 0.460, 1.650); 
   }
+  
 
   // Card Naviagate
   section {    
     position: relative;
     height: 100%;
     width: 100%;
-}
+  } 
 
 #div-router, router-outlet {
   min-width: 100%;
@@ -218,6 +229,8 @@ svg:hover {
   .card-container .card:not(.highlight-card):hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 17px rgba(black, 0.35);
+      transition: all 0.35s cubic-bezier(0.000, 1.270, 0.460, 1.650); 
+      -webkit-transition: all 0.35s cubic-bezier(0.000, 1.270, 0.460, 1.650); 
   }
 
   .card-container .card:not(.highlight-card):hover .material-icons path {

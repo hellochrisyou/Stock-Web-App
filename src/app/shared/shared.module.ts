@@ -8,9 +8,10 @@ import { ChartComponent } from './dialog/chart/chart.component';
 import { ConfirmComponent } from './dialog/confirm/confirm.component';
 import { MaterialModule } from './module/material.module';
 import { ChartsModule } from 'ng2-charts';
+import { ErrorComponent } from './dialog/error/error.component';
 
 @NgModule({
-  declarations: [TableComponent, ConfirmComponent, ChartComponent],
+  declarations: [TableComponent, ConfirmComponent, ChartComponent, ErrorComponent],
   imports: [
     MaterialModule,
     CommonModule,
@@ -32,7 +33,8 @@ import { ChartsModule } from 'ng2-charts';
   ],
   entryComponents: [
     ConfirmComponent,
-    ChartComponent
+    ChartComponent,
+    ErrorComponent
   ]
 })
 export class SharedModule { }

@@ -15,8 +15,8 @@
       "@query/*": [
         "app/graphQL/query/*"
       ],
-      "@mutation/*": [
-        "app/graphQL/mutation/*"
+      "@styles/*": [
+        "styles/*"
       ],
       "@interface/*": [
         "app/interface/*"
@@ -26,9 +26,6 @@
       ],
       "@constant/*": [
         "app/constant/*"
-      ],
-      "@styles/*": [
-        "src/assets/styles/*"
       ],
     },
     "outDir": "./dist/out-tsc",

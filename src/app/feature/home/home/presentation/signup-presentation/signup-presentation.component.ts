@@ -7,8 +7,8 @@ import { AuthService } from 'app/core/service/auth/auth.service';
 
 @Component({
   selector: 'home-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['../home/home.component.scss']
+  templateUrl: './signup-presentation.component.html',
+  styleUrls: ['../../logic/home-logic.component.scss']
 })
 export class SignupLogicComponent extends CreateBaseForm implements OnInit, OnDestroy {
 
