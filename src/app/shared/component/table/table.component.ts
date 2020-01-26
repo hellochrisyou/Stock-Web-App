@@ -9,17 +9,22 @@ import { SearchHistory, Stock } from '@shared/interface/models';
 import { HttpService } from 'app/core/service/http/http.service';
 import { NanService } from 'app/core/service/mapper/nan.service';
 import { ErrorComponent } from '@shared/dialog/error/error.component';
+import { expandRowTransition } from 'app/core/animation';
+import { COLS_DISPLAY } from '@shared/const/column.const';
 
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'base-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  animations: [expandRowTransition]
 })
 export class TableComponent implements AfterViewInit {
 
   tmpSearchArr: SearchHistory[] = [];
-
+  expandRow: Stock;
+  columns_display = COLS_DISPLAY;
+  
   private _isStock: boolean;
   private _isSearch: string;
   private _dataSource: MatTableDataSource<Stock>;
@@ -108,6 +113,7 @@ export class TableComponent implements AfterViewInit {
     // const month = today.getMonth();
     // const day = today.getDate();
     // this.tmpSearchHistory.dateRecorded = new Date(year, month, day);
+    
   }
 
   public select(value: number): void {

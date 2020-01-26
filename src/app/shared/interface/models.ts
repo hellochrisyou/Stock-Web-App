@@ -11,7 +11,6 @@ export interface Stock {
   latestPrice?: number;
   change?: number;
   changePercent?: number;
-  stateId?: number;
   week52Low?: number;
   week52High?: number;
   ytdChange?: number;

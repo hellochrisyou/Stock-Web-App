@@ -36,3 +36,7 @@ export const STOCK_HISTORY_COL_OBJ: ColumnObject[] = [
     { columnId: 'Week52High', propertyName: 'Week52High' },
     { columnId: 'YtdChange', propertyName: 'YtdChange' }
 ]; 
+
+export const COLS_DISPLAY = [
+    'select', 'chart', 'symbol', 'name', 'exchange', 'open', 'low', 'high', 'latestPrice', 'change', 'changePercent', 'week52Low', 'week52High', 'ytdChange'
+]
