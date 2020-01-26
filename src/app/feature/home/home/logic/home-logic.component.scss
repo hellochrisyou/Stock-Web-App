@@ -1,9 +1,9 @@
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'); 
 @import '_container';
+@import '_control'; 
 @import '_button';
 @import '_font';
 @import '_presentation_form';
-@import '_control'; 
 
 @include container();
 @include font();

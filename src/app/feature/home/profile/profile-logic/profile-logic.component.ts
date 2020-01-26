@@ -7,8 +7,8 @@ import { Stock, SearchHistory } from '@shared/interface/models';
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'user-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  templateUrl: './profile-logic.component.html',
+  styleUrls: ['./profile-logic.component.scss']
 })
 export class ProfileComponent implements OnInit {
 

@@ -1,11 +1,11 @@
 import { ColumnObject } from '@shared/interface/interface';
 
 export const STOCK_COL_OBJ: ColumnObject[] = [
-    { columnId: 'Select', propertyName: '' },
-    { columnId: 'Chart', propertyName: '' },
+    { columnId: 'Select', propertyName: 'Select' },
+    { columnId: 'Chart', propertyName: 'Chart' },
     { columnId: 'symbol', propertyName: 'symbol' },
-    { columnId: 'name', propertyName: 'name' },
     { columnId: 'exchange', propertyName: 'exchange' },
+    { columnId: 'name', propertyName: 'name' },    
     { columnId: 'open', propertyName: 'open' },
     { columnId: 'low', propertyName: 'low' },
     { columnId: 'high', propertyName: 'high' },

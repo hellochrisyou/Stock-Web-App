@@ -14,22 +14,18 @@ export class EditProfileComponent extends CreateBaseForm implements OnInit, OnDe
   minDate = new Date();
   maxDate = new Date();
 
-
-  public displayName() {
-    return this.formGroup.get('displayNameCtrl');
-  }
-
   constructor(
-    protected fb: FormBuilder,
+    protected fbProfile: FormBuilder,
     protected changeDetectorRef: ChangeDetectorRef,
     protected auth: AuthService,
   ) {
-    super(fb, changeDetectorRef);
+    super(fbProfile, changeDetectorRef);
     this.formName = 'editProfileForm';
   }
 
   public ngOnInit(): void {
     super.ngOnInit();
+    this.formGroup = CREATE_PROFILE_FG(this.fbProfile);
 
     const today = new Date();
     const year = today.getFullYear();
@@ -38,7 +34,6 @@ export class EditProfileComponent extends CreateBaseForm implements OnInit, OnDe
     this.minDate = new Date(year, month, day);
     this.maxDate = new Date(year + 100, month, day);
 
-    this.formGroup = CREATE_PROFILE_FG(this.fb);
   }
 
   public ngOnDestroy(): void {

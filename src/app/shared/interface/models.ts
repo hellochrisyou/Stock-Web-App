@@ -14,6 +14,7 @@ export interface Stock {
   week52Low?: number;
   week52High?: number;
   ytdChange?: number;
+  isCompleted?: boolean;
 }
 
 export interface User {
@@ -33,6 +34,7 @@ export interface SearchHistory {
   email?: string,
   name?: string,
   url?: string
+  isCompleted?: boolean;
 }
 
 export interface StockHistory {

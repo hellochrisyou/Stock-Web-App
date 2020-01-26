@@ -1,12 +1,19 @@
 @import '_button';
 @import '_font';
-@import '_form';
 
 @include button();
 @include font();
-@include form();
 
 section {
     height:100%;
     width:100%;
+}
+
+#edit-profile-title {
+    text-align: center;
+    margin-top: 1.5vw;
+}
+
+div button {
+    margin-top: 1.5vw;
 }

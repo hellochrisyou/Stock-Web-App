@@ -5,7 +5,10 @@ import { SearchLogicComponent } from './logic/search-logic.component';
 import { SearchPresentationComponent } from './presentation/search-presentation.component';
 import { SearchRoutingModule } from './search-routing.module';
 @NgModule({
-  declarations: [SearchLogicComponent, SearchPresentationComponent],
+  declarations: [
+    SearchLogicComponent, 
+    SearchPresentationComponent
+  ],
   imports: [
     CommonModule,
     SharedModule,

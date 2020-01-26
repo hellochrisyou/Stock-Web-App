@@ -11,6 +11,8 @@ import { NanService } from 'app/core/service/mapper/nan.service';
 import { ErrorComponent } from '@shared/dialog/error/error.component';
 import { expandRowTransition } from 'app/core/animation';
 import { COLS_DISPLAY } from '@shared/const/column.const';
+import { StockListService } from 'app/core/service/state/stock-list.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -24,7 +26,7 @@ export class TableComponent implements AfterViewInit {
   tmpSearchArr: SearchHistory[] = [];
   expandRow: Stock;
   columns_display = COLS_DISPLAY;
-  
+
   private _isStock: boolean;
   private _isSearch: string;
   private _dataSource: MatTableDataSource<Stock>;
@@ -32,7 +34,7 @@ export class TableComponent implements AfterViewInit {
   private _dataArray: Stock[];
   private _columnObjects: any[];
   private _type: string;
-
+  
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -104,16 +106,20 @@ export class TableComponent implements AfterViewInit {
     private nanService: NanService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
+    private stockListService: StockListService
   ) { }
 
   ngAfterViewInit() {
     console.log('table here', this._dataSource);
+    // if (this.isSearch) {
+    //   this.dataArray = this.stockListService.stocks$;
+    // }
     // const today = new Date();
     // const year = today.getFullYear();
     // const month = today.getMonth();
     // const day = today.getDate();
     // this.tmpSearchHistory.dateRecorded = new Date(year, month, day);
-    
+
   }
 
   public select(value: number): void {
@@ -130,18 +136,17 @@ export class TableComponent implements AfterViewInit {
         } else { // Confirm item added
           this.openSnackBar('Item added to your list', 'SUCCESS');
         }
-        console.log('addstock data', data);
+        console.log('Data from addStock', data);
+
+        this.stockListService.addStock(data); // Might need to fix this
       },
-        err => {
-          console.log('HTTP Error', err);
-        },
-        () => console.log('HTTP request completed.'
-        ));
+        err => console.log('HTTP Error for addStock: ', err),
+        () => console.log('HTTP getIEX addStock.')
+      );
 
     } else {
-      console.log('datararay number', this.dataArray[value]);
-      this.httpService.deleteStock(GLOBAL.APIURL.deleteStock, this.dataArray[value].symbol).subscribe(data => {
-        console.log('addstock data', data);
+      this.httpService.delete(GLOBAL.APIURL.deleteStock, this.dataArray[value].symbol).subscribe(data => {
+        this.stockListService.removeStock(data.data.symbol);
       });
     }
   }

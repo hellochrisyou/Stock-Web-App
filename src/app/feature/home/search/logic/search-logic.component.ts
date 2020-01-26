@@ -8,6 +8,10 @@ import { HttpService } from 'app/core/service/http/http.service';
 import { StockMapperService } from 'app/core/service/mapper/stock-mapper.service';
 import { ErrorComponent } from '@shared/dialog/error/error.component';
 import { NanService } from 'app/core/service/mapper/nan.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { StockListService } from 'app/core/service/state/stock-list.service';
+import { SearchMapperService } from 'app/core/service/mapper/search-mapper.service';
+import { SearchHistoryListService } from 'app/core/service/state/search-history-list.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -20,10 +24,12 @@ export class SearchLogicComponent implements OnInit {
 
   isSearch = 'true';
   tmpAccount: Account;
-
+  stockObservable$: Observable<Stock[]>;
+  _stockObservable$: BehaviorSubject<Stock[]>;
   stockArr: Stock[];
-  stockMat: MatTableDataSource<Stock>;
+  stockMat: MatTableDataSource<BehaviorSubject<Stock[]>>;
   stockCol: ColumnObject[] = STOCK_COL_OBJ;
+  searchArr: SearchHistory[];
 
   saveHistory: SearchHistory = {
     email: 'dd@d.com',
@@ -35,7 +41,10 @@ export class SearchLogicComponent implements OnInit {
     private httpService: HttpService,
     private stockMapperService: StockMapperService,
     public dialog: MatDialog,
+    private stockStateService: StockListService,
     private nanService: NanService,
+    private searchMapperService: SearchMapperService,
+    private searchHistoryListService: SearchHistoryListService
   ) { }
 
   ngOnInit() {
@@ -43,27 +52,42 @@ export class SearchLogicComponent implements OnInit {
     // Data is expected to be an object, with keys that match the requested root fields in your document (pos in this case). 
     // Apollo expects to a value at data.pos, but since data is an array and doesn't have this property, it returns undefined.
 
-  }
+    // HTTP FindAllStocks Service Call
+    
 
+    // HTTP FindAllSearchHistory Call
+    this.httpService.getAll(GLOBAL.APIURL.findSearchHistory, 'dd@d.com').subscribe( data => {
+      this.searchArr = [];
+      this.searchArr = this.searchMapperService.mapSearchArray(data);
+      this.searchHistoryListService.searchHistory = this.searchArr;
+      console.log('Data from findAllSearchHistory', data);
+    },
+      err => console.log('HTTP Error for findAllSearchHistory: ', err),
+      () => console.log('HTTP findAllSearchHistory complete.'
+    ));
+  }
+// https://stackoverflow.com/questions/54375073/cannot-use-observable-as-datasource-for-mattable-appears-empty
   public onSubmit(value: string): void {
+    this.httpService.getAll
     console.log('reached here', value);
 
     this.httpService.postSearchHistory(GLOBAL.APIURL.addSearchHistory, value).subscribe(data => {
-      console.log('post search', data);
-      
+      console.log('Data from addSearchHistory', data);
     },
-      err => console.log(err),
-      () => console.log('HTTP request completed.'
-      ));
+    err => console.log('HTTP Error for addSearchHistory: ', err),
+    () => console.log('HTTP addSearchHistory complete.'
+    ));
 
     this.httpService.getIex(value).subscribe(data => {
       this.stockArr = this.stockMapperService.mapStockArray(data);
-      this.stockArr= this.nanService.mapStockArray(this.stockArr);
-      this.stockMat = new MatTableDataSource(this.stockArr);
-      console.log('Data retrieved from Api', this.stockArr);
+      this.stockArr = this.nanService.mapStockArray(this.stockArr);
+      // this.stockObservable = new BehaviorSubject<Stock[]>(this.stockArr);
+      // this.stockObservable$ = this.stockObservable.asObservable();
+      // this.stockMat = new MatTableDataSource(this.stockObservable);
+      console.log('Data retrieved from getIEX', this.stockArr);
     },
-      err => console.log('HTTP Error', err),
-      () => console.log('HTTP request completed.')
+    err => console.log('HTTP Error for getIEX: ', err),
+    () => console.log('HTTP getIEX complete.')
     );
   }
 

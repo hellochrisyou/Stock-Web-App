@@ -5,15 +5,27 @@
         <h1 class="mat-typography mat-display-1 text-center profile-typogrpahy">{{ user.displayName }}</h1>
         <img class="margin-center mat-elevation-12" [src]="user.photoURL">
         <br>
-        <p>email: &nbsp;&nbsp;&nbsp;&nbsp;{{ user.email }}</p>
-        <br>
-        <p>City: &nbsp;&nbsp;&nbsp;&nbsp;{{ user.city }}</p>
-        <br>
-        <p>State: &nbsp;&nbsp;&nbsp;&nbsp;{{ user.state }}</p>
-        <br>
-        <p>Age: &nbsp;&nbsp;&nbsp;&nbsp;{{ user.age }}</p>
-        <br>
-        <button class="non-home-button mat-elevation-z7" (click)="auth.signOut()">Logout</button>
-        </div>
-    </div>
-</div>
+        <form [formGroup]="formGroup">            
+            <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="1.5vw">
+                <mat-form-field>
+                    <mat-label>DisplayName</mat-label>
+                    <input matInput placeholder="Name" formControlName="displayNameCtrl" required [errorStateMatcher]="matcher">
+                    <mat-hint>This will not change any 3rd-party provider name properties</mat-hint>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Expected Retirement Date</mat-label>
+                    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
+                        placeholder="Choose a retirement date" formControlName="dateCtrl" required>
+                    <mat-hint>When do you want to retire?</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="space-around center">
+                <button class="non-home-button mat-elevation-z7 margin-center" type="submit" (click)="submit()">Submit</button>
+            </div>
+        </form>                <br>
+                <div fxLayout="column" fxLayoutAlign="space-around center">
+                <button class="non-home-button mat-elevation-z7" (click)="auth.signOut()">Logout</button>
+                </div>
+        

@@ -14,7 +14,6 @@ import { HomeRoutingModule } from './home-routing.module';
     LoginLogicComponent, 
     SignupLogicComponent],
   imports: [
-    CommonModule,
     SharedModule,
     HomeRoutingModule
   ],

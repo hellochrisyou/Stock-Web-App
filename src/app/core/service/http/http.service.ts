@@ -95,7 +95,7 @@ export class HttpService {
     );
   }
 
-  public deleteStock(url: string, bodyParam: string): Observable<any> {
+  public delete(url: string, bodyParam: string): Observable<any> {
     this.bodyString.jsonString = bodyParam;
     return this.http.post(url, this.bodyString, httpOptions).pipe(
       catchError(this.handleError)

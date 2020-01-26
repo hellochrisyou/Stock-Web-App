@@ -14,7 +14,7 @@ export class CreateBaseForm implements OnInit, OnDestroy {
     protected componentIdle: Subject<boolean> = new Subject();
     protected abstractControl: AbstractControl;
 
-    constructor(protected formBuilder: FormBuilder,
+    constructor(public formBuilder: FormBuilder,
         protected changeDetectorRef: ChangeDetectorRef) {
     }
 
