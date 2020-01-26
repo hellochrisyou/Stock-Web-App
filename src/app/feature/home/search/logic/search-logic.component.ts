@@ -16,7 +16,7 @@ import { StockMapperService } from 'app/core/service/mapper/stock-mapper.service
 })
 export class SearchLogicComponent implements OnInit {
 
-  isSearch = 'yes';
+  isSearch = 'true';
   tmpAccount: Account;
 
   stockArr: Stock[];

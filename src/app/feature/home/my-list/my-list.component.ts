@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { STOCK_COL_OBJ } from '@shared/const/column.const';
 import * as GLOBAL from '@shared/const/url.const';
@@ -12,9 +12,9 @@ import { HttpService } from 'app/core/service/http/http.service';
   templateUrl: './my-list.component.html',
   styleUrls: ['./my-list.component.scss']
 })
-export class MyListComponent implements OnInit {
+export class MyListComponent implements AfterViewInit {
 
-  isSearch = 'no';
+  isSearch = 'false';
 
   stockArr: Stock[];
 
@@ -26,8 +26,8 @@ export class MyListComponent implements OnInit {
     private httpService: HttpService,
   ) { }
 
-  ngOnInit() {
-    this.httpService.getAll(GLOBAL.APIURL.findStocks, 'dd@d.com').subscribe( data => {      
+  ngAfterViewInit() {
+    this.httpService.getAll(GLOBAL.APIURL.findStocks, 'dd@d.com').subscribe(data => {
       console.log('data', data);
       this.stockArr = data;
       this.stockMat = new MatTableDataSource(this.stockArr);

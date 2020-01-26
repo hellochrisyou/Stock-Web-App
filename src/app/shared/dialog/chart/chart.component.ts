@@ -59,9 +59,9 @@ export class ChartComponent implements OnInit {
   ngOnInit(): void {
     this.dialogRef.updateSize('100vw');
 
-    this.httpService.getChart(this.data.keyword.Symbol).subscribe(data => {
+    this.httpService.getChart(this.data.keyword.symbol).subscribe(data => {
       this.chartData = [];
-      this.chartService.resolveChartArray(data, this.data.keyword.Symbol);
+      this.chartService.resolveChartArray(data, this.data.keyword.symbol);
       this.chartData.push(this.chartService.getLow());
       this.chartData.push(this.chartService.getHigh());
       this.chartData.push(this.chartService.getChange());

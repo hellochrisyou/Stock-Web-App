@@ -2,19 +2,19 @@ export interface Stock {
   Select?: string;
   Chart?: string;
   email?: string;
-  Symbol?: string;
-  Name?: string;
-  Exchange?: string;
-  Open?: number;
-  Low?: number;
-  High?: number;
-  LatestPrice?: number;
-  Change?: number;
-  ChangePercent?: number;
+  symbol?: string;
+  name?: string;
+  exchange?: string;
+  open?: number;
+  low?: number;
+  high?: number;
+  latestPrice?: number;
+  change?: number;
+  changePercent?: number;
   stateId?: number;
-  Week52Low?: number;
-  Week52High?: number;
-  YtdChange?: number;
+  week52Low?: number;
+  week52High?: number;
+  ytdChange?: number;
 }
 
 export interface User {
@@ -22,14 +22,14 @@ export interface User {
   stateId?: string;
   email?: string;
   photoURL?: string;
-  displayName?: string;  
+  displayName?: string;
   // dateCreated?: Date;
   city?: string;
-  state?: string;  
+  state?: string;
   age?: number;
 }
 
-export interface SearchHistory { 
+export interface SearchHistory {
   id?: string,
   email?: string,
   name?: string,

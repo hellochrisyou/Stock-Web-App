@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -14,7 +14,7 @@ import { HttpService } from 'app/core/service/http/http.service';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements AfterViewInit {
 
   tmpSearchArr: SearchHistory[] = [];
 
@@ -30,7 +30,7 @@ export class TableComponent implements OnInit {
   private _dataArray: Stock[];
   // tslint:disable-next-line: variable-name
   private _columnObjects: any[];
-  private _type: string;  
+  private _type: string;
 
   @Input()
   public get isStock(): boolean {
@@ -97,13 +97,14 @@ export class TableComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(    
+  constructor(
     private snackBar: MatSnackBar,
     private httpService: HttpService,
     public dialog: MatDialog
   ) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    console.log('table here', this._dataSource);
     // const today = new Date();
     // const year = today.getFullYear();
     // const month = today.getMonth();
@@ -121,16 +122,22 @@ export class TableComponent implements OnInit {
   }
 
   public select(value: number): void {
-    this.dataArray[value].email = 'dd@d.com';
-    console.log ('datararay number', this.dataArray[value]);
-    this.dataArray[value];  
+    if (this._isSearch === 'true') {
+      this.dataArray[value].email = 'dd@d.com';
+      console.log('datararay number', this.dataArray[value]);
+      this.dataArray[value];
 
-   this.httpService.postStock(GLOBAL.APIURL.addStock, this.dataArray[value]).subscribe( data => {
-     console.log ('addstock data', data);
-   });
+      this.httpService.postStock(GLOBAL.APIURL.addStock, this.dataArray[value]).subscribe(data => {
+        console.log('addstock data', data);
+      });
 
-    this.openSnackBar('Item added to your list', 'SUCCESS');
-
+      this.openSnackBar('Item added to your list', 'SUCCESS');
+    } else {
+      console.log('datararay number', this.dataArray[value]);
+      this.httpService.deleteStock(GLOBAL.APIURL.deleteStock, this.dataArray[value].symbol).subscribe(data => {
+        console.log('addstock data', data);
+      });
+    }
   }
   resetFields() {
     throw new Error('Method not implemented.');

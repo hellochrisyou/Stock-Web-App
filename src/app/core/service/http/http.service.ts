@@ -8,7 +8,7 @@ import * as GLOBAL from '@shared/const/url.const';
 
 export const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
+    'Content-Type': 'application/json',
   })
 };
 
@@ -16,7 +16,7 @@ export const httpOptions = {
   providedIn: 'root'
 })
 export class HttpService {
-  
+
   bodyString: JsonString = {
     jsonString: ''
   }
@@ -27,7 +27,7 @@ export class HttpService {
   // tslint:disable-next-line: variable-name
   private token = '&token=Tsk_1ad1e73bfed34883a302621bf10db807';
   private token2 = '?token=Tsk_1ad1e73bfed34883a302621bf10db807';
-  
+
   thisSearchHistory: SearchHistory = {}
 
   constructor(private http: HttpClient) { }
@@ -36,7 +36,7 @@ export class HttpService {
   public getIex(value: string) {
     const fullIexUrl = this.iexUrl + value + this.token;
     console.log(fullIexUrl);
-    return this.http.get<KeyValuePair>(fullIexUrl).pipe(      
+    return this.http.get<KeyValuePair>(fullIexUrl).pipe(
       retry(3),
       catchError(this.handleError));
   }
@@ -48,9 +48,9 @@ export class HttpService {
       catchError(this.handleError));
   }
 
-  public getUser(id: string) {}
+  public getUser(id: string) { }
 
-  public getAll(url: string , bodyParam: string): Observable<any> {    
+  public getAll(url: string, bodyParam: string): Observable<any> {
     this.bodyString.jsonString = bodyParam;
     return this.http.post(url, this.bodyString, httpOptions).pipe(
       catchError(this.handleError)
@@ -68,9 +68,9 @@ export class HttpService {
     );
   }
 
-  public postClearHistory(url: string, bodyParam: string): Observable<any> {    
+  public postClearHistory(url: string, bodyParam: string): Observable<any> {
     return this.http.post(url, bodyParam, httpOptions).pipe(
-      map(this.extractData), 
+      map(this.extractData),
       catchError(this.handleError)
     );
   }
@@ -87,6 +87,19 @@ export class HttpService {
   public put(url: string, bodyParam): Observable<any> {
     return this.http.put(url, bodyParam, httpOptions).pipe(
       map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+  public deleteStock(url: string, bodyParam: string): Observable<any> {
+    this.bodyString.jsonString = bodyParam;
+    return this.http.post(url, this.bodyString, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public clearStocks(url: string): Observable<any> {
+    return this.http.delete(url, httpOptions).pipe(
       catchError(this.handleError)
     );
   }

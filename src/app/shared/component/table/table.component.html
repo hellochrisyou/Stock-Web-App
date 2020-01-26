@@ -1,20 +1,21 @@
-<section  fxLayout="row" fxLayoutAlign="center" fxFlex="1 1 1 auto">
+<section fxLayout="row" fxLayoutAlign="center" fxFlex="1 1 1 auto">
     <div fxFlex></div>
-    <section  fxLayout="column" fxLayoutAlign="center start" >
-    <mat-form-field>
+    <section fxLayout="column" fxLayoutAlign="center start">
+        <mat-form-field>
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" />
         </mat-form-field>
-        <section  fxLayout="column" fxLayoutAlign="center" >
+        <section fxLayout="column" fxLayoutAlign="center">
 
             <table class="mat-elevation-z7" mat-table [dataSource]="dataSource" matSort matSortDirection="asc">
                 <ng-container *ngFor="let col of columnObjects" [matColumnDef]="col.columnId">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>{{col.propertyName}}</th>
                     <td mat-cell *matCellDef="let dataArray;index as i">{{dataArray[col.propertyName]}}
                         <button *ngIf="col.columnId==='Select'" mat-button class="customize-button" (click)="select(i)">
-                            <mat-icon *ngIf="isSearch==='yes'" class="icon-green">add</mat-icon>
-                            <mat-icon *ngIf="isSearch==='no'" class="icon-red">clear</mat-icon>
+                            <mat-icon *ngIf="isSearch==='true'" class="icon-green">add</mat-icon>
+                            <mat-icon *ngIf="isSearch==='false'" class="icon-red">clear</mat-icon>
                         </button>
-                        <button *ngIf="col.columnId==='Chart'" mat-button class="customize-button" (click)="openDialog(i)">
+                        <button *ngIf="col.columnId==='Chart'" mat-button class="customize-button"
+                            (click)="openDialog(i)">
                             <mat-icon class="icon-green">show_chart</mat-icon>
                         </button>
                     </td>
@@ -22,8 +23,9 @@
                 <tr mat-header-row *matHeaderRowDef="columnIds; sticky: true"></tr>
                 <tr mat-row *matRowDef="let row; columns: columnIds"></tr>
             </table>
-        <mat-paginator class="mat-elevation-z7" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
-    </section>
+            <mat-paginator class="mat-elevation-z7" [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons>
+            </mat-paginator>
+        </section>
     </section>
     <div fxFlex></div>
 </section>
