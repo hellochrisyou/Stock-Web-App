@@ -6,4 +6,5 @@
     <base-table *ngIf="searchArr" style='max-width: 20vw' [columnIds]="searchCol" [columnObjects]="searchCol"
         [isSearch]="isSearch" [dataArray]="searchArr">
     </base-table>
+    <h1 *ngIf="!searchArr" class="mat-typography mat-display-1 text-center profile-typography">Welcome Back!</h1>
 </div>
