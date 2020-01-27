@@ -15,9 +15,7 @@ import { HttpService } from 'app/core/service/http/http.service';
 export class MyListComponent implements AfterViewInit {
 
   isSearch = 'false';
-
   stockArr: Stock[];
-
   stockCol: ColumnObject[] = STOCK_COL_OBJ;
 
   constructor(

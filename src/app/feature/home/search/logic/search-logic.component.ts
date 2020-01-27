@@ -20,6 +20,7 @@ import { SearchMapperService } from 'app/core/service/mapper/search-mapper.servi
 })
 export class SearchLogicComponent implements OnInit {
 
+  text: 'Search Results are'
   isSearch = 'true';
   tmpAccount: Account;
   stockObservable$: Observable<Stock[]>;

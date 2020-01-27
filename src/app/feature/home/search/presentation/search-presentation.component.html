@@ -3,6 +3,7 @@
         <div>
             <mat-form-field>
                 <mat-label>Search Filter</mat-label>
+                <br/>
                 <mat-select [formControl]="searchOptCtrl" required>
                     <mat-optgroup *ngFor="let group of searchGroup" [label]="group.name" [disabled]="group.disabled">
                         <mat-option *ngFor="let select of group.option" [value]="select.value">
@@ -15,8 +16,8 @@
                 </mat-error>
             </mat-form-field>
         </div>
-        <div class="button-wrapper non-home-button">
-            <button class="non-home-button mat-elevation-z7" mat-flat-button color="primary"><span
+        <div class="button-wrapper">
+            <button class="mat-elevation-z7" mat-flat-button color="primary"><span
                     class="button-span">Submit</span></button>
         </div>
     </form>

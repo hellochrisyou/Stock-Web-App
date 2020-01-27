@@ -9,9 +9,16 @@ import { ConfirmComponent } from './dialog/confirm/confirm.component';
 import { MaterialModule } from './module/material.module';
 import { ChartsModule } from 'ng2-charts';
 import { ErrorComponent } from './dialog/error/error.component';
+import { FooterComponent } from './component/table/footer/footer.component';
 
 @NgModule({
-  declarations: [TableComponent, ConfirmComponent, ChartComponent, ErrorComponent],
+  declarations: [
+    TableComponent, 
+    ConfirmComponent, 
+    ChartComponent, 
+    ErrorComponent,
+    FooterComponent
+  ],
   imports: [
     MaterialModule,
     CommonModule,
@@ -24,7 +31,8 @@ import { ErrorComponent } from './dialog/error/error.component';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    TableComponent
+    TableComponent,
+    FooterComponent
   ],
   providers: [
     {
