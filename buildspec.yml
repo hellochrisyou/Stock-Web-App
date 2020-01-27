@@ -1,6 +1,7 @@
 version: 0.2
 
 phases:
+    install:   
     runtime-versions: 
         node.js: 12.14.1
     install:    
@@ -24,15 +25,3 @@ artifacts:
     base-directory: 'dist/*'
     discard-paths: yes
     
-    
-
-phases:
-  install:
-    runtime-versions:
-        php: 7.3
-  build:
-    commands:
-      - php --version
-artifacts:
-  files:
-    -  README.md
