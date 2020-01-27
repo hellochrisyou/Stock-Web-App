@@ -1,7 +1,6 @@
 <section>
-    <search-bar  (emitValue)="onSubmit($event)"></search-bar>
-    <base-table  *ngIf="stockArr" [dataSource]="stockMat" [columnIds]="stockCol"
-        [columnObjects]="stockCol" [dataArray]="stockArr" [isSearch]="isSearch">
+    <search-bar (emitValue)="onSubmit($event)"></search-bar>
+    <base-table *ngIf="stockArr" [dataArray]="stockArr" [columnIds]="stockCol" [columnObjects]="stockCol"
+        [isSearch]="isSearch">
     </base-table>
 </section>
- 

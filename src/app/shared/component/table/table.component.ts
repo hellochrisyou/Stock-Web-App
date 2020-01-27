@@ -11,7 +11,6 @@ import { NanService } from 'app/core/service/mapper/nan.service';
 import { ErrorComponent } from '@shared/dialog/error/error.component';
 import { expandRowTransition } from 'app/core/animation';
 import { COLS_DISPLAY } from '@shared/const/column.const';
-import { StockListService } from 'app/core/service/state/stock-list.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -27,14 +26,16 @@ export class TableComponent implements AfterViewInit {
   expandRow: Stock;
   columns_display = COLS_DISPLAY;
 
+
   private _isStock: boolean;
   private _isSearch: string;
-  private _dataSource: MatTableDataSource<Stock>;
+  public dataSource: MatTableDataSource<Stock>;
+  public index: number;
   private _columnIds: string[] = [];
-  private _dataArray: Stock[];
   private _columnObjects: any[];
   private _type: string;
-  
+  private _dataArray: Stock[];
+
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -55,15 +56,11 @@ export class TableComponent implements AfterViewInit {
   }
 
   @Input()
-  public get dataSource(): MatTableDataSource<Stock> {
-    return this._dataSource;
+  public get dataArray(): Stock[] {
+    return this._dataArray;
   }
-  public set dataSource(ds: MatTableDataSource<Stock>) {
-    if (ds) {
-      ds.sort = this.sort;
-      ds.paginator = this.paginator;
-      this._dataSource = ds;
-    }
+  public set dataArray(value: Stock[]) {
+    this._dataArray = value;
   }
 
   @Input()
@@ -85,15 +82,6 @@ export class TableComponent implements AfterViewInit {
   }
 
   @Input()
-  public get dataArray(): Stock[] {
-    return this._dataArray;
-  }
-  public set dataArray(dataArray: Stock[]) {
-    this.nanService.mapStockArray(dataArray);
-    this._dataArray = dataArray;
-  }
-
-  @Input()
   public get type(): string {
     return this._type;
   }
@@ -106,11 +94,13 @@ export class TableComponent implements AfterViewInit {
     private nanService: NanService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private stockListService: StockListService
   ) { }
 
   ngAfterViewInit() {
-    console.log('table here', this._dataSource);
+    console.log('table here', this.dataArray);
+    this.dataSource = new MatTableDataSource<Stock>(this.dataArray);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
     // if (this.isSearch) {
     //   this.dataArray = this.stockListService.stocks$;
     // }
@@ -124,6 +114,7 @@ export class TableComponent implements AfterViewInit {
 
   public select(value: number): void {
     if (this._isSearch === 'true') {
+      console.log('select value: ', value);
       this.dataArray[value].email = 'dd@d.com';
       console.log('datararay number', this.dataArray[value]);
       this.dataArray[value];
@@ -138,7 +129,6 @@ export class TableComponent implements AfterViewInit {
         }
         console.log('Data from addStock', data);
 
-        this.stockListService.addStock(data); // Might need to fix this
       },
         err => console.log('HTTP Error for addStock: ', err),
         () => console.log('HTTP getIEX addStock.')
@@ -146,7 +136,6 @@ export class TableComponent implements AfterViewInit {
 
     } else {
       this.httpService.delete(GLOBAL.APIURL.deleteStock, this.dataArray[value].symbol).subscribe(data => {
-        this.stockListService.removeStock(data.data.symbol);
       });
     }
   }
@@ -156,10 +145,10 @@ export class TableComponent implements AfterViewInit {
 
   // SORTING
   public applyFilter(filterValue: string): void {
-    this._dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this._dataSource.paginator) {
-      this._dataSource.paginator.firstPage();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
 
