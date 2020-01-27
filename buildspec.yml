@@ -1,23 +1,21 @@
 version: 0.2
 
 phases:
-    install:   
-    runtime-versions: 
-        node.js: 12.14.1
-    install:    
-        commands:
-            - npm install -g @angular/cli
-            - npm install
+    install:
+    runtime-versions:
+      nodejs: 12
     pre_build:
-        commands:
-            # npm run test
-            # npm run e2e                    
+    commands:
+      - echo Installing source NPM dependencies...
+      - npm install
+      - npm install -g @angular/cli
     build:
-        commands:
-            - ng build --prod
+    commands:
+      - echo Build started on `date`
+      - ng build --prod 
     post_build:
          commands:
-            - aws s3 sync --delete ./dist/angular-ff s3://fantasy-football-2019.chrisyou.com
+            - aws s3 sync --delete ./dist/stock-web-app-client s3://stock-web-app.chrisyou.com
             - echo Build completed on `date`
 artifacts:
     files:
