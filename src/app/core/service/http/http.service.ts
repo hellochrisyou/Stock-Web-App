@@ -73,8 +73,8 @@ export class HttpService {
   }
 
   public postClearHistory(url: string, bodyParam: string): Observable<any> {
-    return this.http.post(url, bodyParam, httpOptions).pipe(
-      map(this.extractData),
+    this.bodyString.jsonString = bodyParam;
+    return this.http.post(url, this.bodyString, httpOptions).pipe(
       catchError(this.handleError)
     );
   }

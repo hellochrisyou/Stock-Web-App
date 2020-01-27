@@ -94,7 +94,9 @@
     width: 1920px;
   }
 
- 
+main section#main-section {
+   margin-bottom:0 !important;
+ }
 
 
   /* Responsive Styles */
@@ -238,7 +240,8 @@ svg:hover {
   }
 
   .card.highlight-card {
-    background-color: #1976d2;
+    background: rgb(25,118,210);
+    background: linear-gradient(90deg, rgba(25,118,210,1) 0%, rgba(0,128,255,1) 210%);
     color: white;
     font-weight: 600;
     top: 1vw;

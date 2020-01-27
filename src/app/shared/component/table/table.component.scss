@@ -34,8 +34,8 @@ tr.mat-header-row th {
   tr.mat-header-row {
     // background-color:darkslateblue;
     // background-color:slateblue;
-    background-color: cornflowerblue;
-
+    // background-color: cornflowerblue;
+    background-color: rgb(25,118,210);
       //  background-color:dodgerblue;
 
   }
@@ -69,6 +69,9 @@ tr.mat-header-row th {
 
 }
 
+div.mat-sort-header-container {
+  text-align: center;
+}
 
 // Expandable Row
 .expand-detail {

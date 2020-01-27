@@ -19,7 +19,7 @@
                     </div>
                     <div class="overlay-panel overlay-right">
                         <h1>Hi!</h1>
-                        <p>Enter your registration details</p>
+                        <p>Register a new account with an existing email</p>
                         <button class="ghost" id="signUp" (click)="btnClick()">Sign in</button>
                     </div>
                 </div>
@@ -28,6 +28,12 @@
     </ng-template>
     <ng-template #authenticated>
         <!-- Put in photo -->
-        <h2 class="mat-typography mat-display-2 text-center profile-typography">You are currently logged in</h2>
+        <div fxLayout="column" fxLayoutAlign="center center">
+        <h4 class="mat-typography mat-display-5 text-center profile-typography">Available on mobile also!
+            <div>
+                <img class="margin-center mat-elevation-12" src="../../../../../assets/img/mobile-phone.png">
+            </div>            
+        </h4>
+        </div>
     </ng-template>
 </main>

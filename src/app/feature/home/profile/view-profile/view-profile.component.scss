@@ -12,17 +12,27 @@ h1 {
 }
 
 p {
-    text-align: left;
+    text-align: center;
 }
 
 div button {
     margin-top: 2vw;
 }
 
-img {
-    width: 80%;
-}
-
 .profile-form-group-width {
     width: 35%;
+}
+
+.jumbotron {
+//     border: 1px solid #4C3C1B;
+// padding: 8px 8px 8px 8px;
+// width: auto;
+border-style: groove;
+border-color:seashell;
+border-width: 25px;
+}
+
+.jumbotron img {
+    border: 1px solid #4C3C1B;
+padding: 8px 8px 8px 8px;
 }

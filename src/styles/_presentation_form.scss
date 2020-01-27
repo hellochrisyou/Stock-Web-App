@@ -1,7 +1,8 @@
 @mixin presentationForm() {
    .presentation {
 	form {
-		background: rgb(25,118,210);
+		background: rgb(25,118,210) !important;
+		background: linear-gradient(90deg, rgba(25,118,210,1) 0%, rgba(0,128,255,1) 210%) !important;
 		display: flex;
 		flex-direction: column;
 		padding: 0 100px;
@@ -15,7 +16,8 @@
 		border: none;
 		padding: 10px 15px;.presentation {
 	form {
-		background: rgb(25,118,210);
+		background: rgb(25,118,210) !important;
+		background: linear-gradient(90deg, rgba(25,118,210,1) 0%, rgba(0,128,255,1) 210%) !important;
 		display: flex;
 		flex-direction: column;
 		padding: 0 100px;

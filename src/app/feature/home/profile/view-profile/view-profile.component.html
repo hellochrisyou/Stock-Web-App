@@ -2,10 +2,12 @@
     <div fxLayout="column" fxLayoutAlign="space-around center">
         <div fxLayout="column" fxLayoutAlign="space-around">
             <br />
-            <h1 class="mat-typography mat-display-2 text-center profile-typogrpahy">{{ user.displayName }}</h1>
-            <h1 class="mat-typography mat-display-1 text-center profile-typogrpahy">{{ user.email }}</h1>
-            <img class="margin-center mat-elevation-12" [src]="user.photoURL">
-            <br>
+            <div class="jumbotron">
+                <h1 class="mat-typography mat-display-2 text-center profile-typogrpahy">{{ user.displayName }}</h1>
+                <p class="lead">{{ user.email }}</p>
+                <hr class="my-4">
+                <img class="margin-center text-center mat-elevation-12" [src]="user.photoURL">
+            </div>
         </div>
     </div>
 </div>

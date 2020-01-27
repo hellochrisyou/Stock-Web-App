@@ -1,4 +1,9 @@
-<div fxLayout="row" fxLayoutAlign="center center" >
-    <base-table *ngIf="searchArr" style='max-width: 30vw' [columnIds]="searchCol" [columnObjects]="searchCol" [dataArray]="searchArr">
-</base-table>
+<div fxLayout="column" fxLayoutAlign="center center">
+    <button *ngIf="searchArr" class="margin-center non-home-button mat-elevation-z7" mat-flat-button color="primary">
+        <span 
+            class="button-span">Clear</span>
+        </button> 
+    <base-table *ngIf="searchArr" style='max-width: 20vw' [columnIds]="searchCol" [columnObjects]="searchCol"
+        [isSearch]="isSearch" [dataArray]="searchArr">
+    </base-table>
 </div>

@@ -14,6 +14,7 @@ import { SearchMapperService } from 'app/core/service/mapper/search-mapper.servi
 })
 export class HistoryLogicComponent implements OnInit {
  
+  isSearch: string = 'neither';
   searchArr: SearchHistory[];
   searchCol: ColumnObject[] = SEARCH_COL_OBJ;
   
@@ -26,15 +27,17 @@ export class HistoryLogicComponent implements OnInit {
     
       this.httpService.getAll(GLOBAL.APIURL.findSearchHistory, 'dd@d.com').subscribe( data => {
         console.log ('Data from FindAlLSearchHistory', data);
-        this.searchArr = [];
-        this.searchArr = this.searchMapperService.mapSearchArray(data);
+        if (data.length > 0) {
+          this.searchArr = [];
+          this.searchArr = this.searchMapperService.mapSearchArray(data);
+        }
       },
       err => console.log('HTTP Error for FindAlLSearchHistory', err),
       () => console.log('HTTP FindAlLSearchHistory completed.'));
   }
 
-  public clearSearchHistory(value: boolean): void {
-    this.httpService.postClearHistory(GLOBAL.APIURL.addSearchHistory, 'Search').subscribe( data => {
+  public clearSearchHistory(): void {
+    this.httpService.postClearHistory(GLOBAL.APIURL.clearSearchHistory, 'dd@d.com').subscribe( data => {
       console.log ('clear search history data', data);
     },
     err => console.log('HTTP Error', err),
