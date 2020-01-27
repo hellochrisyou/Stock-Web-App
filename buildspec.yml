@@ -2,6 +2,8 @@ version: 0.2
 
 phases:
     install:
+    runtime-versions: 
+        node.js: 12.14.1
         commands:
             ## Get Chrome information 
             # curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
@@ -14,8 +16,8 @@ phases:
             # pip install --upgrade awscli
 
             # Upgrade AWS CLI to the latest version - pip install - upgrade awscli
-            - npm install
             - npm install -g @angular/cli
+            - npm install
 
     pre_build:
         commands:
