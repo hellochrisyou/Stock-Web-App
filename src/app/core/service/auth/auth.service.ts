@@ -2,13 +2,13 @@ import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '@shared/interface/models';
-import { auth } from 'firebase';
 import { Observable, of } from 'rxjs';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { ConfirmComponent } from '@shared/dialog/confirm/confirm.component';
 import { CloseDialogService } from '../close-dialog/close-dialog.service';
 import { switchMap, first } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { auth } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
