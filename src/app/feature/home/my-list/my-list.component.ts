@@ -18,8 +18,6 @@ export class MyListComponent implements AfterViewInit {
 
   stockArr: Stock[];
 
-  stockMat: MatTableDataSource<Stock>;
-
   stockCol: ColumnObject[] = STOCK_COL_OBJ;
 
   constructor(
@@ -28,12 +26,11 @@ export class MyListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.httpService.getAll(GLOBAL.APIURL.findStocks, 'dd@d.com').subscribe(data => {
-      console.log('data', data);
+      console.log('Data from deleteStock', data);
       this.stockArr = data;
-      this.stockMat = new MatTableDataSource(this.stockArr);
     },
-      err => console.log('HTTP Error', err),
-      () => console.log('HTTP request completed.')
+    err => console.log('HTTP Error for deleteStock: ', err),
+    () => console.log('HTTP deleteStock complete.')        
     );
   }
 

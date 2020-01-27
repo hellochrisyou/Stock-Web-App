@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Stock } from '@shared/interface/models';
 import { ChartDataSets } from 'chart.js';
+import { Stock } from '@shared/interface/models';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,6 @@ export class ChartService {
   stockArr: Stock[];
   // tslint:disable-next-line: variable-name
   private _curStock: Stock = {
-    Select: 'Select',
-    Chart: 'Chart',
   };
 
   dataArray: ChartKeyValue[];
@@ -36,20 +34,65 @@ export class ChartService {
 
   constructor() { }
 
-  public resolveChartArray(data: any, symbol: string): void {
+  public mapChartArrayFiveDays(data: any, symbol: string): void {
     this.stockArr = [];
     data.forEach(x => {
-      this.curStock = {
-        Select: null,
-        Chart: null
-      };
+      this.curStock = {};
       this.curStock.symbol = symbol;
       this.curStock.low = x.low;
       this.curStock.high = x.high;
       this.curStock.change = x.change;
-
       this.stockArr.push(this.curStock);
     });
+  }
+
+  public mapChartArrayOneMonth(data: any, symbol: string): void {
+    this.stockArr = [];
+    for (let i = 1; i <= data.length; i++) {
+      if (i%5 !== 0) {
+        continue;
+      } else {
+        this.curStock = {};
+        this.curStock.symbol = symbol;
+        this.curStock.low = data[i-1].low;
+        this.curStock.high = data[i-1].high;
+        this.curStock.change = data[i-1].change;
+        this.stockArr.push(this.curStock);
+      };
+    }
+  }
+
+  public mapChartArrayOneYear(data: any, symbol: string): void {
+    this.stockArr = [];
+    for (let i = 1; i <= data.length; i++) {
+      if (i % 21 !== 0) {
+        continue;
+      } else {
+        this.curStock = {};
+        this.curStock.symbol = symbol;
+        this.curStock.low = data[i-1].low;
+        this.curStock.high = data[i-1].high;
+        this.curStock.change = data[i-1].change;
+        this.stockArr.push(this.curStock);
+      };
+    }
+  }
+
+
+  public mapChartArrayFiveYears(data: any, symbol: string): void {
+    this.stockArr = [];
+    for (let i = 1; i <= data.length; i++) {
+      if (i % 250 !== 0) {
+        continue;
+      } else {
+        this.curStock = {};
+        this.curStock.symbol = symbol;
+        this.curStock.low = data[i-1].low;
+        this.curStock.high = data[i-1].high;
+        this.curStock.change = data[i-1].change;
+        this.stockArr.push(this.curStock);
+      };
+    }
   }
 
   public getLow(): ChartKeyValue {

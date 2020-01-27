@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { SearchGroup } from '@shared/interface/interface';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SEARCHGROUP } from '@shared/const/search-option.const';
-import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { SearchGroup } from '@shared/interface/interface';
+
 import { CREATE_SEARCH_HEADER } from '../search.config';
 
 @Component({
@@ -19,7 +20,7 @@ export class SearchPresentationComponent implements OnInit {
 
   @Output() emitValue = new EventEmitter();
 
-  get searchOption(): AbstractControl {
+  get searchOption() {
     return this.searchForm.get('searchOptCtrl');
   }
 

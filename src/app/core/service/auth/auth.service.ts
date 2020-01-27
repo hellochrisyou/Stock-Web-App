@@ -103,16 +103,13 @@ export class AuthService {
   private updateUserData(firstTime: boolean, user: User) { // Added with UserStore
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    console.log('user', user);
+    console.log('user', user); 
     if (firstTime) {
     this.data = {
       uid: user.uid,
       email: user.email,
       photoURL: user.photoURL,
-      displayName: user.displayName,
-      city: 'Unknown',
-      state: 'Unknown', 
-      age: 18
+      displayName: user.displayName
     };
    } else {
     this.data = {
@@ -120,9 +117,6 @@ export class AuthService {
       email: user.email,
       photoURL: user.photoURL,
       displayName: user.displayName,
-      city: user.city,
-      state: user.state, 
-      age: user.age
     };
   }
     return userRef.set(this.data, { merge: true });

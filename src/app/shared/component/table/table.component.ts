@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, AfterViewInit, AfterViewChecked, AfterContentChecked, DoCheck, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -20,7 +20,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./table.component.scss'],
   animations: [expandRowTransition]
 })
-export class TableComponent implements AfterViewInit {
+export class TableComponent implements OnInit {
 
   tmpSearchArr: SearchHistory[] = [];
   expandRow: Stock;
@@ -94,9 +94,10 @@ export class TableComponent implements AfterViewInit {
     private nanService: NanService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
+    private changeDetectorRefs: ChangeDetectorRef
   ) { }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     console.log('table here', this.dataArray);
     this.dataSource = new MatTableDataSource<Stock>(this.dataArray);
     this.dataSource.sort = this.sort;
@@ -128,19 +129,22 @@ export class TableComponent implements AfterViewInit {
           this.openSnackBar('Item added to your list', 'SUCCESS');
         }
         console.log('Data from addStock', data);
-
       },
         err => console.log('HTTP Error for addStock: ', err),
-        () => console.log('HTTP getIEX addStock.')
+        () => console.log('HTTP addStock complete.')        
       );
 
     } else {
       this.httpService.delete(GLOBAL.APIURL.deleteStock, this.dataArray[value].symbol).subscribe(data => {
-      });
+        console.log('Data from deleteStock', data);
+        this.dataArray = this.dataArray.filter(obj => obj !== this.dataArray[value]);
+        this.dataSource = new MatTableDataSource<Stock>(this.dataArray);
+        this.changeDetectorRefs.detectChanges();
+      },
+        err => console.log('HTTP Error for deleteStock: ', err),
+        () => console.log('HTTP addStock deleteStock.') 
+      );
     }
-  }
-  resetFields() {
-    throw new Error('Method not implemented.');
   }
 
   // SORTING
@@ -153,10 +157,11 @@ export class TableComponent implements AfterViewInit {
   }
 
   // DIALOGS AND SNACKBARS
-  public openDialog(index: number) {
+  public openDialog(index: number, increment: string) {
     const dialogRef = this.dialog.open(ChartComponent, {
       data: {
-        keyword: this.dataArray[index]
+        keyword: this.dataArray[index],
+        increment: increment
       }
     });
 
@@ -164,6 +169,7 @@ export class TableComponent implements AfterViewInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+  
 
   public openErrorDialog(errorMessage: String): void {
     const dialogRef = this.dialog.open(ErrorComponent, {

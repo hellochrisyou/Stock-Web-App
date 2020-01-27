@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
-import { CreateBaseForm } from '@shared/base/base-form';
-import { FormBuilder, AbstractControl, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { CREATE_SIGNUP_FG } from '@home/home/home.config';
-import { EmitService } from 'app/core/service/emit/emit.service';
+import { CreateBaseForm } from '@shared/base/base-form';
 import { AuthService } from 'app/core/service/auth/auth.service';
+import { EmitService } from 'app/core/service/emit/emit.service';
 
 @Component({
   selector: 'home-signup',
@@ -19,7 +19,6 @@ export class SignupLogicComponent extends CreateBaseForm implements OnInit, OnDe
     protected auth: AuthService
   ) {
     super(fb, changeDetectorRef);
-    this.formName = 'signupForm';
   }
 
   public signup(): boolean {

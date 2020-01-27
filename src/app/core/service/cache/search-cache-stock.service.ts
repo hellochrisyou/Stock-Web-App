@@ -24,19 +24,19 @@ export class SearchCacheStockService {
     this._stocks = []
   }
 
-  public isExist(select: string): boolean {
-    this.resetStock();
-    let check;
-    this.stockStore.forEach(stockArr => {
-      if (stockArr.Select === select) {
-        this._stocks.push(stockArr);
-        check = true;
-      }
-    });
-    if (check === true) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // public isExist(option: string): boolean {
+  //   this.resetStock();
+  //   let check;
+  //   this.stockStore.forEach(stockArr => {
+  //     if (stockArr.option === option) {
+  //       this._stocks.push(stockArr);
+  //       check = true;
+  //     }
+  //   });
+  //   if (check === true) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 }

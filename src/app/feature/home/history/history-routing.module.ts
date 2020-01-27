@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'app/core/service/guard/auth.guard';
 import { HistoryLogicComponent } from './logic/history-logic/history-logic.component';
 
-
 const routes: Routes = [
   {
     path: '',

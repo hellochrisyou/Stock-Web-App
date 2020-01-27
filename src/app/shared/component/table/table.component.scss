@@ -32,7 +32,12 @@ tr.mat-header-row th {
   }
 
   tr.mat-header-row {
-    background-color: #24292e;
+    // background-color:darkslateblue;
+    // background-color:slateblue;
+    background-color: cornflowerblue;
+
+      //  background-color:dodgerblue;
+
   }
 
   .mat-row:nth-child(even) {
@@ -57,6 +62,12 @@ tr.mat-header-row th {
     text-align: center;
 }
 
+ .mat-cell:first-child {
+  padding-right:1vw;
+  padding-left:0.5vw;
+  text-align: center;
+
+}
 
 
 // Expandable Row
@@ -88,4 +99,20 @@ tr.expanded-row:not(.expanded-row):active {
 
 .expanded-row td {
   border-bottom-width: 0;
+}
+
+#option-image {
+  width:1rem;
+}
+
+#option-row {
+  width: 100%;
+}
+
+.delete-tooltip-red {
+  background: #b71c1c;
+}
+
+.add-tooltip-green {
+  background: #4bb543;
 }

@@ -1,6 +1,5 @@
 export interface Stock {
-  Select?: string;
-  Chart?: string;
+  options?: string;
   email?: string;
   symbol?: string;
   name?: string;
@@ -23,10 +22,7 @@ export interface User {
   email?: string;
   photoURL?: string;
   displayName?: string;
-  // dateCreated?: Date;
-  city?: string;
-  state?: string;
-  age?: number;
+  retirementAge?: number;
 }
 
 export interface SearchHistory {

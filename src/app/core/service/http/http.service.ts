@@ -34,7 +34,7 @@ export class HttpService {
 
   constructor(private http: HttpClient,
     public dialog: MatDialog,
-    ) { }
+    ) {}
 
   // REFACTOR BY ADDING URL TO PARAMETER
   public getIex(value: string) {
@@ -45,8 +45,8 @@ export class HttpService {
       catchError(this.handleError));
   }
 
-  public getChart(value: string) {
-    const chartFullUrl = this.chartUrl + value + '/chart/5d' + this.token2;
+  public getChart(value: string, increment: string) {
+    const chartFullUrl = this.chartUrl + value + '/chart/' + increment + this.token2;
     return this.http.get<KeyValuePair[]>(chartFullUrl).pipe(
       retry(3),
       catchError(this.handleError));

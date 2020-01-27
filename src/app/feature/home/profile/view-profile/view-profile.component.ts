@@ -1,8 +1,11 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { AuthService } from 'app/core/service/auth/auth.service';
 import { CreateBaseForm } from '@shared/base/base-form';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CREATE_PROFILE_FG } from '../profile.config';
+import { ValidatorName } from '@shared/validator/validators/name.validator';
+import { ValidateUrl } from '@shared/validator/validators/url.validator';
+import { MAT_DATEPICKER_VALIDATORS } from '@angular/material';
 
 @Component({
   selector: 'view-profile',
@@ -15,18 +18,15 @@ export class ViewProfileComponent extends CreateBaseForm implements OnInit, OnDe
   maxDate = new Date();
 
   constructor(
-    protected fbProfile: FormBuilder,
+    protected fb: FormBuilder,
     protected changeDetectorRef: ChangeDetectorRef,
     public auth: AuthService,
   ) {
-    super(fbProfile, changeDetectorRef);
-    this.formName = 'editProfileForm';
-
+    super(fb, changeDetectorRef);
   }
 
   public ngOnInit(): void {
     super.ngOnInit();
-    this.formGroup = CREATE_PROFILE_FG(this.fbProfile);
 
     const today = new Date();
     const year = today.getFullYear();
@@ -35,9 +35,13 @@ export class ViewProfileComponent extends CreateBaseForm implements OnInit, OnDe
     this.minDate = new Date(year, month, day);
     this.maxDate = new Date(year + 100, month, day);
 
+    this.formGroup = CREATE_PROFILE_FG(this.fb);
   }
-
   public ngOnDestroy(): void {
     super.ngOnDestroy();
+  }
+
+  public submit(): void {
+
   }
 }

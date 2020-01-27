@@ -1,4 +1,5 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Validate_AlphaNumeric } from '@shared/validator/validators/alphanumeric';
 
 export const CREATE_LOGIN_FG = (fb: FormBuilder): FormGroup => {
 
@@ -9,6 +10,8 @@ export const CREATE_LOGIN_FG = (fb: FormBuilder): FormGroup => {
         ]],
         loginPassCtrl: ['', [
             Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(25)
         ]]
     });
     return loginFb;
@@ -20,12 +23,11 @@ export const CREATE_SIGNUP_FG = (fb: FormBuilder): FormGroup => {
         signupEmailCtrl: ['', [
             Validators.required,
             Validators.email,
-            Validators.maxLength(30),
+            Validators.maxLength(25),
         ]],
         signupPassCtrl: ['', [
             Validators.required,
-            Validators.minLength(8),
-            Validators.maxLength(30),
+            Validators.maxLength(25),
         ]]
     });
     return signupFb;

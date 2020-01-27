@@ -9,38 +9,37 @@ import { AuthService } from 'app/core/service/auth/auth.service';
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss']
 })
-export class EditProfileComponent extends CreateBaseForm implements OnInit, OnDestroy {
+export class EditProfileComponent {
 
-  minDate = new Date();
-  maxDate = new Date();
+  // minDate = new Date();
+  // maxDate = new Date();
 
-  constructor(
-    protected fbProfile: FormBuilder,
-    protected changeDetectorRef: ChangeDetectorRef,
-    protected auth: AuthService,
-  ) {
-    super(fbProfile, changeDetectorRef);
-    this.formName = 'editProfileForm';
-  }
+  // constructor(
+  //   protected fbProfile: FormBuilder,
+  //   protected changeDetectorRef: ChangeDetectorRef,
+  //   protected auth: AuthService,
+  // ) {
+  //   super(fbProfile, changeDetectorRef);
+  // }
 
-  public ngOnInit(): void {
-    super.ngOnInit();
-    this.formGroup = CREATE_PROFILE_FG(this.fbProfile);
+  // public ngOnInit(): void {
+  //   super.ngOnInit();
+  //   this.formGroup = CREATE_PROFILE_FG(this.fbProfile);
 
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth();
-    const day = today.getDate();
-    this.minDate = new Date(year, month, day);
-    this.maxDate = new Date(year + 100, month, day);
+  //   const today = new Date();
+  //   const year = today.getFullYear();
+  //   const month = today.getMonth();
+  //   const day = today.getDate();
+  //   this.minDate = new Date(year, month, day);
+  //   this.maxDate = new Date(year + 100, month, day);
 
-  }
+  // }
 
-  public ngOnDestroy(): void {
-    super.ngOnDestroy();
-  }
+  // public ngOnDestroy(): void {
+  //   super.ngOnDestroy();
+  // }
 
-  submit(): void {
+  // submit(): void {
 
-  }
+  // }
 }

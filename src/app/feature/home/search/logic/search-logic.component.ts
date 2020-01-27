@@ -62,7 +62,7 @@ export class SearchLogicComponent implements OnInit {
     this.httpService.getAll
     console.log('reached here', value);
 
-    this.httpService.postSearchHistory(GLOBAL.APIURL.addSearchHistory, value).subscribe(data => {
+    this.httpService.postSearchHistory(GLOBAL.APIURL.addSearchHistory, 'value').subscribe(data => {
       console.log('Data from addSearchHistory', data);
     },
       err => console.log('HTTP Error for addSearchHistory: ', err),
@@ -72,9 +72,6 @@ export class SearchLogicComponent implements OnInit {
     this.httpService.getIex(value).subscribe(data => {
       this.stockArr = this.stockMapperService.mapStockArray(data);
       this.stockArr = this.nanService.mapStockArray(this.stockArr);
-      // this.stockObservable = new BehaviorSubject<Stock[]>(this.stockArr);
-      // this.stockObservable$ = this.stockObservable.asObservable();
-      // this.stockMat = new MatTableDataSource(this.stockObservable);
       console.log('Data retrieved from getIEX', this.stockArr);
     },
       err => console.log('HTTP Error for getIEX: ', err),

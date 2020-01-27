@@ -1,10 +1,10 @@
-import { FormControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 /*** REGEX should check a string for characters A-Z a-z - ' ***/
-export const VALIDATOR_NAME: ValidatorFn = (control: FormControl): ValidationErrors | null => {
+export function ValidatorName(control: AbstractControl) {
     if (control && control.value && control.value !== '') {
         return !control.value.match(/^[A-Za-z-']+$/) ? {
-            cbptmInvalidName: 'Name is incorrect'
+            validName: false
         } : null;
     }
     return null;

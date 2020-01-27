@@ -1,18 +1,16 @@
-import { FormControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { FormControl, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 import { VALIDATE_ARRAY } from '@shared/utils/utils';
 /*** REGEX should check a string with only letters and numbers (no spaces)  ***/
 
-const VALIDATOR_ALPHANUM = (num: string): string[] => {
+export const VALIDATOR_ALPHANUM = (num: string): string[] => {
   return num.match(/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/i);
 };
 
-export const VALIDATOR_ALPHANUMERIC: ValidatorFn = (control: FormControl): ValidationErrors | null => {
-  let isValid = true;
+export function Validate_AlphaNumeric(control: AbstractControl) {  
   if (control && control.value) {
-    isValid = VALIDATE_ARRAY(control.value, VALIDATOR_ALPHANUM);
-
+    if (VALIDATE_ARRAY(control.value, VALIDATOR_ALPHANUM)) {
+      return {validInput: true};
+    }
+  return null
   }
-  return !isValid ? {
-    invalidAlphaNum: 'Alpha-Numeric characters only. Spaces prohibited.'
-  } : null;
-};
+}

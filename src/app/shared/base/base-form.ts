@@ -8,7 +8,6 @@ export class CreateBaseForm implements OnInit, OnDestroy {
 
     public formGroup: FormGroup;
     public formArray: FormArray;
-    public formName: string = null;
     public matcher = new RequiredStateMatcher();
 
     protected componentIdle: Subject<boolean> = new Subject();

@@ -30,7 +30,6 @@ export class LoginLogicComponent extends CreateBaseForm implements OnInit, OnDes
     protected router: Router
   ) {
     super(fb, changeDetectorRef);
-    this.formName = 'loginForm';
     // this.emitService.logingOutput.subscribe(x => {
     //   this.auth.SigninEmail(this.formGroup.get('loginEmailCtrl').value, this.formGroup.get('loginPassCtrl').value);
     // });

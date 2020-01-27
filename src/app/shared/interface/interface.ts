@@ -28,6 +28,7 @@ export interface DialogData {
     subTitle: string;
     text: string;
     keyword?: Stock;
+    increment?: string;
 }
 
 // export interface KeyValuePair {

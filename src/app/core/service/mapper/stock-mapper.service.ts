@@ -8,10 +8,7 @@ import { StockDto } from '@shared/interface/dto.interface';
 export class StockMapperService {
 
   stockArr: Stock[];
-  curStock: Stock = {
-    Select: 'Select',
-    Chart: 'Chart'
-  };
+  curStock: Stock = {};
 
 
   constructor() { }
@@ -19,10 +16,7 @@ export class StockMapperService {
   public mapStockArray(data: any): Stock[] {
     this.stockArr = [];
     data.forEach(x => {
-      this.curStock = {
-        Select: 'Select',
-        Chart: 'Chart'
-      };
+      this.curStock = {};
       this.curStock.symbol = x.symbol;
       this.curStock.exchange = x.primaryExchange;
       this.curStock.name = x.companyName;
