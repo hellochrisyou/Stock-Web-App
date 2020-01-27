@@ -12,7 +12,7 @@ phases:
     build:
         commands:
             - echo Build started on `date`
-            - ng build --prod 
+            - ng build --prod  --aot
     post_build:
         commands:
             - aws s3 sync --delete ./dist/stock-web-app-client s3://stock-web-app.chrisyou.com
