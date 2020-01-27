@@ -1,4 +1,9 @@
+@import '_font';
+
+@include font();
+
   .toolbar {
+	padding:0 1vw 0 2vw;
 	width: 100vw;
     height: 80px;   
 	background: rgb(25,118,210);
@@ -64,4 +69,11 @@ a {
   mat-icon {
 	  cursor: pointer;
 	  color: white;
+  }
+
+  h1.mat-typography {
+	  color: white !important;
+	  display:inline-block;
+	  font-size:2rem;
+	  
   }

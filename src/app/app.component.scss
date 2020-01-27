@@ -119,7 +119,7 @@ main section#main-section {
     }
 
     .card.highlight-card span {
-      margin-left: 72px;
+      margin-left: 1rem;
     }
 
     svg#rocket-smoke {
@@ -127,8 +127,6 @@ main section#main-section {
       transform: rotate(-5deg);
     }
   }
-
-
 
   @media screen and (max-width: 575px) {
     svg#rocket-smoke {
@@ -250,11 +248,7 @@ svg:hover {
     min-width: 30%;
     position: relative;
   }
-
-  .card.card.highlight-card span {
-    margin-left: 60px;
-  }
-
+  
     // Fix this css later
 mat-icon {
       color:rgb(221,0,49);
