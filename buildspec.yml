@@ -5,18 +5,18 @@ phases:
     runtime-versions:
       nodejs: 12
     pre_build:
-    commands:
-      - echo Installing source NPM dependencies...
-      - npm install
-      - npm install -g @angular/cli
+        commands:
+          - echo Installing source NPM dependencies...
+          - npm install
+          - npm install -g @angular/cli
     build:
-    commands:
-      - echo Build started on `date`
-      - ng build --prod 
+        commands:
+          - echo Build started on `date`
+          - ng build --prod 
     post_build:
-         commands:
-            - aws s3 sync --delete ./dist/stock-web-app-client s3://stock-web-app.chrisyou.com
-            - echo Build completed on `date`
+    commands:
+        - aws s3 sync --delete ./dist/stock-web-app-client s3://stock-web-app.chrisyou.com
+        - echo Build completed on `date`
 artifacts:
     files:
         - '**/*'
