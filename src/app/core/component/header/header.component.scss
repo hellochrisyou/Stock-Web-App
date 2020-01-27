@@ -20,6 +20,10 @@
 	}
 }
 
+a {
+	border: none;
+}
+
   .spacer {
 	flex: 1;
 	text-align: right;	
@@ -31,13 +35,13 @@
 	  padding-right: 1vw;
   }
    
-  span i {
+  a i {
 	  color: white;
 	  margin: 0 2px 0;
-	  background: rgba(255,255,255,0.1); 
+	  background: transparent; 
   }
 
-  span i:hover, mat-toolbar a, mat-icon:hover {
+  a i:hover, mat-toolbar a, mat-icon:hover {
 	transform: scale3d(1.2, 1.2, 1); 
 	-webkit-transform: scale3d(1.2, 1.2, 1); 
 	transition: all 0.35s cubic-bezier(0.000, 1.270, 0.460, 1.650); 
@@ -50,7 +54,7 @@
   }
 
 
-  span {
+ a {
 	margin: 0 10px 0;
   }
  mat-toolbar a svg#twitter-logo {

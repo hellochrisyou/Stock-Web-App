@@ -35,7 +35,12 @@ p {
       left: 0;
   }
 
-
+div img:hover {
+    transform: scale3d(1.2, 1.2, 1); 
+	-webkit-transform: scale3d(1.2, 1.2, 1); 
+	transition: all 0.35s cubic-bezier(0.000, 1.270, 0.460, 1.650); 
+	-webkit-transition: all 0.35s cubic-bezier(0.000, 1.270, 0.460, 1.650);
+}
 
 form h1, span, i, a {
     color: black; 
