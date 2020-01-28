@@ -21,7 +21,6 @@ export class ViewProfileComponent extends CreateBaseForm implements OnInit, OnDe
     public auth: AuthService,
   ) {
     super(fb, changeDetectorRef);
-    this.auth;
   }
 
   public ngOnInit(): void {
