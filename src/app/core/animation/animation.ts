@@ -3,7 +3,7 @@ import { trigger, animate, style, group, animateChild, query, stagger, transitio
 export const routerTransition = trigger('routerTransition', [
     transition('* <=> *', [
     /* order */
-    /* 1 */ query(':enter, :leave', style({ position: 'fixed', width: '100%' })
+    /* 1 */ query(':enter, :leave', style({ position: 'fixed', bottom: 0, width: '100%' })
         , { optional: true }),
     /* 2 */ group([  // block executes in parallel
             query(':enter', [
@@ -17,6 +17,8 @@ export const routerTransition = trigger('routerTransition', [
         ])
     ])
 ])
+
+  
 
 export const expandRowTransition = trigger('detailExpand', [
     state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),

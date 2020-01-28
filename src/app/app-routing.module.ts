@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ViewProfileComponent } from '@home/profile/view-profile/view-profile.component';
 
+import { AuthGuard } from './core/service/guard/auth.guard';
 import { ErrorComponent } from './error/error.component';
 
 
@@ -11,8 +13,8 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('./feature/home/profile/profile.module').then(mod => mod.ProfileModule),
-  },
+    component: ViewProfileComponent, canActivate: [AuthGuard] , data: {state: 'profile' } 
+   },
   {
     path: 'search-stock',
     loadChildren: () => import('./feature/home/search/search.module').then(mod => mod.SearchModule),

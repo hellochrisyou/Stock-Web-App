@@ -9,7 +9,7 @@ import { SearchHistory, Stock } from '@shared/interface/models';
 import { HttpService } from 'app/core/service/http/http.service';
 import { NanService } from 'app/core/service/mapper/nan.service';
 import { ErrorComponent } from '@shared/dialog/error/error.component';
-import { expandRowTransition } from 'app/core/animation';
+import { expandRowTransition } from 'app/core/animation/animation';
 import { COLS_DISPLAY } from '@shared/const/column.const';
 import { BehaviorSubject } from 'rxjs';
 

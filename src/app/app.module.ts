@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HistoryModule } from '@home/history/history.module';
 import { HomeModule } from '@home/home/home.module';
 import { MyListModule } from '@home/my-list/my-list.module';
-import { ProfileModule } from '@home/profile/profile.module';
+import { ViewProfileComponent } from '@home/profile/view-profile/view-profile.component';
 import { SearchModule } from '@home/search/search.module';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +20,7 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
+    ViewProfileComponent,
     ErrorComponent,
   ],
   imports: [
@@ -32,7 +33,6 @@ import { SharedModule } from './shared/shared.module';
     HistoryModule,
     SearchModule,
     MyListModule,
-    ProfileModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

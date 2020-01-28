@@ -1,11 +1,9 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
-import { AuthService } from 'app/core/service/auth/auth.service';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { CreateBaseForm } from '@shared/base/base-form';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'app/core/service/auth/auth.service';
+
 import { CREATE_PROFILE_FG } from '../profile.config';
-import { ValidatorName } from '@shared/validator/validators/name.validator';
-import { ValidateUrl } from '@shared/validator/validators/url.validator';
-import { MAT_DATEPICKER_VALIDATORS } from '@angular/material';
 
 @Component({
   selector: 'view-profile',
@@ -23,6 +21,7 @@ export class ViewProfileComponent extends CreateBaseForm implements OnInit, OnDe
     public auth: AuthService,
   ) {
     super(fb, changeDetectorRef);
+    this.auth;
   }
 
   public ngOnInit(): void {
