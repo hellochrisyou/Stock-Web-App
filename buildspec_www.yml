@@ -1,7 +1,7 @@
 version: 0.2
 env:
   variables:    
-    S3_BUCKET: "stock.chrisyou.com"
+    WWW_S3_BUCKET: "www.stock.chrisyou.com"
 phases:
     install:
         runtime-versions:
@@ -17,7 +17,7 @@ phases:
             - ng build --prod  --aot
     post_build:
         commands:
-            - aws s3 sync --delete ./dist/Stock-Web-App s3://${S3_BUCKET}
+            - aws s3 sync --delete ./dist/Stock-Web-App s3://${WWW_S3_BUCKET}
             - echo Build completed on `date`
 artifacts:
     files:
