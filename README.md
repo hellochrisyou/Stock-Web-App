@@ -27,8 +27,10 @@ MVC: Controller, Repository, Service
 ## Firebase Authentication (includes 3rd party authentication via Firebase api)
 
 ## Packages
-#### Angular Packages: Angular Material, Prettier, TsLint, Rxjs, Auth0<br>
-#### Spring Modules: Spring Boot, Spring Web, Spring MongoDB, Spring Data
+#### Angular Packages: 
+     Angular Material, Prettier, TsLint, Rxjs, Auth0<br>
+#### Spring Modules: 
+     Spring Boot, Spring Web, Spring MongoDB, Spring Data
 
 ## Cloud Infrastructure Diagram
 <img  src="https://chrisyou-backup-website.s3.amazonaws.com/assets/AWS+Network+Diagram+(1).png" width="100%"/>
