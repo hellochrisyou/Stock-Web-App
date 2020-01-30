@@ -23,9 +23,9 @@ Microservices
 NoSQL Database (Spring Data/MongoDB)
 MVC: Controller, Repository, Service
 
-## Firebase Authentication (includes 3rd party authentication via Firebase api)
+#### Firebase Authentication (includes 3rd party authentication via Firebase api)
 
-### Packages
+#### Packages
 Angular Packages: Angular Material, Prettier, TsLint, Rxjs, Auth0
 Spring Modules: Spring Boot, Spring Web, Spring MongoDB, Spring Data
 
