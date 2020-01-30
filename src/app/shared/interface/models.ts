@@ -16,13 +16,12 @@ export interface Stock {
   isCompleted?: boolean;
 }
 
-export interface User {
+export interface TmpUser {
   uid?: string;
   stateId?: string;
   email?: string;
   photoURL?: string;
   displayName?: string;
-  retirementAge?: number;
 }
 
 export interface SearchHistory {

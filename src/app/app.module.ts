@@ -8,8 +8,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HistoryModule } from '@home/history/history.module';
 import { HomeModule } from '@home/home/home.module';
 import { MyListModule } from '@home/my-list/my-list.module';
-import { ViewProfileComponent } from '@home/profile/view-profile/view-profile.component';
+import { ProfileModule } from '@home/profile/profile.module';
 import { SearchModule } from '@home/search/search.module';
+
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +21,6 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-    ViewProfileComponent,
     ErrorComponent,
   ],
   imports: [
@@ -30,6 +30,7 @@ import { SharedModule } from './shared/shared.module';
     CoreModule,
     HomeModule,
     SharedModule,
+    ProfileModule,
     HistoryModule,
     SearchModule,
     MyListModule,

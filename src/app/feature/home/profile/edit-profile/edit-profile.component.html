@@ -1,70 +1,31 @@
-<!-- 
 <form [formGroup]="formGroup">
-    <h1 id="edit-profile-title" class="mat-typography mat-display-1">Edit</h1>
     <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="1.5vw">
         <mat-form-field>
             <mat-label>DisplayName</mat-label>
-            <input matInput placeholder="Name" formControlName="displayNameCtrl" required [errorStateMatcher]="matcher">
+            <input matInput placeholder="Name" formControlName="displayNameCtrl" required place
+                placeholder="Name" [errorStateMatcher]="matcher">
             <mat-hint>This will not change any 3rd-party provider name properties</mat-hint>
-            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-      This will not change any 3rd-party provider name properties.
-    </mat-error>
-    <mat-error *ngIf="emailFormControl.hasError('required')">
-      Name is <strong>required</strong>
-    </mat-error> 
-             <mat-error *ngIf="formGroup.controls.displayNameCtrl.hasError('minlength')">
-            Miniumum of <strong>{{formGroup.controls.displayNameCtrl.errors.minlength.requiredLength}}<strong>
-            characters
-        </mat-error> 
+            <mat-error *ngIf="formGroup.controls.displayNameCtrl.hasError('required')">
+                Display Name is <strong>Required</strong>
+            </mat-error>
             <mat-error *ngIf="formGroup.controls.displayNameCtrl.hasError('maxlength')">
-            Maximum of <strong>{{formGroup.controls.displayNameCtrl.errors.maxlength.requiredLength}}<strong>
-            characters
-        </mat-error>
-        <mat-error *ngIf="formGroup.controls.displayNameCtrl.hasError('required')">
-            Name is <strong>required</strong>
-        </mat-error>
+                Maximum of
+                <strong>{{formGroup.controls.displayNameCtrl.errors.maxlength.requiredLength}}</strong>
+                characters
+            </mat-error>
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Age</mat-label>
-            <input matInput placeholder="21" formControlName="ageCtrl" required [errorStateMatcher]="matcher">
-            <mat-hint>21 and over!</mat-hint>
-
-              <mat-error *ngIf="formGroup.controls.ageCtrl.hasError('maxlength')">
-            Maximum of <strong>{{formGroup.controls.ageCtrl.errors.maxlength.requiredLength}}<strong>
-            characters
-         </mat-error>  
-             <mat-error *ngIf="formGroup.controls.ageCtrl.hasError('required')">
-            Age is <strong>required</strong>
-        </mat-error> 
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Country</mat-label>
-            <input matInput placeholder="Country" formControlName="countryCtrl" required [errorStateMatcher]="matcher">
-             <mat-error *ngIf="formGroup.controls.countryCtrl.hasError('minlength')">
-            Miniumum of <strong>{{formGroup.controls.countryCtrl.errors.minlength.requiredLength}}<strong>
-            characters
-        </mat-error> 
-             <mat-error *ngIf="formGroup.controls.citcountryCtrlyCtrl.hasError('maxlength')">
-            Maximum of <strong>{{formGroup.controls.countryCtrl.errors.maxlength.requiredLength}}<strong>
-            characters
-        </mat-error> 
-        <mat-error *ngIf="formGroup.controls.countryCtrl.hasError('required')">
-            City is <strong>required</strong>
-        </mat-error> 
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Expected Retirement Date</mat-label>
-            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
-                placeholder="Choose a retirement date" formControlName="dateCtrl">
-            <mat-hint>When do you want to retire?</mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #picker></mat-datepicker>
-            <mat-error *ngIf="formGroup.controls.dateCtrl.hasError('required')">
-            Retirement Date is <strong>required<strong>
-        </mat-error> 
+            <mat-label>Photo URL</mat-label>
+            <input matInput formControlName="photoCtrl" required placeholder="http"
+                [errorStateMatcher]="matcher">
+            <mat-hint>Start with http</mat-hint>
+            <mat-error *ngIf="formGroup.controls.photoCtrl.hasError('pattern')">
+                Invalid <Strong>URL</Strong>
+            </mat-error>
         </mat-form-field>
     </div>
     <div fxLayout="column" fxLayoutAlign="space-around center">
-        <button class="non-home-button mat-elevation-z7 margin-center" type="submit" (click)="submit()">Submit</button>
+        <button class="non-home-button mat-elevation-z7 margin-center" type="submit"
+            (click)="submit()">Submit</button>
     </div>
-</form> -->
+</form>

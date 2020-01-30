@@ -1,5 +1,4 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Validate_AlphaNumeric } from '@shared/validator/validators/alphanumeric';
 
 export const CREATE_LOGIN_FG = (fb: FormBuilder): FormGroup => {
 

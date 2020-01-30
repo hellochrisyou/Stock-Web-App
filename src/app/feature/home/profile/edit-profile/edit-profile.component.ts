@@ -1,45 +1,56 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { CREATE_PROFILE_FG } from '@home/profile/profile.config';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CreateBaseForm } from '@shared/base/base-form';
 import { AuthService } from 'app/core/service/auth/auth.service';
+import { URLVALIDATOR, ALPHABETVALIDATOR } from '@shared/validator/error-validator/validators';
+import { TmpUser } from '@shared/interface/models';
 
 @Component({
   selector: 'edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss']
 })
-export class EditProfileComponent {
+export class EditProfileComponent extends CreateBaseForm {
 
-  // minDate = new Date();
-  // maxDate = new Date();
+  public thisUser: TmpUser = {};
+  @Output() submitUser = new EventEmitter<TmpUser>();
 
-  // constructor(
-  //   protected fbProfile: FormBuilder,
-  //   protected changeDetectorRef: ChangeDetectorRef,
-  //   protected auth: AuthService,
-  // ) {
-  //   super(fbProfile, changeDetectorRef);
-  // }
+  constructor(
+    protected fb: FormBuilder,
+    protected changeDetectorRef: ChangeDetectorRef,
+    protected auth: AuthService,
+  ) {
+    super(fb, changeDetectorRef);
+  }
 
-  // public ngOnInit(): void {
-  //   super.ngOnInit();
-  //   this.formGroup = CREATE_PROFILE_FG(this.fbProfile);
+  public ngOnInit(): void {
+    super.ngOnInit();
 
-  //   const today = new Date();
-  //   const year = today.getFullYear();
-  //   const month = today.getMonth();
-  //   const day = today.getDate();
-  //   this.minDate = new Date(year, month, day);
-  //   this.maxDate = new Date(year + 100, month, day);
 
-  // }
+    this.formGroup = this.fb.group({
+      displayNameCtrl: ['', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(30)
+      ]],
+      photoCtrl: ['', [
+        Validators.required, 
+        Validators.pattern(URLVALIDATOR)
+      ]],
+    })
+  }
 
-  // public ngOnDestroy(): void {
-  //   super.ngOnDestroy();
-  // }
+  public ngOnDestroy(): void {
+    super.ngOnDestroy();
+  }
 
-  // submit(): void {
-
-  // }
+  public submit(): void {
+    if (this.formGroup.get('displayNameCtrl').value !== '') {
+      this.thisUser.displayName = this.formGroup.get('displayNameCtrl').value;
+    }
+    if (this.formGroup.get('photoCtrl').value !== '') {
+      this.thisUser.photoURL = this.formGroup.get('photoCtrl').value;
+    }
+    this.submitUser.emit(this.thisUser);
+  }
 }

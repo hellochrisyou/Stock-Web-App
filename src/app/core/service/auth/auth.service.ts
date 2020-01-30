@@ -1,14 +1,14 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { User } from '@shared/interface/models';
-import { auth } from 'firebase';
+import { auth, User } from 'firebase';
 import { Observable, of } from 'rxjs';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { ConfirmComponent } from '@shared/dialog/confirm/confirm.component';
 import { CloseDialogService } from '../close-dialog/close-dialog.service';
 import { switchMap, first } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { TmpUser } from '@shared/interface/models';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,6 @@ export class AuthService {
   public set user(value: Observable<User>) {
     this._user = value;
   }
-
 
   constructor(
     public router: Router,
@@ -55,7 +54,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
         console.log('Successfully signed up!', res);
-        this.updateUserData(true, res.user) //Added with UserStore
+        this.updateUserData(res.user) //Added with UserStore
         this.snackBar.open('Sign Up', 'SUCCESS', {
         });
         this.closeDialogService.closeSignupDialog();
@@ -70,7 +69,7 @@ export class AuthService {
   OAuthProvider(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((res) => {
-        this.updateUserData(false, res.user) //Added with UserStore
+        this.updateUserData(res.user) //Added with UserStore
         this.ngZone.run(() => {
           console.log('ngZone Run', res);
           this.router.navigate(['home']);
@@ -100,25 +99,26 @@ export class AuthService {
       });
   }
 
-  private updateUserData(firstTime: boolean, user: User) { // Added with UserStore
+  public getUser(): User {
+    this.data = this.angularFireAuth.auth.currentUser;
+    return this.data;
+  }
+
+  public updateUserData( user: User) { // Added with UserStore
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+
+    this.data = user;
     console.log('user', user); 
-    if (firstTime) {
-    this.data = {
-      uid: user.uid,
-      email: user.email,
-      photoURL: user.photoURL,
-      displayName: user.displayName
-    };
-   } else {
-    this.data = {
-      uid: user.uid,
-      email: user.email,
-      photoURL: user.photoURL,
+    user.updateProfile({
       displayName: user.displayName,
-    };
-  }
+      photoURL: user.photoURL,
+    }).then(function() {
+      console.log('User Updated',user);
+    }).catch(function(error) {      
+      console.log('User update failed');
+    });    
+
     return userRef.set(this.data, { merge: true });
   }
 
@@ -136,7 +136,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(credential => {
         console.log('Successfully signed in!', credential);
-        this.updateUserData(false, credential.user);
+        this.updateUserData(credential.user);
       })
       .catch(err => {
         console.log('Something is wrong:', err.message);
