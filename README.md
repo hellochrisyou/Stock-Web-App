@@ -1,3 +1,4 @@
+http://stock.chrisyou.com
 # Stock Web App - Angular/Spring
 
 Frontend- Angular 2+ version 9 
