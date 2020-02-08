@@ -6,4 +6,5 @@ http://stock.chrisyou.com
 
 ## Cloud Infrastructure Diagram
 <img  src="https://chrisyou-backup-website.s3.amazonaws.com/assets/AWS+Network+Diagram+(1).png" width="100%"/>
- 
+ <img  src="https://chrisyou-backup-website.s3.amazonaws.com/assets/github-preview/stock/stock1.png" width="100%"/>
+
